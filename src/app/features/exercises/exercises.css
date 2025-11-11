@@ -1,0 +1,34 @@
+/* Exercises Component */
+
+.exercises-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Grid de Cards Responsive */
+.exercises-grid {
+  display: grid;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+/* Mobile: 1 columna */
+@media (width < 640px) {
+  .exercises-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet: 2 columnas */
+@media (640px <= width < 1024px) {
+  .exercises-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop con sidebar: ajuste dinámico según espacio disponible */
+@media (width >= 1024px) {
+  .exercises-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}

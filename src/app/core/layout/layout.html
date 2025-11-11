@@ -1,0 +1,107 @@
+<!-- Layout Principal con Sidebar -->
+<div class="byf-layout">
+  <!-- Sidebar Desktop (hidden en mobile) -->
+  <aside class="sidebar">
+    <!-- Logo -->
+    <div class="sidebar-header">
+      <a routerLink="/home" class="sidebar-logo-link">
+        <img src="/assets/logo.png" alt="Logo" class="sidebar-logo" />
+        <span class="sidebar-brand">BeYourFitness</span>
+      </a>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="sidebar-nav">
+      <a
+        routerLink="/home"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="sidebar-nav-item"
+      >
+        <span class="material-icons">home</span>
+        <span>Inicio</span>
+      </a>
+      <a routerLink="/exercises" routerLinkActive="active" class="sidebar-nav-item">
+        <span class="material-icons">fitness_center</span>
+        <span>Ejercicios</span>
+      </a>
+      <a routerLink="/workout" routerLinkActive="active" class="sidebar-nav-item">
+        <span class="material-icons">play_circle</span>
+        <span>Entreno</span>
+      </a>
+      <a routerLink="/profile" routerLinkActive="active" class="sidebar-nav-item">
+        <span class="material-icons">person</span>
+        <span>Perfil</span>
+      </a>
+      <!-- Solo para entrenadores -->
+      <!-- <a *ngIf="role === 'trainer'" routerLink="/athletes" routerLinkActive="active" class="sidebar-nav-item">
+        <span class="material-icons">groups</span>
+        <span>Atletas</span>
+      </a> -->
+    </nav>
+
+    <!-- Logout Button -->
+    <div class="sidebar-footer">
+      <button class="sidebar-logout-btn" (click)="logout()">
+        @if (isLoggedIn()) {
+        <span class="material-icons">logout</span>
+        <span>Cerrar sesión</span>
+        } @else {
+        <span class="material-icons">login</span>
+        <span>Iniciar sesión</span>
+        }
+      </button>
+    </div>
+  </aside>
+
+  <!-- Header Mobile (visible solo en mobile/tablet) -->
+  <header class="mobile-header">
+    <a routerLink="/home">
+      <img class="h-8 w-auto object-contain" src="/assets/logo.png" alt="Logo" />
+    </a>
+    <button class="logout-btn" (click)="logout()">
+      @if (isLoggedIn()) {
+      <span class="material-icons text-2xl text-grey-primary">logout</span>
+      } @else {
+      <span class="material-icons text-2xl text-grey-primary">login</span>
+      }
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer Mobile (visible solo en mobile/tablet) -->
+  <footer class="mobile-footer">
+    <nav class="flex justify-around items-center h-[60px] px-2">
+      <a
+        routerLink="/home"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="footer-link"
+      >
+        <span class="material-icons text-[22px] mb-0.5">home</span>
+        <span class="text-xs">Inicio</span>
+      </a>
+      <a
+        routerLink="/exercises"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="footer-link"
+      >
+        <span class="material-icons text-[22px] mb-0.5">fitness_center</span>
+        <span class="text-xs">Ejercicios</span>
+      </a>
+      <a routerLink="/workout" routerLinkActive="active" class="footer-link">
+        <span class="material-icons text-[22px] mb-0.5">play_circle</span>
+        <span class="text-xs">Entreno</span>
+      </a>
+      <a routerLink="/profile" routerLinkActive="active" class="footer-link">
+        <span class="material-icons text-[22px] mb-0.5">person</span>
+        <span class="text-xs">Perfil</span>
+      </a>
+    </nav>
+  </footer>
+</div>

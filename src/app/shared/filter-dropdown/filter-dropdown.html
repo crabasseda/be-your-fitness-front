@@ -1,0 +1,21 @@
+<div class="w-full">
+  <mat-form-field appearance="outline" class="filter-field">
+    <mat-label class="flex items-center">
+      <mat-icon class="filter-label-icon">filter_list</mat-icon>
+      {{ label() }}
+    </mat-label>
+    <mat-select
+      [value]="selectedValue()"
+      (selectionChange)="onSelectionChange($event.value)"
+      [placeholder]="placeholder()"
+    >
+      @if (showAllOption()) {
+      <mat-option [value]="null">Todos</mat-option>
+      } @for (option of options(); track option.value) {
+      <mat-option [value]="option.value">
+        {{ option.label }}
+      </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>

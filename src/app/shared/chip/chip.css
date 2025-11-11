@@ -1,0 +1,35 @@
+.chip {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 0.2s;
+}
+
+.chip-blue {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.chip-pink {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+.chip-green {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.chip-orange {
+  background: #fef3c7;
+  color: #a16207;
+}
+
+@media (max-width: 768px) {
+  .chip {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}

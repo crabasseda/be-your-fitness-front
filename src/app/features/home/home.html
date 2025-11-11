@@ -1,0 +1,64 @@
+<!-- Home Component - Con Tailwind CSS -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 min-h-screen">
+  <!-- Hero Section con Saludo -->
+  <div class="text-center mb-12 home-hero">
+    <h1 class="text-4xl sm:text-5xl font-bold text-dark mb-2">
+      Hola <span class="home-username">{{ user!.username }}</span> 👋
+    </h1>
+    <p class="text-lg sm:text-xl text-grey-primary italic mb-8 home-motivation">
+      {{ motivationalMessage }}
+    </p>
+
+    <!-- Botón Principal CTA -->
+    <button mat-flat-button class="home-start-btn" type="button" aria-label="Start workout">
+      <mat-icon class="text-4xl! w-10! h-10! mr-3">play_circle</mat-icon>
+      <span class="text-xl sm:text-2xl font-semibold">Empezar entreno</span>
+    </button>
+  </div>
+
+  <!-- Cards Grid -->
+  <div class="flex flex-col gap-8">
+    <!-- Próximo Workout Card -->
+    <section class="home-section">
+      <h3 class="home-section-title">Próximo Workout</h3>
+      <mat-card class="home-next-workout">
+        <div class="text-5xl">💪</div>
+        <p class="text-lg sm:text-xl font-medium m-0 flex-1">
+          {{ nextWorkoutText }}
+        </p>
+      </mat-card>
+    </section>
+
+    <!-- Resumen Semanal Card -->
+    <section class="home-section">
+      <h3 class="home-section-title">Resumen semanal</h3>
+      <mat-card class="home-chart-card">
+        <div class="min-h-[250px] sm:min-h-[300px] flex items-center justify-center">
+          <!-- <canvas baseChart
+            [data]="barChartData"
+            [type]="barChartType"
+            [options]="barChartOptions">
+          </canvas> -->
+          <p class="text-lg text-grey-primary m-0">📊 Gráfico de progreso semanal</p>
+        </div>
+      </mat-card>
+    </section>
+
+    <!-- Divider -->
+    <mat-divider class="!my-12 border-gray-200!"></mat-divider>
+
+    <!-- Coach Card -->
+    <mat-card class="home-coach-card">
+      <div class="shrink-0">
+        <div class="home-coach-avatar">
+          <!-- <img [src]="coach.avatarUrl" alt="Coach avatar" class="w-full h-full object-cover" /> -->
+          <span class="text-4xl sm:text-5xl">👨‍🏫</span>
+        </div>
+      </div>
+      <div class="flex-1 flex flex-col justify-center gap-2">
+        <h4 class="text-xl font-semibold text-dark m-0">{{ 'Pedro' }}</h4>
+        <p class="text-base text-grey-primary leading-relaxed m-0">{{ 'test' }}</p>
+      </div>
+    </mat-card>
+  </div>
+</div>

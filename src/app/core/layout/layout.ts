@@ -1,0 +1,34 @@
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { UrlKey } from '@models/url';
+import { filter } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+
+@Component({
+  selector: 'byf-layout',
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  templateUrl: './layout.html',
+  styleUrl: './layout.css',
+})
+export class Layout {
+  private _authService = inject(AuthService);
+  private _router = inject(Router);
+  public showLayout: boolean = true;
+
+  public isLoggedIn = this._authService.isLoggedIn;
+
+  constructor() {
+    this._router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        const noLayoutRoutes = ['/login', '/register'];
+        this.showLayout = !noLayoutRoutes.includes(event.urlAfterRedirects);
+      });
+  }
+
+  logout() {
+    this._authService.logout();
+    this._router.navigateByUrl(UrlKey.Login);
+  }
+}

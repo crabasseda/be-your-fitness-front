@@ -1,0 +1,26 @@
+.searchbar-field {
+  width: 100%;
+}
+
+.searchbar-clear-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.searchbar-clear-btn .material-icons {
+  color: var(--grey-primary);
+  font-size: 24px;
+}
+
+.searchbar-clear-btn:hover {
+  transform: scale(1.1);
+}
+
+.searchbar-clear-btn:hover .material-icons {
+  color: var(--orange-primary);
+}

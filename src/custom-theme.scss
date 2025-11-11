@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+// Definir las paletas directamente (ya no desde variables.scss)
+$orange-palette: mat.$orange-palette;
+$blue-palette: mat.$cyan-palette;
+$font-family-base: 'Poppins', sans-serif;
+
+// Definir el tema de Angular Material
+$my-byf-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: $orange-palette,
+      tertiary: $blue-palette,
+    ),
+    typography: (
+      brand-family: $font-family-base,
+      plain-family: $font-family-base,
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+// Aplicar el tema a todos los componentes de Material
+html {
+  @include mat.all-component-themes($my-byf-theme);
+}

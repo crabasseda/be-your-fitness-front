@@ -1,0 +1,42 @@
+/* Variables CSS */
+:root {
+  /* Colores principales */
+  --orange-primary: #ec6c1e;
+  --orange-secondary: #f6a100;
+  --blue-primary: #31a1dd;
+  --blue-secondary: #112b76;
+
+  /* Colores de estado */
+  --color-success: #2b9f60;
+  --color-danger: #e53935;
+  --color-light: #f8f9fa;
+  --color-dark: #212529;
+  --grey-primary: #666;
+
+  /* Tipografía */
+  --font-family-base: 'Poppins', sans-serif;
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+  --font-size-lg: 20px;
+
+  /* Espaciado */
+  --spacer: 1rem;
+  --spacer-sm: 0.5rem;
+  --spacer-lg: 2rem;
+
+  /* Bordes */
+  --border-radius: 8px;
+}
+
+/* Tailwind v4: Definir colores personalizados */
+@theme {
+  --color-orange-primary: #ec6c1e;
+  --color-orange-secondary: #f6a100;
+  --color-blue-primary: #31a1dd;
+  --color-blue-secondary: #112b76;
+  --color-grey-primary: #666;
+  --color-success: #2b9f60;
+  --color-danger: #e53935;
+  --color-light: #f8f9fa;
+  --color-dark: #212529;
+}
