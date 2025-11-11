@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDivider } from '@angular/material/divider';
@@ -12,7 +12,7 @@ import { AuthService } from '../../core/auth/auth.service';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {
+export class Home implements OnInit {
   private _authService = inject(AuthService);
 
   public user = this._authService.getUser();
@@ -25,8 +25,8 @@ export class Home {
     'Una repetición más te acerca a tu mejor versión.',
   ];
 
-  motivationalMessage: string = '';
-  nextWorkoutText: string = '';
+  motivationalMessage = '';
+  nextWorkoutText = '';
 
   ngOnInit() {
     this.pickRandomMotivationalMessage();

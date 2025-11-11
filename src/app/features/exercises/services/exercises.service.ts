@@ -29,10 +29,7 @@ export class ExercisesService {
 
   constructor() {
     effect(() => {
-      const equipment = this.selectedEquipment();
-      const bodyPart = this.selectedBodyPart();
-
-      this.getExercises();
+      if (this.selectedEquipment() || this.selectedBodyPart()) this.getExercises();
     });
   }
   getExercises() {

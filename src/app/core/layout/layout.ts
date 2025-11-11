@@ -14,14 +14,14 @@ import { AuthService } from '../auth/auth.service';
 export class Layout {
   private _authService = inject(AuthService);
   private _router = inject(Router);
-  public showLayout: boolean = true;
+  public showLayout = true;
 
   public isLoggedIn = this._authService.isLoggedIn;
 
   constructor() {
     this._router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
+      .subscribe((event) => {
         const noLayoutRoutes = ['/login', '/register'];
         this.showLayout = !noLayoutRoutes.includes(event.urlAfterRedirects);
       });

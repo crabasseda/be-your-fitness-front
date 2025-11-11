@@ -67,7 +67,7 @@ export class Exercises {
   onSearch(searchValue: string) {
     if (this.exercisesList()) {
       const exercises = this.exercisesList()!.filter((item) =>
-        item.name.toLowerCase().includes(searchValue.toLowerCase())
+        item.name.toLowerCase().includes(searchValue.toLowerCase()),
       );
 
       this.filteredExercises.set(exercises);

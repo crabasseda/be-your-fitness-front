@@ -11,11 +11,11 @@ import { ChipType } from '@shared/chip/models/chip.enum';
 })
 export class ExerciseDetailModal {
   exercise = input.required<ExtendedExercise>();
-  close = output<void>();
+  closeModal = output<void>();
 
   ChipType = ChipType;
 
   onClose() {
-    this.close.emit();
+    this.closeModal.emit();
   }
 }

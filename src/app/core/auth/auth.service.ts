@@ -18,7 +18,7 @@ export class AuthService {
     try {
       const res: any = await firstValueFrom(
         this._http.post('http://localhost:3000/api/auth/login', { username, password }).pipe(
-          catchError((err) => {
+          catchError(() => {
             return throwError(() => new Error('Credenciales incorrectas'));
           }),
         ),

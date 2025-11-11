@@ -44,11 +44,11 @@
     <div class="sidebar-footer">
       <button class="sidebar-logout-btn" (click)="logout()">
         @if (isLoggedIn()) {
-        <span class="material-icons">logout</span>
-        <span>Cerrar sesión</span>
+          <span class="material-icons">logout</span>
+          <span>Cerrar sesión</span>
         } @else {
-        <span class="material-icons">login</span>
-        <span>Iniciar sesión</span>
+          <span class="material-icons">login</span>
+          <span>Iniciar sesión</span>
         }
       </button>
     </div>
@@ -61,9 +61,9 @@
     </a>
     <button class="logout-btn" (click)="logout()">
       @if (isLoggedIn()) {
-      <span class="material-icons text-2xl text-grey-primary">logout</span>
+        <span class="material-icons text-2xl text-grey-primary">logout</span>
       } @else {
-      <span class="material-icons text-2xl text-grey-primary">login</span>
+        <span class="material-icons text-2xl text-grey-primary">login</span>
       }
     </button>
   </header>

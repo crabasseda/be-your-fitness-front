@@ -114,7 +114,9 @@
   color: white !important;
   box-shadow: 0 4px 16px rgba(49, 161, 221, 0.25) !important;
   border: none !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease !important;
   display: flex;
   align-items: center;
   gap: 1.5rem;

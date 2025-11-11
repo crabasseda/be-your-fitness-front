@@ -26,18 +26,18 @@
   <!-- Grid de Cards -->
   <div class="exercises-grid">
     @for (exercise of filteredExercises(); track exercise.exerciseId) {
-    <byf-card
-      [title]="exercise.name"
-      [subtitle]="exercise.exerciseType"
-      [chips]="exercise.equipments"
-      [image]="exercise.imageUrl"
-      (clicked)="onCardClick(exercise)"
-    ></byf-card>
+      <byf-card
+        [title]="exercise.name"
+        [subtitle]="exercise.exerciseType"
+        [chips]="exercise.equipments"
+        [image]="exercise.imageUrl"
+        (clicked)="onCardClick(exercise)"
+      ></byf-card>
     }
   </div>
 
   <!-- Modal -->
   @if (isModalOpen()) {
-  <byf-exercise-detail-modal [exercise]="selectedExercise()!" (close)="onCloseDetail()" />
+    <byf-exercise-detail-modal [exercise]="selectedExercise()!" (closeModal)="onCloseDetail()" />
   }
 </div>

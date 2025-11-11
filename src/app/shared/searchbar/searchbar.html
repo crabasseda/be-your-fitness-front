@@ -3,14 +3,14 @@
     <mat-label>Buscar</mat-label>
     <input matInput type="text" [(ngModel)]="searchText" placeholder="Escribe para buscar..." />
     @if (searchText()) {
-    <button
-      class="searchbar-clear-btn"
-      matSuffix
-      (click)="clearSearch()"
-      aria-label="Limpiar búsqueda"
-    >
-      <span class="material-icons">close</span>
-    </button>
+      <button
+        class="searchbar-clear-btn"
+        matSuffix
+        (click)="clearSearch()"
+        aria-label="Limpiar búsqueda"
+      >
+        <span class="material-icons">close</span>
+      </button>
     }
     <mat-icon matPrefix>search</mat-icon>
   </mat-form-field>

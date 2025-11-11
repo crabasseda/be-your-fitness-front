@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -12,7 +12,7 @@ import { AuthService } from '../../core/auth/auth.service';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class Login implements OnInit {
   private _authService = inject(AuthService);
   private _router = inject(Router);
   private _formBuilder = inject(FormBuilder);
@@ -34,7 +34,7 @@ export class Login {
     try {
       await this._authService.login(user.username, user.password);
       this._router.navigateByUrl(UrlKey.Home);
-    } catch (error) {
+    } catch {
       this.loginForm.reset();
       this.loginForm.setErrors({ invalidCredentials: true });
     }
