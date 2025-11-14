@@ -4,7 +4,7 @@ import { Chip } from '@shared/chip/chip';
 import { ChipType } from '@shared/chip/models/chip.enum';
 
 @Component({
-  selector: 'byf-exercise-detail-modal',
+  selector: 'exercise-detail-modal',
   imports: [Chip],
   templateUrl: './exercise-detail-modal.html',
   styleUrl: './exercise-detail-modal.css',

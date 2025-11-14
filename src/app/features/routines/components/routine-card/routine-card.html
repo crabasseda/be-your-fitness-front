@@ -1,0 +1,43 @@
+<div class="routine-card bg-white rounded-lg shadow-md p-6 relative">
+  <div class="flex justify-between items-start">
+    <h3 class="text-lg font-semibold text-dark pr-8">
+      {{ name() }}
+    </h3>
+
+    @if (areOptionsAvailable()) {
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        class="-mt-2! -mr-2!"
+        aria-label="Opciones"
+      >
+        <mat-icon class="text-grey-primary">more_vert</mat-icon>
+      </button>
+    }
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onEdit()">
+        <mat-icon class="text-blue-primary">edit</mat-icon>
+        <span>Editar</span>
+      </button>
+      <button mat-menu-item (click)="onDelete()">
+        <mat-icon class="text-danger">delete</mat-icon>
+        <span>Eliminar</span>
+      </button>
+    </mat-menu>
+  </div>
+
+  <div class="mb-6">
+    <p class="text-sm text-grey-primary line-clamp-2">
+      {{ items()!.join(', ') }}
+    </p>
+  </div>
+
+  <button
+    mat-raised-button
+    class="w-full bg-orange-primary! text-white! hover:bg-orange-secondary! transition-colors"
+    (click)="onStartTraining()"
+  >
+    Empezar entreno
+  </button>
+</div>

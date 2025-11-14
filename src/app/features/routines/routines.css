@@ -1,0 +1,307 @@
+/* Container principal */
+.routines-page-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-light) 0%, #ffffff 100%);
+  padding-bottom: 2rem;
+}
+
+/* Header Section */
+.page-header {
+  background: linear-gradient(135deg, var(--blue-primary) 0%, var(--blue-secondary) 100%);
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.title-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.page-title {
+  font-family: var(--font-family-base);
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* Botón Crear Rutina */
+.create-routine-btn {
+  background: var(--orange-primary) !important;
+  color: white !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: var(--border-radius) !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  box-shadow: 0 4px 12px rgba(236, 108, 30, 0.3) !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  min-height: 48px !important;
+}
+
+.create-routine-btn:hover {
+  background: var(--orange-secondary) !important;
+  box-shadow: 0 6px 20px rgba(236, 108, 30, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+.create-routine-btn:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  font-size: 1.75rem !important;
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+}
+
+.btn-text {
+  font-size: 1.125rem;
+  white-space: nowrap;
+}
+
+/* Tabs Container */
+.tabs-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  margin-top: -1rem;
+}
+
+/* Custom Tabs Styling */
+::ng-deep .custom-tabs {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+::ng-deep .custom-tabs .mat-mdc-tab-labels {
+  background: white;
+  border-bottom: 2px solid var(--color-light);
+  padding: 0 1rem;
+}
+
+::ng-deep .custom-tabs .mat-mdc-tab {
+  min-width: 180px !important;
+  padding: 0 1.5rem !important;
+  height: 64px !important;
+}
+
+::ng-deep .custom-tabs .mat-mdc-tab-label-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab-icon {
+  font-size: 1.25rem !important;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  color: var(--grey-primary);
+}
+
+.tab-label {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--color-dark);
+}
+
+.tab-badge {
+  background: var(--color-light);
+  color: var(--grey-primary);
+  border-radius: 12px;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+::ng-deep .custom-tabs .mat-mdc-tab.mdc-tab--active .tab-icon {
+  color: var(--blue-primary);
+}
+
+::ng-deep .custom-tabs .mat-mdc-tab.mdc-tab--active .tab-label {
+  color: var(--blue-primary);
+}
+
+::ng-deep .custom-tabs .mat-mdc-tab.mdc-tab--active .tab-badge {
+  background: var(--blue-primary);
+  color: white;
+}
+
+::ng-deep .custom-tabs .mdc-tab-indicator__content--underline {
+  border-color: var(--blue-primary) !important;
+  border-top-width: 3px !important;
+}
+
+/* Tab Content */
+.tab-content {
+  padding: 2rem 1.5rem;
+  min-height: 400px;
+}
+
+/* Routines Grid */
+.routines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 5rem !important;
+  width: 5rem !important;
+  height: 5rem !important;
+  color: var(--grey-primary);
+  opacity: 0.3;
+  margin-bottom: 1.5rem;
+}
+
+.empty-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin: 0 0 0.75rem 0;
+}
+
+.empty-description {
+  font-size: 1rem;
+  color: var(--grey-primary);
+  margin: 0 0 2rem 0;
+  max-width: 400px;
+}
+
+.empty-action-btn {
+  background: var(--orange-primary) !important;
+  color: white !important;
+  border-radius: var(--border-radius) !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 600 !important;
+}
+
+.empty-action-btn:hover {
+  background: var(--orange-secondary) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .create-routine-btn {
+    width: 100%;
+    justify-content: center !important;
+  }
+
+  .tabs-container {
+    padding: 0 0.75rem;
+  }
+
+  .tab-content {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .routines-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  ::ng-deep .custom-tabs .mat-mdc-tab {
+    min-width: 140px !important;
+    padding: 0 1rem !important;
+  }
+
+  .tab-label {
+    font-size: 0.875rem;
+  }
+
+  .btn-text {
+    font-size: 1rem;
+  }
+
+  .empty-state {
+    padding: 3rem 1rem;
+  }
+
+  .empty-icon {
+    font-size: 4rem !important;
+    width: 4rem !important;
+    height: 4rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .btn-icon {
+    font-size: 1.5rem !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+
+  ::ng-deep .custom-tabs .mat-mdc-tab {
+    min-width: 120px !important;
+    padding: 0 0.75rem !important;
+  }
+
+  .tab-icon {
+    display: none; /* Ocultar iconos en móviles pequeños */
+  }
+}

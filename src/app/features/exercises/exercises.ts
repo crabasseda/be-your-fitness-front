@@ -83,7 +83,6 @@ export class Exercises {
   }
 
   onCardClick(exercise: Exercise) {
-    console.log(exercise);
     this._exercisesService.getExerciseById(exercise.exerciseId);
     this.isModalOpen.set(true);
   }

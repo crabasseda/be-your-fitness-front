@@ -38,6 +38,6 @@
 
   <!-- Modal -->
   @if (isModalOpen()) {
-    <byf-exercise-detail-modal [exercise]="selectedExercise()!" (closeModal)="onCloseDetail()" />
+    <exercise-detail-modal [exercise]="selectedExercise()!" (closeModal)="onCloseDetail()" />
   }
 </div>

@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { UrlKey } from '@models/url';
-import { filter } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -14,18 +13,8 @@ import { AuthService } from '../auth/auth.service';
 export class Layout {
   private _authService = inject(AuthService);
   private _router = inject(Router);
-  public showLayout = true;
 
-  public isLoggedIn = this._authService.isLoggedIn;
-
-  constructor() {
-    this._router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event) => {
-        const noLayoutRoutes = ['/login', '/register'];
-        this.showLayout = !noLayoutRoutes.includes(event.urlAfterRedirects);
-      });
-  }
+  public isLoggedIn = this._authService.isUserInStorage();
 
   logout() {
     this._authService.logout();

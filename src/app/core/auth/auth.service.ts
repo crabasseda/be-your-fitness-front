@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Permission, rolePermissions } from '@models/permissions.constant';
 import { Role, User } from '@models/user.interface';
 import { catchError, firstValueFrom, throwError } from 'rxjs';
@@ -11,8 +11,6 @@ export class AuthService {
   private _http = inject(HttpClient);
 
   private _currentUser: User | null = null;
-
-  public isLoggedIn = signal<boolean>(false);
 
   async login(username: string, password: string): Promise<void> {
     try {
@@ -27,14 +25,12 @@ export class AuthService {
       localStorage.setItem(this.TOKEN_KEY, res.token);
       localStorage.setItem(this.USER_KEY, JSON.stringify(res.user));
       this._currentUser = res.user;
-      this.isLoggedIn.set(true);
     } catch (err) {
       throw err;
     }
   }
 
   logout() {
-    this.isLoggedIn.set(false);
     this._currentUser = null;
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
@@ -42,7 +38,7 @@ export class AuthService {
 
   isUserInStorage(): boolean {
     if (!this._isBrowser()) return false;
-    return this.isLoggedIn() || !!localStorage?.getItem(this.TOKEN_KEY);
+    return !!localStorage?.getItem(this.TOKEN_KEY);
   }
 
   getUser(): User | null {

@@ -25,9 +25,9 @@
         <span class="material-icons">fitness_center</span>
         <span>Ejercicios</span>
       </a>
-      <a routerLink="/workout" routerLinkActive="active" class="sidebar-nav-item">
+      <a routerLink="/routines" routerLinkActive="active" class="sidebar-nav-item">
         <span class="material-icons">play_circle</span>
-        <span>Entreno</span>
+        <span>Rutinas</span>
       </a>
       <a routerLink="/profile" routerLinkActive="active" class="sidebar-nav-item">
         <span class="material-icons">person</span>
@@ -43,7 +43,7 @@
     <!-- Logout Button -->
     <div class="sidebar-footer">
       <button class="sidebar-logout-btn" (click)="logout()">
-        @if (isLoggedIn()) {
+        @if (isLoggedIn) {
           <span class="material-icons">logout</span>
           <span>Cerrar sesión</span>
         } @else {
@@ -60,7 +60,7 @@
       <img class="h-8 w-auto object-contain" src="/assets/logo.png" alt="Logo" />
     </a>
     <button class="logout-btn" (click)="logout()">
-      @if (isLoggedIn()) {
+      @if (isLoggedIn) {
         <span class="material-icons text-2xl text-grey-primary">logout</span>
       } @else {
         <span class="material-icons text-2xl text-grey-primary">login</span>
@@ -94,9 +94,9 @@
         <span class="material-icons text-[22px] mb-0.5">fitness_center</span>
         <span class="text-xs">Ejercicios</span>
       </a>
-      <a routerLink="/workout" routerLinkActive="active" class="footer-link">
+      <a routerLink="/routines" routerLinkActive="active" class="footer-link">
         <span class="material-icons text-[22px] mb-0.5">play_circle</span>
-        <span class="text-xs">Entreno</span>
+        <span class="text-xs">Rutinas</span>
       </a>
       <a routerLink="/profile" routerLinkActive="active" class="footer-link">
         <span class="material-icons text-[22px] mb-0.5">person</span>

@@ -26,6 +26,10 @@ export const routes: Routes = [
         path: UrlKey.Exercises,
         loadComponent: () => import('@features/exercises/exercises').then((m) => m.Exercises),
       },
+      {
+        path: UrlKey.Routines,
+        loadComponent: () => import('@features/routines/routines').then((m) => m.Routines),
+      },
     ],
   },
 

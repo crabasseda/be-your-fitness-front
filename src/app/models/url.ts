@@ -3,4 +3,5 @@ export enum UrlKey {
   Login = 'login',
   Logout = 'logout',
   Exercises = 'exercises',
+  Routines = 'routines',
 }
