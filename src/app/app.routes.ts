@@ -34,6 +34,10 @@ export const routes: Routes = [
         path: `${UrlKey.Workout}/:id`,
         loadComponent: () => import('@features/workout/workout').then((m) => m.Workout),
       },
+      {
+        path: UrlKey.Profile,
+        loadComponent: () => import('@features/profile/profile').then((m) => m.Profile),
+      },
     ],
   },
 
