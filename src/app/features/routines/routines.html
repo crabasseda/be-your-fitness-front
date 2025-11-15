@@ -34,14 +34,14 @@
         <div class="p-8 min-h-[400px]">
           @if (myRoutines().length > 0) {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-              @for (routine of myRoutines(); track routine.id) {
+              @for (routine of myRoutines(); track routine._id) {
                 <routine-card
                   [name]="routine.name"
                   [items]="routine.exercises"
                   [areOptionsAvailable]="true"
-                  (startTraining)="handleStartTraining(routine.id)"
-                  (edit)="handleEdit(routine.id)"
-                  (delete)="handleDelete(routine.id)"
+                  (startTraining)="handleStartTraining(routine._id)"
+                  (edit)="handleEdit(routine._id)"
+                  (delete)="handleDelete(routine._id)"
                 />
               }
             </div>

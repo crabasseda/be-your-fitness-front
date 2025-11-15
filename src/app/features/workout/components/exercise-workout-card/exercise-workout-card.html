@@ -1,0 +1,74 @@
+<div class="exercise-routine-card bg-white rounded-xl shadow-md overflow-hidden">
+  <div class="exercise-header relative">
+    <div
+      class="relative h-32 bg-gradient-to-br from-[var(--color-blue-primary)] to-[var(--color-blue-secondary)] overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-4">
+      <h3 class="text-white text-xl font-bold drop-shadow-lg">
+        {{ exercise().exercise_name }}
+      </h3>
+    </div>
+  </div>
+
+  <div class="p-3 sm:p-6">
+    <div
+      class="sets-grid-header grid gap-2 sm:gap-4 pb-2 sm:pb-3 border-b-2 border-gray-200 font-semibold text-gray-700 text-xs sm:text-sm"
+    >
+      <div class="text-center">SET</div>
+      <div class="text-center">KG</div>
+      <div class="text-center">REPS</div>
+      <div class="text-center">✓</div>
+    </div>
+
+    <div class="sets-grid-body mt-2 space-y-1 sm:space-y-2">
+      @for (set of sets(); track set.set_number) {
+        <div
+          class="sets-grid-row grid gap-2 sm:gap-4 items-center py-2 sm:py-3 hover:bg-gray-50 rounded-lg transition-colors duration-150"
+          [class.completed-set]="set.completed"
+        >
+          <!-- Número del set -->
+          <div class="flex items-center justify-center">
+            <div
+              class="w-7 h-7 sm:w-10 sm:h-10 bg-[var(--color-blue-primary)] text-white rounded-full flex items-center justify-center font-bold text-sm sm:text-lg transition-colors duration-200"
+              [class.completed-badge]="set.completed"
+            >
+              {{ set.set_number }}
+            </div>
+          </div>
+
+          <!-- Peso (solo lectura) -->
+          <div class="flex items-center justify-center">
+            <span
+              class="text-center text-sm sm:text-lg font-semibold text-gray-800 transition-all duration-200"
+              [class.completed-text]="set.completed"
+            >
+              {{ set.weight || '—' }}
+            </span>
+          </div>
+
+          <!-- Repeticiones (solo lectura) -->
+          <div class="flex items-center justify-center">
+            <span
+              class="text-center text-sm sm:text-lg font-semibold text-gray-800 transition-all duration-200"
+              [class.completed-text]="set.completed"
+            >
+              {{ set.repetitions || '—' }}
+            </span>
+          </div>
+
+          <!-- Checkbox -->
+          <div class="flex items-center justify-center">
+            <mat-checkbox
+              [checked]="set.completed"
+              (change)="toggleCompleted(set.set_number)"
+              color="primary"
+              class="custom-checkbox"
+            ></mat-checkbox>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

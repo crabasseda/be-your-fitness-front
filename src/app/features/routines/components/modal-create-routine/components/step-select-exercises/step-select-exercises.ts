@@ -9,13 +9,12 @@ import { Chip } from '@shared/chip/chip';
 import { ChipType } from '@shared/chip/models/chip.enum';
 import { FilterDropdown } from '@shared/filter-dropdown/filter-dropdown';
 import { FilterOption } from '@shared/filter-dropdown/models/filter-dropdown.interface';
-import { Modal } from '@shared/modal/modal';
 import { Searchbar } from '@shared/searchbar/searchbar';
 import { CreateRoutineService } from '../../services/modal-create-routine.service';
 
 @Component({
   selector: 'step-select-exercises',
-  imports: [MatIcon, FilterDropdown, Searchbar, Card, MatCheckbox, MatStepperModule, Chip, Modal],
+  imports: [MatIcon, FilterDropdown, Searchbar, Card, MatCheckbox, MatStepperModule, Chip],
   templateUrl: './step-select-exercises.html',
   styleUrl: './step-select-exercises.css',
 })

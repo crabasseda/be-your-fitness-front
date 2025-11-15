@@ -1,0 +1,35 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <div class="flex justify-end">
+    <button
+      mat-flat-button
+      type="button"
+      class="bg-(--orange-primary)! hover:bg-[-bg-orange-secondary]! text-white! font-semibold! py-2.5! px-5! rounded-lg! shadow-md! hover:shadow-lg!"
+    >
+      <div class="flex items-center justify-center gap-2">
+        <mat-icon class="w-5! h-5! text-xl!">flag</mat-icon>
+        <span class="text-sm sm:text-base whitespace-nowrap">Terminar rutina</span>
+      </div>
+    </button>
+  </div>
+
+  <div class="mb-8">
+    <h1 class="font-bold text-3xl md:text-4xl lg:text-5xl text-blue-secondary mb-3">
+      {{ workoutRoutine()!.name }}
+    </h1>
+
+    <div class="inline-flex items-center gap-2 text-grey-primary">
+      <mat-icon class="text-blue-primary w-5! h-5! text-xl!">schedule</mat-icon>
+      <span class="font-medium text-base sm:text-lg">
+        {{ durationTime() }}
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+    @for (exercise of workoutExercises(); track exercise.exercise_id) {
+      <div class="transform transition-all duration-300 hover:scale-[1.02]">
+        <exercise-workout-card [exercise]="exercise" [initialSets]="exercise.sets" />
+      </div>
+    }
+  </div>
+</div>

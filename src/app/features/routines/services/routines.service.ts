@@ -64,7 +64,6 @@ export class RoutinesService {
     this._http
       .get<RoutineAssignmentResponse[]>(`${this._apiUrlAssignments}/athlete/${athleteId}`)
       .subscribe((assignments) => {
-        console.log('assignments', assignments);
         this.assignedRoutinesResponse.set(assignments);
       });
   }

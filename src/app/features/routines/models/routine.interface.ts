@@ -2,6 +2,7 @@ export interface Set {
   set_number: number;
   weight: number;
   repetitions: number;
+  completed?: boolean;
 }
 
 export interface ExerciseInRoutine {
@@ -14,7 +15,7 @@ export interface ExerciseInRoutine {
 }
 
 export interface Routine {
-  id: string;
+  _id: string;
   name: string;
   type: RoutineType;
   created_by: string;
@@ -57,7 +58,7 @@ export interface RoutineResponse {
 }
 
 export interface RoutineCard {
-  id: string;
+  _id: string;
   name: string;
   type: RoutineType;
   exercises: {

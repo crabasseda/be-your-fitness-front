@@ -6,6 +6,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { ChipType } from '@shared/chip/models/chip.enum';
 import { ModalCreateRoutine } from './components/modal-create-routine/modal-create-routine';
 
+import { Router } from '@angular/router';
 import { RoutineCard } from './components/routine-card/routine-card';
 import { RoutinesService } from './services/routines.service';
 
@@ -16,6 +17,7 @@ import { RoutinesService } from './services/routines.service';
   styleUrl: './routines.css',
 })
 export class Routines {
+  private _router = inject(Router);
   private _routinesService = inject(RoutinesService);
   private _authService = inject(AuthService);
 
@@ -39,7 +41,7 @@ export class Routines {
   }
 
   handleStartTraining(routineId: string): void {
-    console.log('Iniciando entrenamiento...');
+    this._router.navigate(['/workout', routineId]);
   }
 
   handleEdit(routineId: string): void {
