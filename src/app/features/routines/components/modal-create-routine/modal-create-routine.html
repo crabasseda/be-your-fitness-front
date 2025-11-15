@@ -1,0 +1,90 @@
+<byf-modal (closeModal)="onClose()">
+  <ng-template #header>
+    <div class="modal-header">
+      <div class="header-content">
+        <div class="title-section">
+          <h2 class="modal-title">
+            Paso {{ currentStep() }}:
+            @switch (currentStep()) {
+              @case (1) {
+                Selecciona Ejercicios
+              }
+              @case (2) {
+                Configura Series y Repeticiones
+              }
+              @case (3) {
+                Detalles de la Rutina
+              }
+            }
+          </h2>
+        </div>
+        <div class="flex gap-2 mt-3">
+          @for (step of [1, 2, 3]; track step) {
+            <div
+              class="h-1 flex-1 rounded-full transition-colors"
+              [class.bg-blue-primary]="step <= currentStep()"
+              [class.bg-gray-300]="step > currentStep()"
+            ></div>
+          }
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #body>
+    @switch (currentStep()) {
+      @case (1) {
+        <step-select-exercises />
+      }
+      @case (2) {
+        @for (exercise of selectedExercises(); track exercise.exerciseId) {
+          <exercise-routine-card
+            [exercise]="exercise"
+            (exerciseUpdated)="updateExerciseInRoutine($event)"
+            (removeExercise)="removeExerciseFromRoutine($event)"
+          />
+        }
+      }
+
+      @case (3) {
+        <step-routine-details (isValid)="areDetailsValid.set(true)" />
+      }
+    }
+  </ng-template>
+
+  <ng-template #footer>
+    <div class="flex justify-between w-full gap-2">
+      @if (currentStep() > 1) {
+        <button
+          class="flex items-center gap-2 bg-(--blue-primary) hover:bg-(--blue-secondary) text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:translate-y-0 disabled:shadow-none"
+          (click)="previousStep()"
+        >
+          <mat-icon>arrow_back</mat-icon>
+          Anterior
+        </button>
+      }
+
+      <div class="ml-auto">
+        @if (currentStep() < TOTAL_STEPS) {
+          <button
+            class="flex items-center gap-2 bg-(--blue-primary) hover:bg-(--blue-secondary) text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:translate-y-0 disabled:shadow-none"
+            [disabled]="!canProceedToNextStep()"
+            (click)="nextStep()"
+          >
+            Siguiente
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        } @else {
+          <button
+            class="flex items-center gap-2 bg-(--blue-primary) hover:bg-(--blue-secondary) text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:translate-y-0 disabled:shadow-none"
+            [disabled]="!areDetailsValid()"
+            (click)="onSaveRoutine()"
+          >
+            Guardar Rutina
+            <mat-icon>check</mat-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </ng-template>
+</byf-modal>

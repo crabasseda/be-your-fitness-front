@@ -1,25 +1,24 @@
-<div class="routines-page-container">
-  <div class="page-header">
-    <div class="header-content">
-      <div class="title-section">
-        <h1 class="page-title">Mis Rutinas</h1>
-        <p class="page-subtitle">Gestiona y organiza tus entrenamientos</p>
+<div class="min-h-screen bg-linear-to-br from-light to-white pb-8">
+  <div class="bg-linear-to-br from-(--blue-primary) to-(--blue-secondary) px-6 py-8 shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-6 flex-wrap">
+      <div class="flex-1 min-w-[250px]">
+        <h1 class="font-bold text-3xl text-white mb-2 drop-shadow-sm">Mis Rutinas</h1>
+        <p class="text-white/90">Gestiona y organiza tus entrenamientos</p>
       </div>
-
       <button
         mat-flat-button
-        class="create-routine-btn"
+        class="btn-create-routine"
         type="button"
         aria-label="Crear nueva rutina"
-        (click)="handleCreateRoutine()"
+        (click)="onOpenModal()"
       >
-        <mat-icon class="btn-icon">add_circle</mat-icon>
-        <span class="btn-text">Crear rutina</span>
+        <mat-icon class="text-2xl w-7 h-7">add_circle</mat-icon>
+        <span class="text-lg whitespace-nowrap">Crear rutina</span>
       </button>
     </div>
   </div>
 
-  <div class="tabs-container">
+  <div class="max-w-7xl mx-auto px-6 -mt-4">
     <mat-tab-group
       class="custom-tabs"
       mat-stretch-tabs="false"
@@ -28,18 +27,17 @@
     >
       <mat-tab>
         <ng-template mat-tab-label>
-          <mat-icon class="tab-icon mr-1">sports_gymnastics. </mat-icon>
+          <mat-icon class="tab-icon">sports_gymnastics</mat-icon>
           <span class="tab-label">Mis rutinas</span>
           <span class="tab-badge">{{ myRoutines().length }}</span>
         </ng-template>
-
-        <div class="tab-content">
+        <div class="p-8 min-h-[400px]">
           @if (myRoutines().length > 0) {
-            <div class="routines-grid">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
               @for (routine of myRoutines(); track routine.id) {
                 <routine-card
                   [name]="routine.name"
-                  [items]="myRoutinesExercises()"
+                  [items]="routine.exercises"
                   [areOptionsAvailable]="true"
                   (startTraining)="handleStartTraining(routine.id)"
                   (edit)="handleEdit(routine.id)"
@@ -48,11 +46,15 @@
               }
             </div>
           } @else {
-            <div class="empty-state">
-              <mat-icon class="empty-icon">fitness_center</mat-icon>
-              <h3 class="empty-title">No tienes rutinas creadas</h3>
-              <p class="empty-description">Comienza creando tu primera rutina de entrenamiento</p>
-              <button mat-raised-button class="empty-action-btn" (click)="handleCreateRoutine()">
+            <div class="flex flex-col items-center justify-center py-16 px-8 text-center">
+              <mat-icon class="text-8xl w-20 h-20 text-(--grey-primary) opacity-30 mb-6">
+                fitness_center
+              </mat-icon>
+              <h3 class="text-2xl font-semibold text-dark mb-3">No tienes rutinas creadas</h3>
+              <p class="text-(--grey-primary) mb-8 max-w-md">
+                Comienza creando tu primera rutina de entrenamiento
+              </p>
+              <button mat-raised-button class="btn-empty-action" (click)="onOpenModal()">
                 <mat-icon>add</mat-icon>
                 Crear mi primera rutina
               </button>
@@ -61,33 +63,35 @@
         </div>
       </mat-tab>
 
-      <!-- Tab: Rutinas Asignadas -->
       <mat-tab>
         <ng-template mat-tab-label>
-          <mat-icon class="tab-icon mr-1">assignment</mat-icon>
+          <mat-icon class="tab-icon">assignment</mat-icon>
           <span class="tab-label">Rutinas asignadas</span>
           <span class="tab-badge">{{ assignedRoutines().length }}</span>
         </ng-template>
-
-        <div class="tab-content">
+        <div class="p-8 min-h-[400px]">
           @if (assignedRoutines().length > 0) {
-            <div class="routines-grid">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
               @for (routine of assignedRoutines(); track routine.id) {
-                <div class="assigned-routine-wrapper">
-                  <routine-card
-                    [name]="routine.name"
-                    [items]="assignedRoutinesExercises()"
-                    [areOptionsAvailable]="false"
-                    (startTraining)="handleStartTraining(routine.id)"
-                  />
-                </div>
+                <routine-card
+                  [name]="routine.name"
+                  [items]="routine.exercises"
+                  [areOptionsAvailable]="false"
+                  (startTraining)="handleStartTraining(routine.id)"
+                />
               }
             </div>
           } @else {
-            <div class="empty-state">
-              <mat-icon class="empty-icon">assignment</mat-icon>
-              <h3 class="empty-title">No tienes rutinas asignadas</h3>
-              <p class="empty-description">Tu entrenador aún no te ha asignado ninguna rutina</p>
+            <div class="flex flex-col items-center justify-center py-16 px-8 text-center">
+              <mat-icon class="text-8xl w-20 h-20 text-[var(--grey-primary)] opacity-30 mb-6">
+                assignment
+              </mat-icon>
+              <h3 class="text-2xl font-semibold text-[var(--color-dark)] mb-3">
+                No tienes rutinas asignadas
+              </h3>
+              <p class="text-[var(--grey-primary)] max-w-md">
+                Tu entrenador aún no te ha asignado ninguna rutina
+              </p>
             </div>
           }
         </div>
@@ -97,5 +101,5 @@
 </div>
 
 @if (isModalOpen()) {
-  <new-routine-modal (closeModal)="onCloseModal()" />
+  <modal-create-routine (closeModal)="onCloseModal()" />
 }

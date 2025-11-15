@@ -1,11 +1,8 @@
-<!-- Exercises Component -->
 <div class="exercises-container">
-  <!-- Barra de búsqueda -->
   <div class="w-full mb-4">
     <byf-searchbar (searchChange)="onSearch($event)"></byf-searchbar>
   </div>
 
-  <!-- Filtros -->
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
     <byf-filter-dropdown
       [options]="equipmentOptions()!"
@@ -23,7 +20,6 @@
     />
   </div>
 
-  <!-- Grid de Cards -->
   <div class="exercises-grid">
     @for (exercise of filteredExercises(); track exercise.exerciseId) {
       <byf-card
@@ -36,7 +32,6 @@
     }
   </div>
 
-  <!-- Modal -->
   @if (isModalOpen()) {
     <exercise-detail-modal [exercise]="selectedExercise()!" (closeModal)="onCloseDetail()" />
   }

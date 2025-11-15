@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -12,12 +12,16 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class RoutineCard {
   name = input<string>();
-  items = input<string[]>();
+  items = input.required<any>();
   areOptionsAvailable = input<boolean>();
 
   startTraining = output<void>();
   edit = output<void>();
   delete = output<void>();
+
+  formattedItems = computed(() => {
+    return this.items().map((exercise: any) => exercise.exercise_name);
+  });
 
   onStartTraining(): void {
     this.startTraining.emit();

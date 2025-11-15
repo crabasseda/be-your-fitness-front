@@ -38,6 +38,8 @@ export interface CreateRoutineDTO {
   exercises: ExerciseInRoutine[];
 }
 
+export type RoutineDetails = Omit<CreateRoutineDTO, 'exercises'>;
+
 export interface UpdateRoutineDto {
   name: string;
   type: RoutineType;

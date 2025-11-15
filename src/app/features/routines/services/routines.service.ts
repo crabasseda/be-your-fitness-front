@@ -35,7 +35,6 @@ export class RoutinesService {
     params = params.set('userId', userId);
 
     this._http.get<RoutineCard[]>(this._apiUrl, { params }).subscribe((res) => {
-      console.log(res);
       this.routinesList.set(res);
     });
   }
@@ -65,6 +64,7 @@ export class RoutinesService {
     this._http
       .get<RoutineAssignmentResponse[]>(`${this._apiUrlAssignments}/athlete/${athleteId}`)
       .subscribe((assignments) => {
+        console.log('assignments', assignments);
         this.assignedRoutinesResponse.set(assignments);
       });
   }

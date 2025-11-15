@@ -1,0 +1,66 @@
+<div class="w-full mb-4">
+  <byf-searchbar (searchChange)="onSearch($event)"></byf-searchbar>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+  <byf-filter-dropdown
+    [options]="equipmentOptions()"
+    label="Equipamiento"
+    placeholder="Selecciona"
+    [selectedValue]="selectedEquipment()"
+    (selectionChanged)="onEquipmentChange($event)"
+  />
+  <byf-filter-dropdown
+    [options]="bodyPartsOptions()"
+    label="Parte del cuerpo"
+    placeholder="Selecciona"
+    [selectedValue]="selectedBodyPart()"
+    (selectionChanged)="onBodyPartChange($event)"
+  />
+</div>
+
+<byf-chip
+  [text]="selectedCount().toString() + ' ejercicios seleccionados'"
+  [chipType]="ChipType.Blue"
+></byf-chip>
+
+<div class="exercises-grid">
+  @for (exercise of filteredExercises(); track exercise.exerciseId) {
+    <div
+      class="exercise-card-wrapper"
+      [class.selected]="isExerciseSelected(exercise)"
+      (click)="toggleExerciseSelection(exercise.exerciseId)"
+    >
+      <byf-card
+        [title]="exercise.name"
+        [subtitle]="exercise.exerciseType"
+        [chips]="exercise.equipments"
+        [image]="exercise.imageUrl"
+        [class.card-selected]="isExerciseSelected(exercise)"
+      ></byf-card>
+
+      <div class="checkbox-overlay">
+        <mat-checkbox
+          [checked]="isExerciseSelected(exercise)"
+          (click)="$event.stopPropagation()"
+          (change)="toggleExerciseSelection(exercise.exerciseId)"
+          color="primary"
+          class="exercise-checkbox"
+        >
+        </mat-checkbox>
+      </div>
+
+      @if (isExerciseSelected(exercise)) {
+        <div class="selected-indicator">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+      }
+    </div>
+  } @empty {
+    <div class="empty-state">
+      <mat-icon class="empty-icon">search_off</mat-icon>
+      <p class="empty-text">No se encontraron ejercicios</p>
+      <p class="empty-subtext">Intenta ajustar los filtros de búsqueda</p>
+    </div>
+  }
+</div>

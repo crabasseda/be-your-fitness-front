@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { effect, inject, Injectable, signal } from '@angular/core';
 import { catchError, map, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import {
   Exercise,
   ExerciseDetailResponse,
@@ -15,7 +16,7 @@ import {
 })
 export class ExercisesService {
   private _http = inject(HttpClient);
-  url = 'https://v2.exercisedb.dev/api/v1';
+  private _apiUrl = environment.exercisesApiUrl;
 
   exerciseList = signal<Exercise[] | null>(null);
 
@@ -44,7 +45,7 @@ export class ExercisesService {
     }
 
     this._http
-      .get<ExercisesResponse>(this.url + '/exercises', { params })
+      .get<ExercisesResponse>(this._apiUrl + '/exercises', { params })
       .pipe(map((response) => response.data))
       .subscribe((data) => {
         this.exerciseList.set(data);
@@ -53,17 +54,16 @@ export class ExercisesService {
 
   getExerciseById(exerciseId: string) {
     this._http
-      .get<ExerciseDetailResponse>(this.url + '/exercises/' + exerciseId)
+      .get<ExerciseDetailResponse>(this._apiUrl + '/exercises/' + exerciseId)
       .pipe(map((response) => response.data))
       .subscribe((data) => {
         this.selectedExercise.set(data);
-        console.log(data);
       });
   }
 
   getEquipments() {
     this._http
-      .get<FiltersResponse>(this.url + '/equipments')
+      .get<FiltersResponse>(this._apiUrl + '/equipments')
       .pipe(
         map((response) => response.data),
         catchError((error) => {
@@ -78,7 +78,7 @@ export class ExercisesService {
 
   getBodyParts() {
     this._http
-      .get<FiltersResponse>(this.url + '/bodyparts')
+      .get<FiltersResponse>(this._apiUrl + '/bodyparts')
       .pipe(
         map((response) => response.data),
         catchError((error) => {

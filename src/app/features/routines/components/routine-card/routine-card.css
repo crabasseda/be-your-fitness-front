@@ -6,7 +6,6 @@
   flex-direction: column;
 }
 
-/* Asegurar que el texto se trunca correctamente */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -15,14 +14,12 @@
   text-overflow: ellipsis;
 }
 
-/* Estilos para el botón de Material */
 ::ng-deep .mat-mdc-raised-button {
   border-radius: var(--border-radius) !important;
   font-weight: 500;
   padding: 12px 24px;
 }
 
-/* Hover para el menú kebab */
 ::ng-deep .mat-mdc-icon-button:hover {
   background-color: rgba(0, 0, 0, 0.04);
 }

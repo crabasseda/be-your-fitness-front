@@ -1,0 +1,82 @@
+<div class="step-routine-details-container">
+  <div class="header-section">
+    <h2 class="step-title">Detalles de la rutina</h2>
+    <p class="step-subtitle">Dale un nombre y elige el tipo de entrenamiento</p>
+  </div>
+
+  <div class="form-container">
+    <!-- Nombre de la rutina -->
+    <div class="form-field-wrapper">
+      <label class="field-label" for="routine-name">
+        <span class="label-text">Nombre de la rutina</span>
+        <span class="required-star">*</span>
+      </label>
+      <input
+        id="routine-name"
+        type="text"
+        [value]="routineName()"
+        (input)="onNameChange($any($event.target).value)"
+        placeholder="Ej: Rutina de Fuerza 5x5"
+        class="custom-input"
+        maxlength="100"
+      />
+      <div class="input-hint">{{ routineName().length }}/100 caracteres</div>
+    </div>
+
+    <!-- Tipo de rutina -->
+    <div class="form-field-wrapper">
+      <label class="field-label" for="routine-type">
+        <span class="label-text">Tipo de rutina</span>
+        <span class="required-star">*</span>
+      </label>
+
+      <div class="routine-type-grid">
+        @for (type of routineTypes; track type.value) {
+          <button
+            type="button"
+            class="routine-type-card"
+            [class.selected]="routineType() === type.value"
+            (click)="onTypeChange(type.value)"
+          >
+            <div class="card-icon">{{ type.icon }}</div>
+            <div class="card-content">
+              <div class="card-title">{{ type.label }}</div>
+              <div class="card-description">{{ type.description }}</div>
+            </div>
+            <div class="check-indicator">
+              @if (routineType() === type.value) {
+                <svg
+                  class="check-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              }
+            </div>
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Información de validación -->
+    @if (!areDetailsValid()) {
+      <div class="validation-message">
+        <svg
+          class="info-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>Por favor, completa el nombre y selecciona un tipo de rutina</span>
+      </div>
+    }
+  </div>
+</div>
