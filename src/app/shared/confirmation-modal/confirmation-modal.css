@@ -1,0 +1,244 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.confirmation-modal {
+  min-width: 320px;
+  max-width: 500px;
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.95) translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-wrapper-success {
+  background-color: rgba(43, 159, 96, 0.1);
+}
+
+.icon-wrapper-danger {
+  background-color: rgba(229, 57, 53, 0.1);
+}
+
+.icon-wrapper-warning {
+  background-color: rgba(246, 161, 0, 0.1);
+}
+
+.icon-wrapper-info {
+  background-color: rgba(49, 161, 221, 0.1);
+}
+
+.header-icon {
+  font-size: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.icon-wrapper-success .header-icon {
+  color: var(--color-success);
+}
+
+.icon-wrapper-danger .header-icon {
+  color: var(--color-danger);
+}
+
+.icon-wrapper-warning .header-icon {
+  color: var(--color-orange-secondary);
+}
+
+.icon-wrapper-info .header-icon {
+  color: var(--color-blue-primary);
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.close-button {
+  color: var(--color-grey-primary);
+  flex-shrink: 0;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Body */
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-message {
+  margin: 0;
+  color: var(--color-grey-primary);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Footer */
+.modal-footer {
+  padding: 1rem 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  background-color: var(--color-light);
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancel-button {
+  color: var(--color-grey-primary) !important;
+  border-color: #d1d5db !important;
+}
+
+.cancel-button:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.confirm-button {
+  font-weight: 600 !important;
+}
+
+.confirm-button-success {
+  background-color: var(--color-success) !important;
+  color: white !important;
+}
+
+.confirm-button-success:hover {
+  background-color: #248c52 !important;
+}
+
+.confirm-button-danger {
+  background-color: var(--color-danger) !important;
+  color: white !important;
+}
+
+.confirm-button-danger:hover {
+  background-color: #c62828 !important;
+}
+
+.confirm-button-warning {
+  background-color: var(--color-orange-secondary) !important;
+  color: white !important;
+}
+
+.confirm-button-warning:hover {
+  background-color: #e59100 !important;
+}
+
+.confirm-button-info {
+  background-color: var(--color-blue-primary) !important;
+  color: white !important;
+}
+
+.confirm-button-info:hover {
+  background-color: #2890c4 !important;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .confirmation-modal {
+    min-width: 280px;
+  }
+
+  .modal-header {
+    padding: 1.25rem;
+  }
+
+  .header-content {
+    gap: 0.75rem;
+  }
+
+  .icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header-icon {
+    font-size: 24px !important;
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .modal-title {
+    font-size: 1.125rem;
+  }
+
+  .modal-body {
+    padding: 1.25rem;
+  }
+
+  .modal-message {
+    font-size: 0.9375rem;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+    padding: 1rem;
+  }
+
+  .modal-footer button {
+    width: 100%;
+  }
+}

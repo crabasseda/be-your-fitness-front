@@ -2,12 +2,13 @@ import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmationModal } from '@shared/confirmation-modal/confirmation-modal';
 import { ExerciseWorkoutCard } from './components/exercise-workout-card/exercise-workout-card';
 import { WorkoutService } from './services/workout.service';
 
 @Component({
   selector: 'workout',
-  imports: [MatIcon, MatButton, ExerciseWorkoutCard],
+  imports: [MatIcon, MatButton, ExerciseWorkoutCard, ConfirmationModal],
   templateUrl: './workout.html',
   styleUrl: './workout.css',
 })
@@ -19,6 +20,7 @@ export class Workout implements OnDestroy {
 
   workoutRoutine = this._workoutService.workoutRoutine;
   durationTime = signal<string>('00:00');
+  showConfirmationModal = signal(false);
 
   workoutExercises = computed(() => {
     if (!this.workoutRoutine()) return;

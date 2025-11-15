@@ -3,6 +3,7 @@
     <button
       mat-flat-button
       type="button"
+      (click)="showConfirmationModal.set(true)"
       class="bg-(--orange-primary)! hover:bg-[-bg-orange-secondary]! text-white! font-semibold! py-2.5! px-5! rounded-lg! shadow-md! hover:shadow-lg!"
     >
       <div class="flex items-center justify-center gap-2">
@@ -33,3 +34,15 @@
     }
   </div>
 </div>
+
+<confirmation-modal
+  [isOpen]="showConfirmationModal()"
+  [title]="'Terminar rutina'"
+  [message]="'¿Estás seguro de que deseas finalizar el entreno?'"
+  [confirmText]="'Terminar'"
+  [cancelText]="'Cancelar'"
+  [icon]="'flag'"
+  [type]="'success'"
+  (confirm)="finishWorkout()"
+  (cancel)="showConfirmationModal.set(false)"
+/>

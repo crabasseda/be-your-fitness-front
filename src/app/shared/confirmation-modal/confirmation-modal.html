@@ -1,0 +1,38 @@
+@if (isOpen()) {
+  <div class="modal-backdrop" (click)="onBackdropClick($event)">
+    <div class="confirmation-modal">
+      <!-- Header -->
+      <div class="modal-header" [ngClass]="'modal-header-' + type()">
+        <div class="header-content">
+          <div class="icon-wrapper" [ngClass]="'icon-wrapper-' + type()">
+            <mat-icon class="header-icon">{{ icon() }}</mat-icon>
+          </div>
+          <h2 class="modal-title">{{ title() }}</h2>
+        </div>
+        <button mat-icon-button class="close-button" (click)="onCancel()" aria-label="Cerrar">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <p class="modal-message">{{ message() }}</p>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button mat-stroked-button class="cancel-button" (click)="onCancel()">
+          {{ cancelText() }}
+        </button>
+        <button
+          mat-flat-button
+          class="confirm-button"
+          [ngClass]="'confirm-button-' + type()"
+          (click)="onConfirm()"
+        >
+          {{ confirmText() }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

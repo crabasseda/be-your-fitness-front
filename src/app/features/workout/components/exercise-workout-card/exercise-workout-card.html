@@ -1,9 +1,7 @@
 <div class="exercise-routine-card bg-white rounded-xl shadow-md overflow-hidden">
   <div class="exercise-header relative">
-    <div
-      class="relative h-32 bg-gradient-to-br from-[var(--color-blue-primary)] to-[var(--color-blue-secondary)] overflow-hidden"
-    >
-      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+    <div class="relative h-32 bg-linear-to-br from-blue-primary to-blue-secondary overflow-hidden">
+      <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
     </div>
     <div class="absolute bottom-0 left-0 right-0 p-4">
       <h3 class="text-white text-xl font-bold drop-shadow-lg">
@@ -31,7 +29,7 @@
           <!-- Número del set -->
           <div class="flex items-center justify-center">
             <div
-              class="w-7 h-7 sm:w-10 sm:h-10 bg-[var(--color-blue-primary)] text-white rounded-full flex items-center justify-center font-bold text-sm sm:text-lg transition-colors duration-200"
+              class="w-7 h-7 sm:w-10 sm:h-10 bg-blue-primary text-white rounded-full flex items-center justify-center font-bold text-sm sm:text-lg transition-colors duration-200"
               [class.completed-badge]="set.completed"
             >
               {{ set.set_number }}
