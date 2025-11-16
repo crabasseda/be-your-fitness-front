@@ -3,12 +3,12 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationModal } from '@shared/confirmation-modal/confirmation-modal';
-import { ExerciseWorkoutCard } from './components/exercise-workout-card/exercise-workout-card';
+import { ExerciseCard } from '@shared/exercise-card/exercise-card';
 import { WorkoutService } from './services/workout.service';
 
 @Component({
   selector: 'workout',
-  imports: [MatIcon, MatButton, ExerciseWorkoutCard, ConfirmationModal],
+  imports: [MatIcon, MatButton, ExerciseCard, ConfirmationModal],
   templateUrl: './workout.html',
   styleUrl: './workout.css',
 })

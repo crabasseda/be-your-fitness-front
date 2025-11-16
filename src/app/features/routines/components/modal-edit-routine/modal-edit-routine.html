@@ -1,0 +1,75 @@
+<byf-modal (closeModal)="onClose()">
+  <ng-template #header>
+    <div class="modal-header">
+      <div class="header-content">
+        <div class="title-section">
+          <h2 class="modal-title">Editar rutina</h2>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #body>
+    <div class="flex justify-end mb-4">
+      <button
+        mat-flat-button
+        type="button"
+        (click)="showConfirmationModal.set(true)"
+        class="bg-orange-primary! hover:bg-orange-secondary! text-white! font-semibold! cursor-pointer py-2.5! px-5! rounded-lg! shadow-md! hover:shadow-lg! border-0!"
+      >
+        <div class="flex items-center justify-center gap-2">
+          <mat-icon class="w-5! h-5! text-base!">save</mat-icon>
+          <span class="text-sm sm:text-base whitespace-nowrap">Guardar rutina</span>
+        </div>
+      </button>
+    </div>
+
+    <div class="form-field-wrapper">
+      <label class="field-label" for="routine-name">
+        <span class="label-text">Nombre de la rutina</span>
+        <span class="required-star">*</span>
+      </label>
+      <input
+        id="routine-name"
+        type="text"
+        [value]="routineName()"
+        (input)="onNameChange($any($event.target).value)"
+        placeholder="Ej: Rutina de Fuerza 5x5"
+        class="custom-input"
+        maxlength="100"
+      />
+      <div class="input-hint">{{ routineToEdit()?.name?.length }}/100 caracteres</div>
+    </div>
+
+    <label class="field-label mb-3" for="routine-name">
+      <span class="label-text">Ejercicios</span>
+    </label>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+      @for (exercise of routineToEdit()?.exercises; track exercise.exercise_id) {
+        <div class="transform transition-all duration-300 hover:scale-[1.02]">
+          <exercise-card
+            mode="routine"
+            [exercise]="exercise"
+            [initialSets]="exercise.sets"
+            (exerciseUpdated)="onExerciseUpdated($event)"
+          />
+        </div>
+      }
+    </div>
+  </ng-template>
+
+  <ng-template #footer> </ng-template>
+</byf-modal>
+
+<confirmation-modal
+  [isOpen]="showConfirmationModal()"
+  [title]="'Guardar rutina'"
+  [message]="'¿Estás seguro de que deseas guardar los cambios en la rutina?'"
+  [confirmText]="'Confirmar'"
+  [cancelText]="'Cancelar'"
+  [icon]="'save'"
+  [type]="'warning'"
+  (confirm)="handleUpdateRoutine()"
+  (cancel)="showConfirmationModal.set(false)"
+/>

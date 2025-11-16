@@ -38,7 +38,8 @@
       }
       @case (2) {
         @for (exercise of selectedExercises(); track exercise.exerciseId) {
-          <exercise-routine-card
+          <exercise-card
+            mode="routine"
             [exercise]="exercise"
             (exerciseUpdated)="updateExerciseInRoutine($event)"
             (removeExercise)="removeExerciseFromRoutine($event)"

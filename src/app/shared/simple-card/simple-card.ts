@@ -5,10 +5,10 @@ import { ChipType } from '../chip/models/chip.enum';
 @Component({
   selector: 'byf-card',
   imports: [Chip],
-  templateUrl: './card.html',
-  styleUrl: './card.css',
+  templateUrl: './simple-card.html',
+  styleUrl: './simple-card.css',
 })
-export class Card {
+export class SimpleCard {
   image = input<string>();
   title = input<string>();
   subtitle = input<string>();

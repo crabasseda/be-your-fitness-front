@@ -10,7 +10,7 @@
         class="btn-create-routine"
         type="button"
         aria-label="Crear nueva rutina"
-        (click)="onOpenModal()"
+        (click)="onOpenCreateRoutineModal()"
       >
         <mat-icon class="text-2xl w-7 h-7">add_circle</mat-icon>
         <span class="text-lg whitespace-nowrap">Crear rutina</span>
@@ -41,7 +41,7 @@
                   [areOptionsAvailable]="true"
                   (startTraining)="handleStartTraining(routine._id)"
                   (edit)="handleEdit(routine._id)"
-                  (delete)="handleDelete(routine._id)"
+                  (delete)="handleConfirmationDelete(routine._id)"
                 />
               }
             </div>
@@ -54,7 +54,11 @@
               <p class="text-(--grey-primary) mb-8 max-w-md">
                 Comienza creando tu primera rutina de entrenamiento
               </p>
-              <button mat-raised-button class="btn-empty-action" (click)="onOpenModal()">
+              <button
+                mat-raised-button
+                class="btn-empty-action"
+                (click)="onOpenCreateRoutineModal()"
+              >
                 <mat-icon>add</mat-icon>
                 Crear mi primera rutina
               </button>
@@ -70,14 +74,15 @@
           <span class="tab-badge">{{ assignedRoutines().length }}</span>
         </ng-template>
         <div class="p-8 min-h-[400px]">
-          @if (assignedRoutines().length > 0) {
+          <!-- @if (assignedRoutines().length > 0) {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-              @for (routine of assignedRoutines(); track routine.id) {
+              @for (routine of assignedRoutines(); track routine._id) {
                 <routine-card
                   [name]="routine.name"
                   [items]="routine.exercises"
                   [areOptionsAvailable]="false"
-                  (startTraining)="handleStartTraining(routine.id)"
+                  (startTraining)="handleStartTraining(routine._id)"
+                  (delete)="handleDelete(routine._id)"
                 />
               }
             </div>
@@ -91,13 +96,32 @@
                 Tu entrenador aún no te ha asignado ninguna rutina
               </p>
             </div>
-          }
+          } -->
         </div>
       </mat-tab>
     </mat-tab-group>
   </div>
 </div>
 
-@if (isModalOpen()) {
-  <modal-create-routine (closeModal)="onCloseModal()" />
+@if (showCreateRoutineModal()) {
+  <modal-create-routine (closeModal)="onCloseCreateRoutineModal()" />
 }
+@if (showEditRoutineModal()) {
+  <modal-edit-routine
+    [routineId]="routineIdToEdit()"
+    (updatedRoutine)="handleUpdateRoutine($event)"
+    (closeModal)="onCloseEditRoutineModal()"
+  />
+}
+
+<confirmation-modal
+  [isOpen]="showConfirmationModal()"
+  [title]="'Eliminar rutina'"
+  [message]="'¿Estás seguro de que deseas eliminar la rutina?'"
+  [confirmText]="'Confirmar'"
+  [cancelText]="'Cancelar'"
+  [icon]="'flag'"
+  [type]="'danger'"
+  (confirm)="handleDelete()"
+  (cancel)="showConfirmationModal.set(false)"
+/>

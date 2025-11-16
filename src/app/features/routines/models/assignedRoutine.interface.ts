@@ -2,12 +2,12 @@ import { ExerciseInRoutine, RoutineType } from './routine.interface';
 
 // GET /assignments/athlete/:athleteId
 export interface RoutineAssignmentResponse {
-  id: string; // ← ID de la ASIGNACIÓN (no de la rutina)
-  routine_id: RoutineInAssignment; // ← Info completa de la rutina
+  id: string;
+  routine_id: RoutineInAssignment;
   athlete_id: AthleteInAssignment;
   assigned_by: TrainerInAssignment;
   assigned_date: string;
-  scheduled_dates: string[]; // ← FECHAS PROGRAMADAS (esto es lo importante)
+  scheduled_dates: string[];
   status: 'active' | 'completed' | 'cancelled';
   notes?: string;
   createdAt: string;
@@ -15,7 +15,7 @@ export interface RoutineAssignmentResponse {
 }
 
 export interface RoutineInAssignment {
-  id: string;
+  _id: string;
   name: string;
   type: RoutineType;
   created_by: string;

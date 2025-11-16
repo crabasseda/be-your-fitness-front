@@ -4,15 +4,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '@core/auth/auth.service';
 import { CreateRoutineDTO, ExerciseInRoutine } from '@features/routines/models/routine.interface';
 import { RoutinesService } from '@features/routines/services/routines.service';
+import { ExerciseCard } from '@shared/exercise-card/exercise-card';
 import { Modal } from '@shared/modal/modal';
-import { ExerciseRoutineCard } from './components/exercise-routine-card/exercise-routine-card';
 import { StepRoutineDetails } from './components/step-routine-details/step-routine-details';
 import { StepSelectExercises } from './components/step-select-exercises/step-select-exercises';
 import { CreateRoutineService } from './services/modal-create-routine.service';
 
 @Component({
   selector: 'modal-create-routine',
-  imports: [Modal, MatIcon, StepSelectExercises, ExerciseRoutineCard, StepRoutineDetails],
+  imports: [Modal, MatIcon, StepSelectExercises, ExerciseCard, StepRoutineDetails],
   templateUrl: './modal-create-routine.html',
   styleUrl: './modal-create-routine.css',
 })

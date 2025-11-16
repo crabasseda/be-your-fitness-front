@@ -3,12 +3,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { RoutineAssignmentResponse } from '../models/assignedRoutine.interface';
-import {
-  CreateRoutineDTO,
-  Routine,
-  RoutineCard,
-  UpdateRoutineDto,
-} from '../models/routine.interface';
+import { CreateRoutineDTO, Routine, UpdateRoutineDto } from '../models/routine.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +15,7 @@ export class RoutinesService {
 
   private _apiUrlAssignments = `${environment.apiUrl}/assignments`;
 
-  routinesList = signal<RoutineCard[]>([]);
+  routinesList = signal<Routine[]>([]);
   // Signal con las asignaciones completas
   assignedRoutinesResponse = signal<RoutineAssignmentResponse[]>([]);
 
@@ -34,7 +29,8 @@ export class RoutinesService {
 
     params = params.set('userId', userId);
 
-    this._http.get<RoutineCard[]>(this._apiUrl, { params }).subscribe((res) => {
+    this._http.get<Routine[]>(this._apiUrl, { params }).subscribe((res) => {
+      console.log(res);
       this.routinesList.set(res);
     });
   }
@@ -64,6 +60,7 @@ export class RoutinesService {
     this._http
       .get<RoutineAssignmentResponse[]>(`${this._apiUrlAssignments}/athlete/${athleteId}`)
       .subscribe((assignments) => {
+        console.log(assignments);
         this.assignedRoutinesResponse.set(assignments);
       });
   }

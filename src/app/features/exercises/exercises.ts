@@ -1,15 +1,15 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
-import { Card } from '@shared/card/card';
 import { FilterDropdown } from '@shared/filter-dropdown/filter-dropdown';
 import { FilterOption } from '@shared/filter-dropdown/models/filter-dropdown.interface';
 import { Searchbar } from '@shared/searchbar/searchbar';
+import { SimpleCard } from '@shared/simple-card/simple-card';
 import { ExerciseDetailModal } from './components/exercise-detail-modal/exercise-detail-modal';
 import { Exercise } from './models/exercises.interface';
 import { ExercisesService } from './services/exercises.service';
 
 @Component({
   selector: 'app-exercises',
-  imports: [Searchbar, Card, FilterDropdown, ExerciseDetailModal],
+  imports: [Searchbar, SimpleCard, FilterDropdown, ExerciseDetailModal],
   templateUrl: './exercises.html',
   styleUrl: './exercises.css',
 })

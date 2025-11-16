@@ -4,17 +4,17 @@ import { MatIcon } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
 import { Exercise } from '@features/exercises/models/exercises.interface';
 import { ExercisesService } from '@features/exercises/services/exercises.service';
-import { Card } from '@shared/card/card';
 import { Chip } from '@shared/chip/chip';
 import { ChipType } from '@shared/chip/models/chip.enum';
 import { FilterDropdown } from '@shared/filter-dropdown/filter-dropdown';
 import { FilterOption } from '@shared/filter-dropdown/models/filter-dropdown.interface';
 import { Searchbar } from '@shared/searchbar/searchbar';
+import { SimpleCard } from '@shared/simple-card/simple-card';
 import { CreateRoutineService } from '../../services/modal-create-routine.service';
 
 @Component({
   selector: 'step-select-exercises',
-  imports: [MatIcon, FilterDropdown, Searchbar, Card, MatCheckbox, MatStepperModule, Chip],
+  imports: [MatIcon, FilterDropdown, Searchbar, SimpleCard, MatCheckbox, MatStepperModule, Chip],
   templateUrl: './step-select-exercises.html',
   styleUrl: './step-select-exercises.css',
 })
