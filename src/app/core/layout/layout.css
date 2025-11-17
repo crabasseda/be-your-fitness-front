@@ -217,7 +217,7 @@
 }
 
 .footer-link.active {
-  color: var(--orange-primary);
+  color: var(--orange-primary) !important;
 }
 
 .footer-link:hover {

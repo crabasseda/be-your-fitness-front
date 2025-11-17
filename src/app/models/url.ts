@@ -1,4 +1,5 @@
 export enum UrlKey {
+  SimpleHome = 'simpleHome',
   Home = 'home',
   Login = 'login',
   Logout = 'logout',

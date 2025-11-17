@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (!this._authService.isUserInStorage()) {
-      this._router.navigateByUrl(UrlKey.Login);
+      this._router.navigateByUrl(UrlKey.SimpleHome);
       return false;
     }
     return true;

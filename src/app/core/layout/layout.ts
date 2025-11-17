@@ -16,8 +16,13 @@ export class Layout {
 
   public isLoggedIn = this._authService.isUserInStorage();
 
-  logout() {
-    this._authService.logout();
+  handleSession() {
+    if (this.isLoggedIn) {
+      this._authService.logout();
+      this._router.navigateByUrl(UrlKey.Login);
+      return;
+    }
+
     this._router.navigateByUrl(UrlKey.Login);
   }
 }
