@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { Exercise } from '@features/exercises/models/exercises.interface';
-import { RoutineSchedule, RoutineType } from '@features/routines/models/routine.interface';
+import { RoutineSchedule } from '@features/routines/models/routine.interface';
+import { RoutineType } from '@features/routines/models/routine.type';
 
 @Injectable({
   providedIn: 'root',

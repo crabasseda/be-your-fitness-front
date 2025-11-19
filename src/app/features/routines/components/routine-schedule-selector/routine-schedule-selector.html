@@ -1,4 +1,3 @@
-<!-- Selector de tipo de programación -->
 <div class="schedule-type-selector">
   <button
     type="button"
@@ -45,10 +44,8 @@
   </div>
 }
 
-<!-- Recurrente -->
 @if (scheduleType() === 'recurring') {
   <div class="schedule-details">
-    <!-- Selector de frecuencia -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Frecuencia</mat-label>
       <mat-select [value]="frequency()" (selectionChange)="frequency.set($event.value)">
@@ -58,7 +55,6 @@
       </mat-select>
     </mat-form-field>
 
-    <!-- Días de la semana (solo para weekly) -->
     @if (frequency() === 'weekly') {
       <div class="days-of-week-section">
         <label class="subsection-label">Días de la semana</label>
@@ -80,7 +76,6 @@
       </div>
     }
 
-    <!-- Día del mes (solo para monthly) -->
     @if (frequency() === 'monthly') {
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Día del mes</mat-label>
@@ -92,7 +87,6 @@
       </mat-form-field>
     }
 
-    <!-- Rango de fechas opcional -->
     <div class="date-range-section">
       <label class="subsection-label">Período (opcional)</label>
       <div class="date-range-grid">

@@ -46,7 +46,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width< 768px) {
   .modal-overlay {
     align-items: flex-end;
   }
@@ -82,7 +82,7 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
+@media (width< 768px) {
   .modal-content {
     height: 95vh;
     margin: 0.5rem;
@@ -100,7 +100,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (width< 480px) {
   .modal-overlay {
     padding: 0;
   }

@@ -1,3 +1,5 @@
+import { RoutineType } from './routine.type';
+
 export interface Routine {
   _id: string;
   name: string;
@@ -7,19 +9,9 @@ export interface Routine {
   schedule?: RoutineSchedule;
 }
 
-export type RoutineType =
-  | 'fuerza'
-  | 'resistencia'
-  | 'mixto'
-  | 'hipertrofia'
-  | 'movilidad'
-  | 'cardio';
-
 export interface RoutineSchedule {
   type: 'one-time' | 'recurring';
-
   specificDate?: Date;
-
   recurrence?: {
     frequency: 'daily' | 'weekly' | 'monthly';
     daysOfWeek?: number[];
@@ -47,7 +39,6 @@ export interface SetInRoutine {
 export interface CreateRoutineDTO {
   name: string;
   type: RoutineType;
-  created_by: string;
   exercises: ExerciseInRoutine[];
   schedule?: RoutineSchedule;
 }

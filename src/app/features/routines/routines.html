@@ -71,7 +71,7 @@
         <ng-template mat-tab-label>
           <mat-icon class="tab-icon">assignment</mat-icon>
           <span class="tab-label">Rutinas asignadas</span>
-          <span class="tab-badge">{{ assignedRoutines().length }}</span>
+          <!-- <span class="tab-badge">{{ assignedRoutines().length }}</span> -->
         </ng-template>
         <div class="p-8 min-h-[400px]">
           <!-- @if (assignedRoutines().length > 0) {
@@ -104,7 +104,7 @@
 </div>
 
 @if (showCreateRoutineModal()) {
-  <modal-create-routine (closeModal)="onCloseCreateRoutineModal()" />
+  <modal-create-routine (closeModal)="onCloseCreateRoutineModal($event)" />
 }
 @if (showEditRoutineModal()) {
   <modal-edit-routine

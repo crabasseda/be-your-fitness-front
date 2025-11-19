@@ -1,9 +1,9 @@
 import { Component, effect, inject, input, output, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import { ExerciseCard } from '@features/routines/components/exercise-card/exercise-card';
 import { ExerciseInRoutine, Routine } from '@features/routines/models/routine.interface';
 import { RoutinesService } from '@features/routines/services/routines.service';
 import { ConfirmationModal } from '@shared/confirmation-modal/confirmation-modal';
-import { ExerciseCard } from '@shared/exercise-card/exercise-card';
 import { Modal } from '@shared/modal/modal';
 
 @Component({
@@ -21,7 +21,6 @@ export class ModalEditRoutine {
   closeModal = output<void>();
   updatedRoutine = output<Routine>();
 
-  // Estado local de la rutina editada
   routineToEdit = signal<Routine | null>(null);
   routineName = signal<string>('');
   updatedExercises = signal<ExerciseInRoutine[]>([]);
@@ -41,7 +40,6 @@ export class ModalEditRoutine {
     });
   }
 
-  // Acumula cambios del ejercicio sin emitir
   onExerciseUpdated(updatedExercise: ExerciseInRoutine): void {
     const currentExercises = this.updatedExercises();
     const index = currentExercises.findIndex(

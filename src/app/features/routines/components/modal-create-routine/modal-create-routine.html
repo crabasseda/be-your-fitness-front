@@ -1,25 +1,28 @@
-<byf-modal (closeModal)="onClose()">
+<byf-modal (closeModal)="onClose(false)">
   <ng-template #header>
     <div class="modal-header">
       <div class="header-content">
         <div class="title-section">
           <h2 class="modal-title">
-            Paso {{ currentStep() }}:
+            Paso {{ currentStep() + 1 }}:
             @switch (currentStep()) {
-              @case (1) {
+              @case (ModalStep.AddExercisesStep) {
                 Selecciona Ejercicios
               }
-              @case (2) {
+              @case (ModalStep.AddSetsStep) {
                 Configura Series y Repeticiones
               }
-              @case (3) {
+              @case (ModalStep.AddDetailsStep) {
                 Detalles de la Rutina
               }
             }
           </h2>
         </div>
         <div class="flex gap-2 mt-3">
-          @for (step of [1, 2, 3]; track step) {
+          @for (
+            step of [ModalStep.AddExercisesStep, ModalStep.AddSetsStep, ModalStep.AddDetailsStep];
+            track step
+          ) {
             <div
               class="h-1 flex-1 rounded-full transition-colors"
               [class.bg-blue-primary]="step <= currentStep()"
@@ -33,10 +36,14 @@
 
   <ng-template #body>
     @switch (currentStep()) {
-      @case (1) {
-        <step-select-exercises />
+      @case (ModalStep.AddExercisesStep) {
+        <exercise-list
+          mode="selection"
+          [showSelectionChip]="true"
+          (exercisesSelected)="onExercisesSelected($event)"
+        />
       }
-      @case (2) {
+      @case (ModalStep.AddSetsStep) {
         @for (exercise of selectedExercises(); track exercise.exerciseId) {
           <exercise-card
             mode="routine"
@@ -47,7 +54,7 @@
         }
       }
 
-      @case (3) {
+      @case (ModalStep.AddDetailsStep) {
         <step-routine-details (isValid)="areDetailsValid.set($event)" />
       }
     }

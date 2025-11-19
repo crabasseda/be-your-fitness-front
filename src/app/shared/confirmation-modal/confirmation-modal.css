@@ -125,7 +125,6 @@
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Body */
 .modal-body {
   padding: 1.5rem;
 }
@@ -196,8 +195,7 @@
   background-color: #2890c4 !important;
 }
 
-/* Responsive */
-@media (max-width: 640px) {
+@media (width< 640px) {
   .confirmation-modal {
     min-width: 280px;
   }

@@ -1,30 +1,34 @@
 import { Component, inject, output, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '@core/auth/auth.service';
+import { NotificationService } from '@core/services/notification.service';
+import { ExerciseList } from '@features/exercises/components/exercise-list/exercise-list';
+import { Exercise } from '@features/exercises/models/exercises.interface';
+import { ExerciseCard } from '@features/routines/components/exercise-card/exercise-card';
 import { CreateRoutineDTO, ExerciseInRoutine } from '@features/routines/models/routine.interface';
 import { RoutinesService } from '@features/routines/services/routines.service';
-import { ExerciseCard } from '@shared/exercise-card/exercise-card';
 import { Modal } from '@shared/modal/modal';
 import { StepRoutineDetails } from './components/step-routine-details/step-routine-details';
-import { StepSelectExercises } from './components/step-select-exercises/step-select-exercises';
+import { ModalStep } from './models/modal-step.enum';
 import { CreateRoutineService } from './services/modal-create-routine.service';
 
 @Component({
   selector: 'modal-create-routine',
-  imports: [Modal, MatIcon, StepSelectExercises, ExerciseCard, StepRoutineDetails],
+  imports: [Modal, MatIcon, ExerciseCard, StepRoutineDetails, ExerciseList],
   templateUrl: './modal-create-routine.html',
   styleUrl: './modal-create-routine.css',
 })
 export class ModalCreateRoutine {
   private _createRoutineService = inject(CreateRoutineService);
   private _routinesService = inject(RoutinesService);
-  private _authService = inject(AuthService);
-  private _snackBar = inject(MatSnackBar);
+  private _notificationService = inject(NotificationService);
 
-  closeModal = output<void>();
+  closeModal = output<boolean>();
 
-  userId = this._authService.getUser()?.id;
+  isSaving = signal<boolean>(false);
+  areDetailsValid = signal<boolean>(false);
+  exercisesInRoutine = signal<ExerciseInRoutine[]>([]);
+
+  ModalStep = ModalStep;
 
   routineName = this._createRoutineService.routineName;
   routineType = this._createRoutineService.routineType;
@@ -32,7 +36,7 @@ export class ModalCreateRoutine {
 
   selectedExercises = this._createRoutineService.selectedExercises;
 
-  currentStep = signal(1);
+  currentStep = signal(ModalStep.AddExercisesStep);
   readonly TOTAL_STEPS = 3;
 
   nextStep() {
@@ -51,11 +55,11 @@ export class ModalCreateRoutine {
     return !!this.selectedExercises().length;
   }
 
-  onClose() {
+  onClose(reloadRoutines: boolean) {
     this._resetModal();
-    this.closeModal.emit();
+    this.closeModal.emit(reloadRoutines);
   }
-  exercisesInRoutine = signal<ExerciseInRoutine[]>([]);
+
   updateExerciseInRoutine(exerciseInRoutine: ExerciseInRoutine): void {
     this.exercisesInRoutine.update((exercises) => {
       const index = exercises.findIndex((ex) => ex.exercise_id === exerciseInRoutine.exercise_id);
@@ -90,45 +94,26 @@ export class ModalCreateRoutine {
     );
   }
 
-  areDetailsValid = signal<boolean>(false);
-  isSaving = signal<boolean>(false);
+  onExercisesSelected(exercises: Exercise[]) {
+    this._createRoutineService.selectedExercises.set(exercises);
+  }
+
   onSaveRoutine(): void {
     if (!this.areDetailsValid()) return;
 
     const routineData: CreateRoutineDTO = {
       name: this.routineName(),
       type: this.routineType()!,
-      created_by: this.userId!,
       exercises: this.exercisesInRoutine(),
       schedule: this.schedule(),
     };
 
     this._routinesService.createRoutine(routineData).subscribe({
-      next: (response) => {
+      next: () => {
         this.isSaving.set(false);
-
-        this._snackBar.open(`✅ Rutina "${response.name}" creada exitosamente`, 'Cerrar', {
-          duration: 5000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['success-snackbar'],
-        });
-
-        this._routinesService.getAllRoutines(this.userId!);
+        this._notificationService.success('Rutina creada exitosamente');
         this._resetModal();
-        this.onClose();
-      },
-      error: (error) => {
-        this.isSaving.set(false);
-
-        this._snackBar.open('❌ Error al crear la rutina. Inténtalo de nuevo.', 'Cerrar', {
-          duration: 7000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        });
-
-        console.error('Error al crear rutina:', error);
+        this.onClose(true);
       },
     });
   }

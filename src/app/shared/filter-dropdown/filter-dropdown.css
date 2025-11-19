@@ -12,7 +12,6 @@
   background-color: transparent;
 }
 
-/* Label */
 .filter-field ::ng-deep .mat-mdc-floating-label {
   color: var(--grey-primary);
   font-weight: 500;
@@ -22,7 +21,6 @@
   color: var(--orange-primary);
 }
 
-/* Outline */
 .filter-field ::ng-deep .mdc-notched-outline__leading,
 .filter-field ::ng-deep .mdc-notched-outline__notch,
 .filter-field ::ng-deep .mdc-notched-outline__trailing {
@@ -30,14 +28,12 @@
   transition: border-color 0.3s ease;
 }
 
-/* Hover */
 .filter-field:hover ::ng-deep .mdc-notched-outline__leading,
 .filter-field:hover ::ng-deep .mdc-notched-outline__notch,
 .filter-field:hover ::ng-deep .mdc-notched-outline__trailing {
   border-color: rgba(236, 108, 30, 0.4);
 }
 
-/* Focused */
 .filter-field.mat-focused ::ng-deep .mdc-notched-outline__leading,
 .filter-field.mat-focused ::ng-deep .mdc-notched-outline__notch,
 .filter-field.mat-focused ::ng-deep .mdc-notched-outline__trailing {
@@ -45,7 +41,6 @@
   border-width: 2px;
 }
 
-/* Select value */
 .filter-field ::ng-deep .mat-mdc-select-value {
   color: var(--color-dark);
   font-weight: 500;
@@ -55,12 +50,9 @@
   color: var(--grey-primary);
 }
 
-/* Arrow icon */
 .filter-field ::ng-deep .mat-mdc-select-arrow {
   color: var(--orange-primary);
 }
-
-/* Label icon */
 .filter-label-icon {
   font-size: 18px !important;
   width: 18px !important;
@@ -70,7 +62,6 @@
   color: var(--orange-primary);
 }
 
-/* Panel styles (dropdown menu) */
 ::ng-deep .mat-mdc-select-panel {
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);

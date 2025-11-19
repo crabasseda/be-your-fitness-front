@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -6,9 +6,10 @@ import { AuthService } from '@core/auth/auth.service';
 import { ChipType } from '@shared/chip/models/chip.enum';
 import { ModalCreateRoutine } from './components/modal-create-routine/modal-create-routine';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { NotificationService } from '@core/services/notification.service';
 import { ConfirmationModal } from '@shared/confirmation-modal/confirmation-modal';
+import { finalize } from 'rxjs';
 import { ModalEditRoutine } from './components/modal-edit-routine/modal-edit-routine';
 import { RoutineCard } from './components/routine-card/routine-card';
 import { Routine } from './models/routine.interface';
@@ -32,7 +33,9 @@ export class Routines {
   private _router = inject(Router);
   private _routinesService = inject(RoutinesService);
   private _authService = inject(AuthService);
-  private _snackBar = inject(MatSnackBar);
+  private _notificationService = inject(NotificationService);
+
+  isLoading = signal(true);
 
   ChipType = ChipType;
   showConfirmationModal = signal(false);
@@ -40,20 +43,17 @@ export class Routines {
   showEditRoutineModal = signal<boolean>(false);
 
   user = this._authService.getUser();
-  myRoutines = this._routinesService.routinesList;
-  assignedRoutines = this._routinesService.assignedRoutinesList;
+  myRoutines = signal<Routine[]>([]);
+  //myRoutines = this._routinesService.routinesList;
+  //assignedRoutines = this._routinesService.assignedRoutinesList;
 
   selectedTabIndex!: number;
   routineIdToDelete = signal<string>('');
   routineIdToEdit = signal<string>('');
 
-  constructor() {
-    effect(() => console.log(this.assignedRoutines()));
-  }
-
   ngOnInit() {
-    this._routinesService.getAllRoutines(this.user!.id);
-    this._routinesService.getAssignedRoutines(this.user!.id);
+    this._loadRoutines();
+    //this._routinesService.getAssignedRoutines(this.user!.id);
   }
 
   handleStartTraining(routineId: string): void {
@@ -63,7 +63,6 @@ export class Routines {
   handleEdit(routineId: string): void {
     this.onOpenEditRoutineModal();
     this.routineIdToEdit.set(routineId);
-    console.log('Editando rutina...');
   }
 
   handleConfirmationDelete(routineId: string) {
@@ -73,50 +72,19 @@ export class Routines {
 
   handleDelete(): void {
     this._routinesService.deleteRoutine(this.routineIdToDelete()).subscribe({
-      next: (response) => {
-        console.log('Rutina eliminada:', response.message);
-        this._routinesService.getAllRoutines(this.user!.id);
+      next: () => {
+        this._routinesService.getRoutines();
         this.showConfirmationModal.set(false);
-        this._snackBar.open(`✅ Rutina eliminada correctamente`, 'Cerrar', {
-          duration: 5000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['success-snackbar'],
-        });
-      },
-      error: (error) => {
-        console.error('Error al eliminar:', error);
-        this._snackBar.open('❌ Error al eliminar la rutina. Inténtalo de nuevo.', 'Cerrar', {
-          duration: 7000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        });
+        this._notificationService.success('Rutina eliminada correctamente');
       },
     });
   }
 
   handleUpdateRoutine(routine: Routine) {
     this._routinesService.updateRoutine(this.routineIdToEdit(), routine).subscribe({
-      next: (response) => {
-        console.log(response);
-        console.log('Rutina guardada exitosamente');
+      next: () => {
         this.onCloseEditRoutineModal();
-        this._snackBar.open(`✅ Rutina "${response.name}" editada exitosamente`, 'Cerrar', {
-          duration: 5000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['success-snackbar'],
-        });
-      },
-      error: (error) => {
-        console.error('Error al guardar rutina:', error);
-        this._snackBar.open('❌ Error al crear la rutina. Inténtalo de nuevo.', 'Cerrar', {
-          duration: 7000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        });
+        this._notificationService.success('Rutina editada exitosamente');
       },
     });
   }
@@ -129,7 +97,10 @@ export class Routines {
     this.showCreateRoutineModal.set(true);
   }
 
-  onCloseCreateRoutineModal() {
+  onCloseCreateRoutineModal(shouldReload: boolean) {
+    if (shouldReload) {
+      this._loadRoutines();
+    }
     this.showCreateRoutineModal.set(false);
   }
 
@@ -140,5 +111,16 @@ export class Routines {
   onCloseEditRoutineModal() {
     this.showEditRoutineModal.set(false);
     this.routineIdToEdit.set('');
+  }
+
+  private _loadRoutines() {
+    this._routinesService
+      .getRoutines()
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: (routines) => {
+          this.myRoutines.set(routines);
+        },
+      });
   }
 }

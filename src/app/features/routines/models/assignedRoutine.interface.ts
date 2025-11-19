@@ -1,4 +1,5 @@
-import { ExerciseInRoutine, RoutineType } from './routine.interface';
+import { ExerciseInRoutine } from './routine.interface';
+import { RoutineType } from './routine.type';
 
 // GET /assignments/athlete/:athleteId
 export interface RoutineAssignmentResponse {

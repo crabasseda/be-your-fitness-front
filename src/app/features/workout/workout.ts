@@ -3,10 +3,10 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
+import { ExerciseCard } from '@features/routines/components/exercise-card/exercise-card';
 import { ExerciseInRoutine } from '@features/routines/models/routine.interface';
 import { RoutinesService } from '@features/routines/services/routines.service';
 import { ConfirmationModal } from '@shared/confirmation-modal/confirmation-modal';
-import { ExerciseCard } from '@shared/exercise-card/exercise-card';
 import { CreateWorkoutDTO } from './models/workout.interface';
 import { WorkoutService } from './services/workout.service';
 
@@ -94,22 +94,12 @@ export class Workout implements OnDestroy {
       notes: this.workoutNotes(),
     };
 
-    console.log(workoutData);
-
     this._workoutService.createWorkout(workoutData).subscribe({
-      next: (savedWorkout) => {
-        console.log('✅ Workout guardado:', savedWorkout);
-
+      next: () => {
         this.showConfirmationModal.set(false);
-
         this._router.navigate(['/profile'], {
           queryParams: { workoutSaved: 'true' },
         });
-      },
-      error: (error) => {
-        console.error('❌ Error guardando workout:', error);
-        alert('Error al guardar el entrenamiento. Inténtalo de nuevo.');
-        this._startTimer();
       },
     });
   }

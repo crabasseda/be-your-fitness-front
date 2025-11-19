@@ -1,7 +1,6 @@
 @if (isOpen()) {
   <div class="modal-backdrop" (click)="onBackdropClick($event)">
     <div class="confirmation-modal">
-      <!-- Header -->
       <div class="modal-header" [ngClass]="'modal-header-' + type()">
         <div class="header-content">
           <div class="icon-wrapper" [ngClass]="'icon-wrapper-' + type()">
@@ -14,12 +13,10 @@
         </button>
       </div>
 
-      <!-- Body -->
       <div class="modal-body">
         <p class="modal-message">{{ message() }}</p>
       </div>
 
-      <!-- Footer -->
       <div class="modal-footer">
         <button mat-stroked-button class="cancel-button" (click)="onCancel()">
           {{ cancelText() }}

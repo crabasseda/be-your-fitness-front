@@ -1,7 +1,8 @@
-import { Component, computed, effect, inject, output, signal } from '@angular/core';
+// shared/exercise-list/exercise-list.component.ts
+
+import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatIcon } from '@angular/material/icon';
-import { MatStepperModule } from '@angular/material/stepper';
 import { Exercise } from '@features/exercises/models/exercises.interface';
 import { ExercisesService } from '@features/exercises/services/exercises.service';
 import { Chip } from '@shared/chip/chip';
@@ -10,38 +11,44 @@ import { FilterDropdown } from '@shared/filter-dropdown/filter-dropdown';
 import { FilterOption } from '@shared/filter-dropdown/models/filter-dropdown.interface';
 import { Searchbar } from '@shared/searchbar/searchbar';
 import { SimpleCard } from '@shared/simple-card/simple-card';
-import { CreateRoutineService } from '../../services/modal-create-routine.service';
+
+type ExerciseListMode = 'selection' | 'view';
 
 @Component({
-  selector: 'step-select-exercises',
-  imports: [MatIcon, FilterDropdown, Searchbar, SimpleCard, MatCheckbox, MatStepperModule, Chip],
-  templateUrl: './step-select-exercises.html',
-  styleUrl: './step-select-exercises.css',
+  selector: 'exercise-list',
+  standalone: true,
+  imports: [MatIcon, MatCheckbox, FilterDropdown, Searchbar, SimpleCard, Chip],
+  templateUrl: './exercise-list.html',
+  styleUrls: ['./exercise-list.css'],
 })
-export class StepSelectExercises {
+export class ExerciseList {
   private _exercisesService = inject(ExercisesService);
-  private _createRoutineService = inject(CreateRoutineService);
 
-  closeModal = output<void>();
-  createRoutine = output<any>();
+  mode = input<ExerciseListMode>('view');
+  showFilters = input(true);
+  showSearchbar = input(true);
+  showSelectionChip = input(true);
 
-  ChipType = ChipType;
-  selectedCount = computed(() => this.selectedExercisesIds().size);
-  selectedExercisesIds = signal<Set<string>>(new Set());
-
-  selectedExercisesArray = computed(() => {
-    const selectedIds = this.selectedExercisesIds();
-    return this.exercisesList()!.filter((ex) => selectedIds.has(ex.exerciseId));
-  });
+  exerciseClicked = output<Exercise>();
+  exercisesSelected = output<Exercise[]>();
 
   exercisesList = this._exercisesService.exerciseList;
   equipmentList = this._exercisesService.equipmentList;
   bodyPartsList = this._exercisesService.bodyPartsList;
-
-  filteredExercises = signal<Exercise[] | null>(null);
-
   selectedEquipment = this._exercisesService.selectedEquipment;
   selectedBodyPart = this._exercisesService.selectedBodyPart;
+
+  filteredExercises = signal<Exercise[] | null>(null);
+  selectedExercisesIds = signal<Set<string>>(new Set());
+
+  ChipType = ChipType;
+
+  selectedCount = computed(() => this.selectedExercisesIds().size);
+
+  selectedExercisesArray = computed(() => {
+    const selectedIds = this.selectedExercisesIds();
+    return this.exercisesList()?.filter((ex) => selectedIds.has(ex.exerciseId)) || [];
+  });
 
   equipmentOptions = computed<FilterOption[]>(() => {
     if (!this.equipmentList()) return [];
@@ -65,6 +72,8 @@ export class StepSelectExercises {
     }));
   });
 
+  isSelectionMode = computed(() => this.mode() === 'selection');
+
   constructor() {
     effect(() => {
       if (this.exercisesList()) {
@@ -73,8 +82,8 @@ export class StepSelectExercises {
     });
 
     effect(() => {
-      if (this.selectedExercisesArray()) {
-        this._createRoutineService.selectedExercises.set(this.selectedExercisesArray());
+      if (this.isSelectionMode() && this.selectedExercisesArray().length > 0) {
+        this.exercisesSelected.emit(this.selectedExercisesArray());
       }
     });
   }
@@ -90,7 +99,6 @@ export class StepSelectExercises {
       const exercises = this.exercisesList()!.filter((item) =>
         item.name.toLowerCase().includes(searchValue.toLowerCase()),
       );
-
       this.filteredExercises.set(exercises);
     }
   }
@@ -104,14 +112,14 @@ export class StepSelectExercises {
   }
 
   toggleExerciseSelection(exerciseId: string): void {
-    const selected = new Set(this.selectedExercisesIds());
+    if (!this.isSelectionMode()) return;
 
+    const selected = new Set(this.selectedExercisesIds());
     if (selected.has(exerciseId)) {
       selected.delete(exerciseId);
     } else {
       selected.add(exerciseId);
     }
-
     this.selectedExercisesIds.set(selected);
   }
 
@@ -119,14 +127,11 @@ export class StepSelectExercises {
     return this.selectedExercisesIds().has(exercise.exerciseId);
   }
 
-  getExercisesByIds(exerciseIds: string[]): Exercise[] {
-    return this.exercisesList()!.filter((ex) => exerciseIds.includes(ex.exerciseId));
-  }
-
-  onConfirm(): void {
-    const selected = this.exercisesList()?.filter((ex) =>
-      this.selectedExercisesIds().has(ex.exerciseId),
-    );
-    this.createRoutine.emit(selected);
+  onExerciseClick(exercise: Exercise): void {
+    if (this.isSelectionMode()) {
+      this.toggleExerciseSelection(exercise.exerciseId);
+    } else {
+      this.exerciseClicked.emit(exercise);
+    }
   }
 }

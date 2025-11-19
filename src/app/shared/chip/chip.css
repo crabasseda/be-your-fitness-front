@@ -27,7 +27,7 @@
   color: #a16207;
 }
 
-@media (max-width: 768px) {
+@media (width<768px) {
   .chip {
     font-size: 13px;
     padding: 6px 12px;

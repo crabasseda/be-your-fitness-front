@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { RoutineSchedule } from '@features/routines/models/routine.interface';
 
 @Component({
-  selector: 'byf-routine-schedule-selector',
+  selector: 'routine-schedule-selector',
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -25,11 +25,9 @@ export class RoutineScheduleSelector {
   scheduleChange = output<RoutineSchedule | undefined>();
   validChange = output<boolean>();
 
-  // Nuevas propiedades para la programación
   scheduleType = signal<'none' | 'one-time' | 'recurring'>('none');
   specificDate = signal<Date | null>(null);
 
-  // Para recurrencia
   frequency = signal<'daily' | 'weekly' | 'monthly'>('weekly');
   selectedDaysOfWeek = signal<number[]>([]);
   dayOfMonth = signal<number>(1);
@@ -48,7 +46,6 @@ export class RoutineScheduleSelector {
 
   monthDays = Array.from({ length: 31 }, (_, i) => i + 1);
   constructor() {
-    // Cargar datos iniciales si existen
     effect(() => {
       const initial = this.initialSchedule();
       if (initial) {
@@ -56,9 +53,7 @@ export class RoutineScheduleSelector {
       }
     });
 
-    // Emitir cambios automáticamente
     effect(() => {
-      // Dependencias que desencadenan el efecto
       this.scheduleType();
       this.specificDate();
       this.frequency();
@@ -67,7 +62,6 @@ export class RoutineScheduleSelector {
       this.startDate();
       this.endDate();
 
-      // Emitir el nuevo schedule
       this.scheduleChange.emit(this.buildSchedule());
     });
     effect(() => {
@@ -75,7 +69,7 @@ export class RoutineScheduleSelector {
       this.specificDate();
       this.selectedDaysOfWeek();
 
-      this.validChange.emit(this.isValid()); // 👈 Emitir validez
+      this.validChange.emit(this.isValid());
       console.log(this.isValid());
     });
   }
@@ -124,8 +118,6 @@ export class RoutineScheduleSelector {
         specificDate: this.specificDate()!,
       };
     }
-
-    // recurring
     const recurrence: any = {
       frequency: this.frequency(),
     };

@@ -20,7 +20,6 @@
   }
 }
 
-/* Form Field Wrapper */
 .form-field-wrapper {
   display: flex;
   flex-direction: column;
@@ -47,7 +46,6 @@
   font-size: 1rem;
 }
 
-/* Custom Input */
 .custom-input {
   width: auto;
   padding: 0.875rem 1rem;

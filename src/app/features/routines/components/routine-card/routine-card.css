@@ -1,11 +1,3 @@
-/* .routine-card {
-  border-radius: var(--border-radius);
-  font-family: var(--font-family-base);
-  height: 280px;
-  display: flex;
-  flex-direction: column;
-} */
-
 .line-clamp-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;

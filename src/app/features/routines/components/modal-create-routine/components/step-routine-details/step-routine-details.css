@@ -4,7 +4,6 @@
   margin: 0 auto;
 }
 
-/* Header Section */
 .header-section {
   margin-bottom: 2rem;
   text-align: center;
@@ -23,14 +22,12 @@
   margin: 0;
 }
 
-/* Form Container */
 .form-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-/* Form Field Wrapper */
 .form-field-wrapper {
   display: flex;
   flex-direction: column;
@@ -57,7 +54,6 @@
   font-size: 1rem;
 }
 
-/* Custom Input */
 .custom-input {
   width: auto;
   padding: 0.875rem 1rem;
@@ -88,7 +84,6 @@
   text-align: right;
 }
 
-/* Routine Type Grid */
 .routine-type-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
