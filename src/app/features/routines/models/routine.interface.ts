@@ -4,8 +4,7 @@ export interface Routine {
   type: RoutineType;
   created_by: string;
   exercises: ExerciseInRoutine[];
-  createdAt?: string;
-  updatedAt?: string;
+  schedule?: RoutineSchedule;
 }
 
 export type RoutineType =
@@ -16,15 +15,29 @@ export type RoutineType =
   | 'movilidad'
   | 'cardio';
 
+export interface RoutineSchedule {
+  type: 'one-time' | 'recurring';
+
+  specificDate?: Date;
+
+  recurrence?: {
+    frequency: 'daily' | 'weekly' | 'monthly';
+    daysOfWeek?: number[];
+    dayOfMonth?: number;
+    startDate?: Date;
+    endDate?: Date;
+  };
+}
+
 export interface ExerciseInRoutine {
   exercise_id: string;
   exercise_name: string;
   exercise_image?: string;
   order_number: number;
   note: string;
-  sets: Set[];
+  sets: SetInRoutine[];
 }
-export interface Set {
+export interface SetInRoutine {
   set_number: number;
   weight: number;
   repetitions: number;
@@ -36,6 +49,7 @@ export interface CreateRoutineDTO {
   type: RoutineType;
   created_by: string;
   exercises: ExerciseInRoutine[];
+  schedule?: RoutineSchedule;
 }
 
 export type RoutineDetails = Omit<CreateRoutineDTO, 'exercises'>;

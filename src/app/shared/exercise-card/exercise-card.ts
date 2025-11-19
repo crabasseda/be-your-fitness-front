@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { Exercise } from '@features/exercises/models/exercises.interface';
-import { ExerciseInRoutine, Set } from '@features/routines/models/routine.interface';
+import { ExerciseInRoutine, SetInRoutine } from '@features/routines/models/routine.interface';
 
 type CardMode = 'routine' | 'workout';
 
@@ -20,10 +20,10 @@ export class ExerciseCard {
   // Inputs
   mode = input<CardMode>('routine'); // 'routine' para edición, 'workout' para ejecución
   exercise = input.required<Exercise | ExerciseInRoutine>();
-  initialSets = input<Set[]>();
+  initialSets = input<SetInRoutine[]>();
 
   // Signals
-  sets = signal<Set[]>([{ set_number: 1, weight: 0, repetitions: 0, completed: false }]);
+  sets = signal<SetInRoutine[]>([{ set_number: 1, weight: 0, repetitions: 0, completed: false }]);
 
   // Outputs
   exerciseUpdated = output<ExerciseInRoutine>();
@@ -136,7 +136,7 @@ export class ExerciseCard {
   }
 
   // Métodos privados
-  private _updateSets(newSets: Set[]): void {
+  private _updateSets(newSets: SetInRoutine[]): void {
     this.sets.set(newSets);
   }
 

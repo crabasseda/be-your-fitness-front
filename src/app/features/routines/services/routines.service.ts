@@ -42,6 +42,8 @@ export class RoutinesService {
 
   // POST crear nueva rutina
   createRoutine(routine: CreateRoutineDTO): Observable<Routine> {
+    console.log(routine);
+
     return this._http.post<Routine>(this._apiUrl, routine);
   }
 

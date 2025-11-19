@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Exercise } from '@features/exercises/models/exercises.interface';
-import { RoutineType } from '@features/routines/models/routine.interface';
+import { RoutineSchedule, RoutineType } from '@features/routines/models/routine.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,4 +10,5 @@ export class CreateRoutineService {
 
   routineName = signal<string>('');
   routineType = signal<RoutineType | null>(null);
+  currentSchedule = signal<RoutineSchedule | undefined>(undefined);
 }

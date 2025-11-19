@@ -28,6 +28,7 @@ export class ModalCreateRoutine {
 
   routineName = this._createRoutineService.routineName;
   routineType = this._createRoutineService.routineType;
+  schedule = this._createRoutineService.currentSchedule;
 
   selectedExercises = this._createRoutineService.selectedExercises;
 
@@ -51,6 +52,7 @@ export class ModalCreateRoutine {
   }
 
   onClose() {
+    this._resetModal();
     this.closeModal.emit();
   }
   exercisesInRoutine = signal<ExerciseInRoutine[]>([]);
@@ -89,7 +91,6 @@ export class ModalCreateRoutine {
   }
 
   areDetailsValid = signal<boolean>(false);
-
   isSaving = signal<boolean>(false);
   onSaveRoutine(): void {
     if (!this.areDetailsValid()) return;
@@ -99,6 +100,7 @@ export class ModalCreateRoutine {
       type: this.routineType()!,
       created_by: this.userId!,
       exercises: this.exercisesInRoutine(),
+      schedule: this.schedule(),
     };
 
     this._routinesService.createRoutine(routineData).subscribe({
@@ -113,6 +115,7 @@ export class ModalCreateRoutine {
         });
 
         this._routinesService.getAllRoutines(this.userId!);
+        this._resetModal();
         this.onClose();
       },
       error: (error) => {
@@ -128,5 +131,11 @@ export class ModalCreateRoutine {
         console.error('Error al crear rutina:', error);
       },
     });
+  }
+
+  private _resetModal() {
+    this.routineName.set('');
+    this.routineType.set(null);
+    this.schedule.set(undefined);
   }
 }

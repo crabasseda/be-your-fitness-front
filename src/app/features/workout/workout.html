@@ -29,7 +29,12 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
     @for (exercise of workoutExercises(); track exercise.exercise_id) {
       <div class="transform transition-all duration-300 hover:scale-[1.02]">
-        <exercise-card mode="workout" [exercise]="exercise" [initialSets]="exercise.sets" />
+        <exercise-card
+          mode="workout"
+          [exercise]="exercise"
+          [initialSets]="exercise.sets"
+          (exerciseUpdated)="handleUpdateExercise($event)"
+        />
       </div>
     }
   </div>

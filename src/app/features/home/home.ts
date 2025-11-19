@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDivider } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
@@ -14,6 +15,7 @@ import { AuthService } from '../../core/auth/auth.service';
 })
 export class Home implements OnInit {
   private _authService = inject(AuthService);
+  private _router = inject(Router);
 
   public user = this._authService.getUser();
 
@@ -35,5 +37,9 @@ export class Home implements OnInit {
   pickRandomMotivationalMessage() {
     const i = Math.floor(Math.random() * this.motivationalMessages.length);
     this.motivationalMessage = this.motivationalMessages[i];
+  }
+
+  goToWorkout() {
+    this._router.navigateByUrl('/routines');
   }
 }

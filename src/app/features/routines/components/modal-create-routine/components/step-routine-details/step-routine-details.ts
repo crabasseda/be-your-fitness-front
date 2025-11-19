@@ -1,11 +1,14 @@
-import { Component, effect, inject, output } from '@angular/core';
+import { Component, effect, inject, output, signal } from '@angular/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '@core/auth/auth.service';
-import { RoutineType } from '@features/routines/models/routine.interface';
+import { RoutineSchedule, RoutineType } from '@features/routines/models/routine.interface';
+import { RoutineScheduleSelector } from '@shared/routine-schedule-selector/routine-schedule-selector';
 import { CreateRoutineService } from '../../services/modal-create-routine.service';
 
 @Component({
   selector: 'step-routine-details',
-  imports: [],
+  imports: [MatDatepickerModule, MatInputModule, RoutineScheduleSelector],
   templateUrl: './step-routine-details.html',
   styleUrl: './step-routine-details.css',
 })
@@ -13,20 +16,20 @@ export class StepRoutineDetails {
   private _authService = inject(AuthService);
   private _createRoutineService = inject(CreateRoutineService);
 
+  private _isScheduleValid = signal<boolean>(true);
+
   public userId = this._authService.getUser()?.id;
 
   routineName = this._createRoutineService.routineName;
   routineType = this._createRoutineService.routineType;
+  currentSchedule = this._createRoutineService.currentSchedule;
 
   isValid = output<boolean>();
 
-  constructor() {
-    effect(() => {
-      if (this.areDetailsValid()) {
-        console.log(this.areDetailsValid());
-        this.isValid.emit(true);
-      }
-    });
+  areDetailsValid(): boolean {
+    return (
+      this.routineName().trim().length > 0 && this.routineType() !== null && this._isScheduleValid()
+    );
   }
 
   routineTypes: Array<{
@@ -73,6 +76,12 @@ export class StepRoutineDetails {
     },
   ];
 
+  constructor() {
+    effect(() => {
+      this.isValid.emit(this.areDetailsValid());
+    });
+  }
+
   onNameChange(name: string): void {
     this.routineName.set(name);
   }
@@ -81,7 +90,11 @@ export class StepRoutineDetails {
     this.routineType.set(type);
   }
 
-  areDetailsValid() {
-    return this.routineName().trim().length > 0 && this.routineType() !== null;
+  onScheduleChange(schedule: RoutineSchedule | undefined) {
+    this.currentSchedule.set(schedule);
+  }
+
+  onScheduleValidChange(isValid: boolean) {
+    this._isScheduleValid.set(isValid);
   }
 }

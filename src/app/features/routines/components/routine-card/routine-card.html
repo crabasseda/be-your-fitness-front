@@ -1,20 +1,19 @@
-<div class="routine-card bg-white rounded-lg shadow-md p-6 relative">
-  <div class="flex justify-between items-start">
-    <h3 class="text-lg font-semibold text-dark pr-8">
+<div class="routine-card bg-white rounded-lg shadow-md p-6 relative h-[200px] flex flex-col">
+  <!-- Título con altura fija -->
+  <div class="flex justify-between items-start mb-4 h-[32px]">
+    <h3 class="text-lg font-semibold text-dark pr-8 line-clamp-1">
       {{ name() }}
     </h3>
-
     @if (areOptionsAvailable()) {
       <button
         mat-icon-button
         [matMenuTriggerFor]="menu"
-        class="-mt-2! -mr-2!"
+        class="-mt-2! -mr-2! flex-shrink-0"
         aria-label="Opciones"
       >
         <mat-icon class="text-grey-primary">more_vert</mat-icon>
       </button>
     }
-
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="onEdit()">
         <mat-icon class="text-blue-primary">edit</mat-icon>
@@ -27,15 +26,17 @@
     </mat-menu>
   </div>
 
-  <div class="mb-6">
+  <!-- Área de descripción con altura fija -->
+  <div class="mb-6 h-[48px]">
     <p class="text-sm text-grey-primary line-clamp-2">
       {{ formattedItems()!.join(', ') }}
     </p>
   </div>
 
+  <!-- Botón siempre al final -->
   <button
     mat-raised-button
-    class="w-full bg-orange-primary! text-white! hover:bg-orange-secondary! transition-colors"
+    class="w-full bg-orange-primary! text-white! hover:bg-orange-secondary! transition-colors mt-auto"
     (click)="onStartTraining()"
   >
     Empezar entreno

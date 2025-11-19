@@ -1,14 +1,14 @@
-.routine-card {
+/* .routine-card {
   border-radius: var(--border-radius);
   font-family: var(--font-family-base);
-  min-height: 200px;
+  height: 280px;
   display: flex;
   flex-direction: column;
-}
+} */
 
-.line-clamp-2 {
+.line-clamp-1 {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -48,7 +48,7 @@
       }
 
       @case (3) {
-        <step-routine-details (isValid)="areDetailsValid.set(true)" />
+        <step-routine-details (isValid)="areDetailsValid.set($event)" />
       }
     }
   </ng-template>

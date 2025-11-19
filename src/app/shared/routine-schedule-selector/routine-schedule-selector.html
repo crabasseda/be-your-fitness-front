@@ -1,0 +1,128 @@
+<!-- Selector de tipo de programación -->
+<div class="schedule-type-selector">
+  <button
+    type="button"
+    class="schedule-type-button"
+    [class.selected]="scheduleType() === 'none'"
+    (click)="scheduleType.set('none')"
+  >
+    <div class="button-icon">📋</div>
+    <div class="button-label">Sin programar</div>
+  </button>
+  <button
+    type="button"
+    class="schedule-type-button"
+    [class.selected]="scheduleType() === 'one-time'"
+    (click)="scheduleType.set('one-time')"
+  >
+    <div class="button-icon">📅</div>
+    <div class="button-label">Fecha específica</div>
+  </button>
+  <button
+    type="button"
+    class="schedule-type-button"
+    [class.selected]="scheduleType() === 'recurring'"
+    (click)="scheduleType.set('recurring')"
+  >
+    <div class="button-icon">🔄</div>
+    <div class="button-label">Recurrente</div>
+  </button>
+</div>
+@if (scheduleType() === 'one-time') {
+  <div class="schedule-details">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Selecciona la fecha</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [value]="specificDate()"
+        (dateChange)="specificDate.set($event.value)"
+        placeholder="DD/MM/YYYY"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+}
+
+<!-- Recurrente -->
+@if (scheduleType() === 'recurring') {
+  <div class="schedule-details">
+    <!-- Selector de frecuencia -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Frecuencia</mat-label>
+      <mat-select [value]="frequency()" (selectionChange)="frequency.set($event.value)">
+        <mat-option value="daily">Diario</mat-option>
+        <mat-option value="weekly">Semanal</mat-option>
+        <mat-option value="monthly">Mensual</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Días de la semana (solo para weekly) -->
+    @if (frequency() === 'weekly') {
+      <div class="days-of-week-section">
+        <label class="subsection-label">Días de la semana</label>
+        <div class="days-buttons-grid">
+          @for (day of daysOfWeek; track day.value) {
+            <button
+              type="button"
+              class="day-button"
+              [class.selected]="selectedDaysOfWeek().includes(day.value)"
+              (click)="toggleDayOfWeek(day.value)"
+            >
+              {{ day.label }}
+            </button>
+          }
+        </div>
+        @if (selectedDaysOfWeek().length === 0) {
+          <div class="field-hint error">Selecciona al menos un día</div>
+        }
+      </div>
+    }
+
+    <!-- Día del mes (solo para monthly) -->
+    @if (frequency() === 'monthly') {
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Día del mes</mat-label>
+        <mat-select [value]="dayOfMonth()" (selectionChange)="dayOfMonth.set($event.value)">
+          @for (day of monthDays; track day) {
+            <mat-option [value]="day">{{ day }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+
+    <!-- Rango de fechas opcional -->
+    <div class="date-range-section">
+      <label class="subsection-label">Período (opcional)</label>
+      <div class="date-range-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Desde</mat-label>
+          <input
+            matInput
+            [matDatepicker]="startPicker"
+            [value]="startDate()"
+            (dateChange)="startDate.set($event.value)"
+            placeholder="DD/MM/YYYY"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Hasta</mat-label>
+          <input
+            matInput
+            [matDatepicker]="endPicker"
+            [value]="endDate()"
+            (dateChange)="endDate.set($event.value)"
+            [min]="startDate()"
+            placeholder="DD/MM/YYYY"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+}

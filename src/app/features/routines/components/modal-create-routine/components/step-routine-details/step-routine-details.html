@@ -5,7 +5,6 @@
   </div>
 
   <div class="form-container">
-    <!-- Nombre de la rutina -->
     <div class="form-field-wrapper">
       <label class="field-label" for="routine-name">
         <span class="label-text">Nombre de la rutina</span>
@@ -23,7 +22,6 @@
       <div class="input-hint">{{ routineName().length }}/100 caracteres</div>
     </div>
 
-    <!-- Tipo de rutina -->
     <div class="form-field-wrapper">
       <label class="field-label" for="routine-type">
         <span class="label-text">Tipo de rutina</span>
@@ -61,22 +59,32 @@
       </div>
     </div>
 
-    <!-- Información de validación -->
-    @if (!areDetailsValid()) {
-      <div class="validation-message">
-        <svg
-          class="info-icon"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="16" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-        <span>Por favor, completa el nombre y selecciona un tipo de rutina</span>
-      </div>
-    }
+    <div class="form-field-wrapper">
+      <label class="field-label">
+        <span class="label-text">Programación</span>
+      </label>
+      <p class="field-description">Programa cuándo quieres realizar esta rutina</p>
+      <byf-routine-schedule-selector
+        (scheduleChange)="onScheduleChange($event)"
+        (validChange)="onScheduleValidChange($event)"
+      />
+
+      @if (!areDetailsValid()) {
+        <div class="validation-message">
+          <svg
+            class="info-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <span>Por favor, completa el nombre y selecciona un tipo de rutina</span>
+        </div>
+      }
+    </div>
   </div>
 </div>
