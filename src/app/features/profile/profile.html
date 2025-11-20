@@ -1,1 +1,69 @@
-<p>profile works!</p>
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>Hola, {{ user()?.name || 'Usuario' }} 👋</h1>
+    <p class="subtitle">Bienvenido de vuelta</p>
+  </div>
+
+  @if (workoutStats()) {
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">{{ workoutStats()!.workouts_this_month }}</div>
+        <div class="stat-label">Este mes</div>
+        <mat-icon class="stat-icon">calendar_month</mat-icon>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value">{{ workoutStats()!.workouts_this_week }}</div>
+        <div class="stat-label">Esta semana</div>
+        <mat-icon class="stat-icon">date_range</mat-icon>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value">{{ workoutStats()!.total_duration_hours }}h</div>
+        <div class="stat-label">Total horas</div>
+        <mat-icon class="stat-icon">schedule</mat-icon>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value">{{ workoutStats()!.total_workouts }}</div>
+        <div class="stat-label">Total</div>
+        <mat-icon class="stat-icon">fitness_center</mat-icon>
+      </div>
+    </div>
+  }
+
+  @if (workoutStats()?.favorite_routine) {
+    <div class="favorite-section">
+      <h2>🌟 Tu rutina favorita</h2>
+      <div class="favorite-card">
+        <h3>{{ workoutStats()!.favorite_routine }}</h3>
+        <p>{{ workoutStats()!.most_trained_type }}</p>
+      </div>
+    </div>
+  }
+
+  <div class="calendar-section">
+    <h2>Calendario de Entrenamientos</h2>
+
+    <mat-card class="demo-inline-calendar-card">
+      <mat-calendar [(selected)]="selected"></mat-calendar>
+    </mat-card>
+    <p>Selected date: {{ selected() }}</p>
+
+    <!-- <app-workout-calendar
+      [calendarData]="calendarData()"
+      [currentMonth]="currentMonth()"
+      (monthChanged)="onMonthChange($event)"
+    /> -->
+  </div>
+
+  <!-- Call to action si no hay workouts -->
+  @if (workoutStats()?.total_workouts === 0) {
+    <div class="empty-state">
+      <mat-icon class="empty-icon">fitness_center</mat-icon>
+      <h3>¡Empieza tu primer entrenamiento!</h3>
+      <p>Crea una rutina y comienza a registrar tus entrenamientos</p>
+      <button mat-raised-button color="primary" routerLink="/routines">Ver rutinas</button>
+    </div>
+  }
+</div>
