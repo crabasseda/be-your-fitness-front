@@ -37,7 +37,7 @@ export class ModalCreateRoutine {
   selectedExercises = this._createRoutineService.selectedExercises;
 
   currentStep = signal(ModalStep.AddExercisesStep);
-  readonly TOTAL_STEPS = 3;
+  readonly TOTAL_STEPS = 2;
 
   nextStep() {
     if (this.currentStep() < this.TOTAL_STEPS) {

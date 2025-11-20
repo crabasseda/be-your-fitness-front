@@ -75,7 +75,9 @@ export class Routines {
       next: () => {
         this._routinesService.getRoutines();
         this.showConfirmationModal.set(false);
+
         this._notificationService.success('Rutina eliminada correctamente');
+        this._loadRoutines();
       },
     });
   }

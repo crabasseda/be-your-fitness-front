@@ -14,7 +14,7 @@ export class NotificationService {
   };
 
   success(message: string, duration = 3000) {
-    this.snackBar.open(message, 'Cerrar', {
+    this.snackBar.open(`✓ ${message}`, 'Cerrar', {
       ...this.defaultConfig,
       duration,
       panelClass: ['success-snackbar'],
@@ -22,7 +22,7 @@ export class NotificationService {
   }
 
   error(message: string, duration = 5000) {
-    this.snackBar.open(message, 'Cerrar', {
+    this.snackBar.open(`✕ ${message}`, 'Cerrar', {
       ...this.defaultConfig,
       duration,
       panelClass: ['error-snackbar'],
