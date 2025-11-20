@@ -1,17 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject, model, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
-import { CalendarData } from '@features/workout/models/workout.interface';
+import { WorkoutCalendar } from '@features/workout/components/workout-calendar/workout-calendar';
+import { WorkoutSummary } from '@features/workout/models/workout.interface';
 import { WorkoutService } from '@features/workout/services/workout.service';
 
 @Component({
   selector: 'profile',
-  imports: [MatIcon, MatButton, MatCardModule, MatNativeDateModule, MatDatepickerModule],
+  imports: [MatIcon, MatButton, WorkoutCalendar],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
   providers: [provideNativeDateAdapter()],
@@ -23,7 +22,7 @@ export class Profile {
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
 
-  user = this._authService.getUser;
+  user = this._authService.getUser();
   workoutStats = signal<any>(null);
   calendarData = signal<any>(null);
   recentWorkouts = signal<any[]>([]);
@@ -49,31 +48,22 @@ export class Profile {
 
   loadData() {
     // this.loadStats();
-    this.loadCalendar(this.currentMonth());
+    this.loadCalendarData(2025, 11);
   }
 
-  loadStats() {
-    this._workoutService.getWorkoutStats().subscribe({
-      next: (stats) => {
-        console.log('📊 Stats cargadas:', stats);
-        this.workoutStats.set(stats);
-      },
-    });
-  }
-  workoutDays: number[] = [];
-  loadCalendar(date: Date) {
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-
-    this._workoutService.getWorkoutsForCalendar(year, month).subscribe((data: CalendarData) => {
+  loadCalendarData(year: number, month: number) {
+    this._workoutService.getWorkoutsForCalendar(year, month).subscribe((data) => {
       this.calendarData.set(data);
-
-      // Extraer días con workouts para los puntitos
-      this.workoutDays = Object.keys(data).map((day) => parseInt(day));
-
-      console.log('Días con workout:', this.workoutDays);
-      // Output: [15, 20, 25]
     });
+  }
+
+  onMonthChanged(event: { year: number; month: number }) {
+    this.loadCalendarData(event.year, event.month);
+  }
+
+  onWorkoutClicked(workout: WorkoutSummary) {
+    console.log('Workout clicked:', workout);
+    // Navegar a detalles o abrir modal
   }
 
   // loadRecentWorkouts() {
@@ -84,51 +74,4 @@ export class Profile {
   //     }
   //   });
   // }
-
-  onMonthChange(newDate: Date) {
-    this.currentMonth.set(newDate);
-    this.loadCalendar(newDate);
-  }
-
-  onDayClick(day: number) {
-    console.log('Click en día:', day);
-    // Mostrar modal con detalles del día
-  }
-
-  formatDate(date: Date): string {
-    const now = new Date();
-    const workoutDate = new Date(date);
-    const diffDays = Math.floor((now.getTime() - workoutDate.getTime()) / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 0) return 'Hoy';
-    if (diffDays === 1) return 'Ayer';
-    if (diffDays < 7) return `Hace ${diffDays} días`;
-
-    return workoutDate.toLocaleDateString('es-ES', {
-      day: 'numeric',
-      month: 'short',
-    });
-  }
-
-  formatDuration(seconds: number): string {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-
-    if (hours > 0) {
-      return `${hours}h ${minutes}min`;
-    }
-    return `${minutes}min`;
-  }
-
-  getRoutineIcon(type: string): string {
-    const icons: Record<string, string> = {
-      fuerza: '💪',
-      cardio: '❤️',
-      hipertrofia: '🦾',
-      resistencia: '🏃',
-      movilidad: '🧘',
-      mixto: '🔄',
-    };
-    return icons[type] || '🏋️';
-  }
 }

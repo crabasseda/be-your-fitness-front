@@ -1,0 +1,83 @@
+:host ::ng-deep .mat-calendar {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+:host ::ng-deep mat-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+}
+
+@media (width<= 640px) {
+  :host ::ng-deep .mat-calendar {
+    max-width: 100%;
+  }
+}
+
+@media (640px < width <= 768px) {
+  :host ::ng-deep .mat-calendar {
+    max-width: 350px;
+  }
+}
+
+@media (768px < width <= 1024px) {
+  :host ::ng-deep .mat-calendar {
+    max-width: 380px;
+  }
+}
+
+@media (width > 1024px) {
+  :host ::ng-deep .mat-calendar {
+    max-width: 420px;
+  }
+}
+
+:host ::ng-deep .mat-calendar-body-cell.has-workout::after {
+  content: '';
+  position: absolute;
+  top: auto;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-orange-primary);
+  z-index: 1;
+}
+
+:host ::ng-deep .mat-calendar-body-selected {
+  background-color: var(--color-orange-primary);
+  color: white;
+  font-weight: 600;
+}
+
+:host ::ng-deep .mat-calendar-body-selected.has-workout::after {
+  background-color: white;
+}
+
+:host ::ng-deep .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover {
+  background-color: rgba(236, 108, 30, 0.1);
+}
+
+:host ::ng-deep .mat-calendar-body-today {
+  border-color: var(--color-orange-primary);
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
+}

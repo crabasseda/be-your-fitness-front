@@ -1,10 +1,27 @@
 .chip {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
+  line-height: 1;
   transition: transform 0.2s;
+}
+
+.chip-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chip-text {
+  line-height: 1;
 }
 
 .chip-blue {
@@ -27,9 +44,16 @@
   color: #a16207;
 }
 
-@media (width<768px) {
+@media (width < 768px) {
   .chip {
     font-size: 13px;
     padding: 6px 12px;
+    gap: 4px;
+  }
+
+  .chip-icon {
+    width: 14px !important;
+    height: 14px !important;
+    font-size: 14px !important;
   }
 }

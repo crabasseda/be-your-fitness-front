@@ -4,5 +4,9 @@
   [class.chip-pink]="chipType() === ChipType.Pink"
   [class.chip-blue]="chipType() === ChipType.Blue"
   [class.chip-orange]="chipType() === ChipType.Orange"
-  >{{ text() }}</span
+>
+  @if (icon()) {
+    <mat-icon class="chip-icon">{{ icon() }}</mat-icon>
+  }
+  {{ text() }}</span
 >
