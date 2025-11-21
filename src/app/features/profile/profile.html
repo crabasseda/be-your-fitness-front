@@ -1,29 +1,52 @@
-<div class="profile-container">
-  <div class="profile-header">
-    <h1>Hola, {{ user!.username || 'Usuario' }} 👋</h1>
-    <p class="subtitle">Bienvenido de vuelta</p>
+<div class="min-h-screen bg-gray-50 p-4 md:p-6">
+  <div class="max-w-7xl mx-auto space-y-6">
+    <header class="hero-gradient from-orange-500 to-orange-400 rounded-2xl p-6 md:p-8 shadow-lg">
+      <div class="flex items-center gap-4">
+        <div
+          class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0"
+        >
+          <mat-icon class="w-8! h-8! md:w-10! md:h-10! text-[32px]! md:text-[40px]! text-white">
+            person
+          </mat-icon>
+        </div>
+
+        <div class="text-white">
+          <h1 class="text-2xl md:text-3xl font-bold m-0">Hola, {{ user?.name }} 👋</h1>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <mat-card class="rounded-2xl! shadow-md!">
+        <mat-card-content class="p-4! md:p-6!">
+          <workout-stats />
+        </mat-card-content>
+      </mat-card>
+    </section>
+
+    <section>
+      <mat-card class="rounded-2xl! shadow-md!">
+        <mat-card-content class="p-4! md:p-6!">
+          <workout-calendar
+            [calendarData]="calendarData()"
+            (monthChanged)="onMonthChanged($event)"
+          />
+        </mat-card-content>
+      </mat-card>
+    </section>
+
+    @if (workoutStats()?.total_workouts === 0) {
+      <div class="bg-white rounded-2xl shadow-md p-8 md:p-12 text-center">
+        <mat-icon class="w-20! h-20! text-[80px]! text-gray-300 mb-4"> fitness_center </mat-icon>
+        <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
+          ¡Comienza tu viaje fitness!
+        </h3>
+        <p class="text-gray-600 mb-6">Crea tu primera rutina y registra tu primer entrenamiento</p>
+        <button mat-raised-button color="primary" routerLink="/routines" class="rounded-lg!">
+          <mat-icon>add</mat-icon>
+          Crear Rutina
+        </button>
+      </div>
+    }
   </div>
-
-  <workout-stats />
-
-  <div class="calendar-section">
-    <h2>Calendario de Entrenamientos</h2>
-
-    <div class="bg-gray-50 p-6">
-      <workout-calendar
-        [calendarData]="calendarData()"
-        (monthChanged)="onMonthChanged($event)"
-        (workoutClicked)="onWorkoutClicked($event)"
-      />
-    </div>
-  </div>
-
-  @if (workoutStats()?.total_workouts === 0) {
-    <div class="empty-state">
-      <mat-icon class="empty-icon">fitness_center</mat-icon>
-      <h3>¡Empieza tu primer entrenamiento!</h3>
-      <p>Crea una rutina y comienza a registrar tus entrenamientos</p>
-      <button mat-raised-button color="primary" routerLink="/routines">Ver rutinas</button>
-    </div>
-  }
 </div>

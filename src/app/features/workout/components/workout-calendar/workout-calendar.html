@@ -1,4 +1,5 @@
 <div class="w-full max-w-7xl mx-auto px-2 sm:px-4">
+  <h2>📅 Calendario de Entrenamientos</h2>
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 lg:items-start">
     <div class="bg-white rounded-lg sm:rounded-xl shadow-sm sm:shadow-md overflow-hidden">
       @if (calendarKey(); as key) {
@@ -57,12 +58,11 @@
             @for (workout of selectedDayData()!.workouts; track workout._id) {
               <div
                 class="border border-gray-200 rounded-lg sm:rounded-xl p-3 sm:p-4 cursor-pointer transition-all duration-200 hover:shadow-md hover:border-gray-300 hover:-translate-y-0.5"
-                (click)="onWorkoutClick(workout)"
               >
                 <div class="flex items-start justify-between mb-2 sm:mb-3">
                   <div class="flex items-center gap-2 flex-1 min-w-0">
                     <mat-icon
-                      class="!w-5 !h-5 sm:!w-6 sm:!h-6 !text-xl sm:!text-2xl flex-shrink-0"
+                      class="w-5! h-5! sm:w-6! sm:h-6! text-xl! sm:text-2xl! shrink-0"
                       style="color: var(--color-orange-primary)"
                     >
                       fitness_center
@@ -75,7 +75,7 @@
                   </div>
 
                   <byf-chip
-                    class="inline-block px-2 sm:px-3 py-1 rounded-lg text-[10px] sm:text-xs font-semibold text-white uppercase tracking-wide flex-shrink-0 ml-2"
+                    class="inline-block px-2 sm:px-3 py-1 rounded-lg text-[10px] sm:text-xs font-semibold text-white uppercase tracking-wide shrink-0 ml-2"
                     [text]="workout.routine_type"
                     [chipType]="ChipType.Orange"
                   />
@@ -85,14 +85,14 @@
                   class="flex flex-wrap gap-3 sm:gap-4 md:gap-6 text-xs sm:text-sm text-gray-600"
                 >
                   <div class="flex items-center gap-1.5 sm:gap-2">
-                    <mat-icon class="!w-4 !h-4 sm:!w-5 sm:!h-5 !text-base sm:!text-lg text-gray-400"
+                    <mat-icon class="w-4! h-4! sm:w-5! sm:h-5! text-base! sm:text-lg! text-gray-400"
                       >schedule</mat-icon
                     >
                     <span>{{ formatDuration(workout.duration_seconds) }}</span>
                   </div>
 
                   <div class="flex items-center gap-1.5 sm:gap-2">
-                    <mat-icon class="!w-4 !h-4 sm:!w-5 sm:!h-5 !text-base sm:!text-lg text-gray-400"
+                    <mat-icon class="w-4! h-4! sm:w-5! sm:h-5! text-base! sm:text-lg! text-gray-400"
                       >access_time</mat-icon
                     >
                     <span>{{ workout.started_at | date: 'shortTime' }}</span>
@@ -109,7 +109,7 @@
           class="bg-white rounded-lg sm:rounded-xl shadow-sm sm:shadow-md p-8 text-center min-h-[200px] flex items-center justify-center"
         >
           <div>
-            <mat-icon class="!w-12 !h-12 !text-[48px] text-gray-300 mb-4">event</mat-icon>
+            <mat-icon class="w-12! h-12! text-[48px]! text-gray-300 mb-4">event</mat-icon>
             <p class="text-sm text-gray-500">Selecciona un día para ver los entrenamientos</p>
           </div>
         </div>
@@ -120,7 +120,7 @@
           class="bg-white rounded-lg sm:rounded-xl shadow-sm sm:shadow-md p-8 text-center min-h-[200px] flex items-center justify-center"
         >
           <div>
-            <mat-icon class="!w-12 !h-12 !text-[48px] text-gray-300 mb-4">event_busy</mat-icon>
+            <mat-icon class="w-12! h-12! text-[48px]! text-gray-300 mb-4">event_busy</mat-icon>
             <p class="text-sm text-gray-500">No hay entrenamientos registrados en este día</p>
           </div>
         </div>
@@ -166,7 +166,7 @@
             class="hover:bg-gray-100 rounded-full transition-colors -mt-1 -mr-2"
             aria-label="Cerrar detalles"
           >
-            <mat-icon class="!text-xl sm:!text-2xl">close</mat-icon>
+            <mat-icon class="text-xl! sm:text-2xl!">close</mat-icon>
           </button>
         </div>
 
@@ -174,12 +174,11 @@
           @for (workout of selectedDayData()!.workouts; track workout._id) {
             <div
               class="border border-gray-200 rounded-lg sm:rounded-xl p-3 sm:p-4 cursor-pointer transition-all duration-200 hover:shadow-md hover:border-gray-300 hover:-translate-y-0.5"
-              (click)="onWorkoutClick(workout)"
             >
               <div class="flex items-start justify-between mb-2 sm:mb-3">
                 <div class="flex items-center gap-2 flex-1 min-w-0">
                   <mat-icon
-                    class="!w-5 !h-5 sm:!w-6 sm:!h-6 !text-xl sm:!text-2xl flex-shrink-0"
+                    class="w-5! h-5! sm:w-6! sm:h-6! text-xl! sm:text-2xl! shrink-0"
                     style="color: var(--color-orange-primary)"
                   >
                     fitness_center
@@ -190,7 +189,7 @@
                 </div>
 
                 <byf-chip
-                  class="inline-block px-2 sm:px-3 py-1 rounded-lg text-[10px] sm:text-xs font-semibold text-white uppercase tracking-wide flex-shrink-0 ml-2"
+                  class="inline-block px-2 sm:px-3 py-1 rounded-lg text-[10px] sm:text-xs font-semibold text-white uppercase tracking-wide shrink-0 ml-2"
                   [text]="workout.routine_type"
                   [chipType]="ChipType.Orange"
                 />
@@ -198,14 +197,14 @@
 
               <div class="flex flex-wrap gap-3 sm:gap-4 md:gap-6 text-xs sm:text-sm text-gray-600">
                 <div class="flex items-center gap-1.5 sm:gap-2">
-                  <mat-icon class="!w-4 !h-4 sm:!w-5 sm:!h-5 !text-base sm:!text-lg text-gray-400"
+                  <mat-icon class="w-4! h-4! sm:w-5! sm:h-5! text-base! sm:text-lg! text-gray-400"
                     >schedule</mat-icon
                   >
                   <span>{{ formatDuration(workout.duration_seconds) }}</span>
                 </div>
 
                 <div class="flex items-center gap-1.5 sm:gap-2">
-                  <mat-icon class="!w-4 !h-4 sm:!w-5 sm:!h-5 !text-base sm:!text-lg text-gray-400"
+                  <mat-icon class="w-4! h-4! sm:w-5! sm:h-5! text-base! sm:text-lg! text-gray-400"
                     >access_time</mat-icon
                   >
                   <span>{{ workout.started_at | date: 'shortTime' }}</span>
@@ -222,7 +221,7 @@
         class="mt-4 sm:mt-6 bg-white rounded-lg sm:rounded-xl shadow-sm sm:shadow-md p-8 sm:p-12 text-center animate-slide-down"
       >
         <mat-icon
-          class="!w-10 !h-10 sm:!w-12 sm:!h-12 !text-[40px] sm:!text-[48px] text-gray-300 mb-3 sm:mb-4"
+          class="w-10! h-10! sm:w-12! sm:h-12! text-[40px]! sm:text-[48px]! text-gray-300 mb-3 sm:mb-4"
         >
           event_busy
         </mat-icon>

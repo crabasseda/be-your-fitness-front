@@ -5,11 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  CalendarData,
-  CalendarDayData,
-  WorkoutSummary,
-} from '@features/workout/models/workout.interface';
+import { CalendarData, CalendarDayData } from '@features/workout/models/workout.interface';
 import { Chip } from '@shared/chip/chip';
 import { ChipType } from '@shared/chip/models/chip.enum';
 import { CloseBtn } from '@shared/close-btn/close-btn';
@@ -33,7 +29,6 @@ import { CloseBtn } from '@shared/close-btn/close-btn';
 export class WorkoutCalendar {
   calendarData = input<CalendarData>({});
   monthChanged = output<{ year: number; month: number }>();
-  workoutClicked = output<WorkoutSummary>();
 
   selectedDate = signal<Date>(new Date());
   currentYear = signal<number>(new Date().getFullYear());
@@ -128,9 +123,5 @@ export class WorkoutCalendar {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
     return `${hours}h ${remainingMinutes}min`;
-  }
-
-  onWorkoutClick(workout: WorkoutSummary) {
-    this.workoutClicked.emit(workout);
   }
 }

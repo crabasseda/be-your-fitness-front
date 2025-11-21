@@ -27,7 +27,7 @@ import { DailyWorkoutData } from './models/workout-stats.interface';
 export class WorkoutStats {
   private _workoutService = inject(WorkoutService);
 
-  selectedPeriod = signal<number>(30);
+  selectedPeriod = signal<number>(7);
   selectedMetric = signal<ChartMetric>(ChartMetric.Duration);
   rawWorkouts = signal<any[]>([]);
   isLoading = signal<boolean>(true);
@@ -89,7 +89,7 @@ export class WorkoutStats {
     this._workoutService.getWorkoutsLastNDays(this.selectedPeriod()).subscribe({
       next: (workouts) => {
         this.rawWorkouts.set(workouts);
-        this.isLoading.set(true);
+        this.isLoading.set(false);
       },
       error: (error) => {
         console.error('Error loading workouts:', error);

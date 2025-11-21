@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject, model, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardContent } from '@angular/material/card';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
 import { WorkoutCalendar } from '@features/workout/components/workout-calendar/workout-calendar';
 import { WorkoutStats } from '@features/workout/components/workout-stats/workout-stats';
-import { WorkoutSummary } from '@features/workout/models/workout.interface';
 import { WorkoutService } from '@features/workout/services/workout.service';
 
 @Component({
   selector: 'profile',
-  imports: [MatIcon, MatButton, WorkoutCalendar, WorkoutStats],
+  imports: [MatIcon, MatButton, WorkoutCalendar, WorkoutStats, MatCard, MatCardContent],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
   providers: [provideNativeDateAdapter()],
@@ -36,7 +36,6 @@ export class Profile {
 
     this._route.queryParams.subscribe((params) => {
       if (params['workoutSaved'] === 'true') {
-        console.log('✅ Workout completado, recargando datos...');
         this.loadData();
 
         this._router.navigate([], {
@@ -48,8 +47,8 @@ export class Profile {
   }
 
   loadData() {
-    // this.loadStats();
-    this.loadCalendarData(2025, 11);
+    const currentDate = new Date();
+    this.loadCalendarData(currentDate.getFullYear(), currentDate.getMonth() + 1);
   }
 
   loadCalendarData(year: number, month: number) {
@@ -61,18 +60,4 @@ export class Profile {
   onMonthChanged(event: { year: number; month: number }) {
     this.loadCalendarData(event.year, event.month);
   }
-
-  onWorkoutClicked(workout: WorkoutSummary) {
-    console.log('Workout clicked:', workout);
-    // Navegar a detalles o abrir modal
-  }
-
-  // loadRecentWorkouts() {
-  //   this._workoutService.getRecentWorkouts(5).subscribe({
-  //     next: (workouts) => {
-  //       console.log('🏋️ Últimos workouts:', workouts);
-  //       this.recentWorkouts.set(workouts);
-  //     }
-  //   });
-  // }
 }
