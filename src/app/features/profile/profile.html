@@ -4,43 +4,7 @@
     <p class="subtitle">Bienvenido de vuelta</p>
   </div>
 
-  @if (workoutStats()) {
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value">{{ workoutStats()!.workouts_this_month }}</div>
-        <div class="stat-label">Este mes</div>
-        <mat-icon class="stat-icon">calendar_month</mat-icon>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-value">{{ workoutStats()!.workouts_this_week }}</div>
-        <div class="stat-label">Esta semana</div>
-        <mat-icon class="stat-icon">date_range</mat-icon>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-value">{{ workoutStats()!.total_duration_hours }}h</div>
-        <div class="stat-label">Total horas</div>
-        <mat-icon class="stat-icon">schedule</mat-icon>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-value">{{ workoutStats()!.total_workouts }}</div>
-        <div class="stat-label">Total</div>
-        <mat-icon class="stat-icon">fitness_center</mat-icon>
-      </div>
-    </div>
-  }
-
-  @if (workoutStats()?.favorite_routine) {
-    <div class="favorite-section">
-      <h2>🌟 Tu rutina favorita</h2>
-      <div class="favorite-card">
-        <h3>{{ workoutStats()!.favorite_routine }}</h3>
-        <p>{{ workoutStats()!.most_trained_type }}</p>
-      </div>
-    </div>
-  }
+  <workout-stats />
 
   <div class="calendar-section">
     <h2>Calendario de Entrenamientos</h2>

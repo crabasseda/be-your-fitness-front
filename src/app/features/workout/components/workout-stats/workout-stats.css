@@ -1,0 +1,111 @@
+.workout-stats-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stats-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--color-dark);
+}
+
+.metric-selector {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.metric-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-light);
+  border-radius: 12px;
+  background: white;
+  color: var(--color-grey-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.metric-button:hover {
+  border-color: var(--color-orange-primary);
+  background: rgba(236, 108, 30, 0.05);
+}
+
+.metric-button.active {
+  border-color: var(--color-orange-primary);
+  background: var(--color-orange-primary);
+  color: white;
+}
+
+.metric-button mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.stats-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.chart-wrapper {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 400px;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: #999;
+}
+
+.loading-state mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+}
+
+@media (width < 768px) {
+  .stats-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .metric-selector {
+    flex-direction: column;
+  }
+
+  .metric-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .chart-wrapper {
+    height: 300px;
+    padding: 1rem;
+  }
+}

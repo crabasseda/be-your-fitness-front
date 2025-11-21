@@ -5,12 +5,13 @@ import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
 import { WorkoutCalendar } from '@features/workout/components/workout-calendar/workout-calendar';
+import { WorkoutStats } from '@features/workout/components/workout-stats/workout-stats';
 import { WorkoutSummary } from '@features/workout/models/workout.interface';
 import { WorkoutService } from '@features/workout/services/workout.service';
 
 @Component({
   selector: 'profile',
-  imports: [MatIcon, MatButton, WorkoutCalendar],
+  imports: [MatIcon, MatButton, WorkoutCalendar, WorkoutStats],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
   providers: [provideNativeDateAdapter()],
