@@ -1,17 +1,23 @@
 <div class="min-h-screen bg-gray-50 p-4 md:p-6">
   <div class="max-w-7xl mx-auto space-y-6">
-    <header class="hero-gradient from-orange-500 to-orange-400 rounded-2xl p-6 md:p-8 shadow-lg">
-      <div class="flex items-center gap-4">
-        <div
-          class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0"
-        >
-          <mat-icon class="w-8! h-8! md:w-10! md:h-10! text-[32px]! md:text-[40px]! text-white">
-            person
-          </mat-icon>
-        </div>
+    <header class="bg-white rounded-2xl p-6 md:p-8 shadow-md">
+      <div class="flex items-center justify-between flex-wrap gap-4">
+        <div class="flex items-center gap-4">
+          <div class="w-20 h-20 hero-gradient rounded-full flex items-center justify-center">
+            <mat-icon class="w-10! h-10! text-[40px]! text-white">person</mat-icon>
+          </div>
 
-        <div class="text-white">
-          <h1 class="text-2xl md:text-3xl font-bold m-0">Hola, {{ user?.name }} 👋</h1>
+          <div>
+            <div class="flex justify-between">
+              <h1 class="text-2xl md:text-3xl font-bold text-gray-800 m-0">
+                {{ user?.name }}
+              </h1>
+              <mat-icon class="text-(--grey-primary)">settings</mat-icon>
+            </div>
+            <p class="text-gray-600 text-sm md:text-base mt-1">
+              Personal trainer {{ user?.trainer_id }}
+            </p>
+          </div>
         </div>
       </div>
     </header>
