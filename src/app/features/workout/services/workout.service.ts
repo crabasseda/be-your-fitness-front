@@ -44,7 +44,7 @@ export class WorkoutService {
     return this.getRecentWorkouts(undefined, startDate.toISOString().split('T')[0]);
   }
 
-  getWorkoutsInRange(startDate: string, endDate: string): Observable<Workout[]> {
+  getWorkoutsInRange(startDate: string, endDate?: string): Observable<Workout[]> {
     return this.getRecentWorkouts(undefined, startDate, endDate);
   }
 

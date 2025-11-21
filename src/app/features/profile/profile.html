@@ -1,26 +1,28 @@
 <div class="min-h-screen bg-gray-50 p-4 md:p-6">
   <div class="max-w-7xl mx-auto space-y-6">
-    <header class="bg-white rounded-2xl p-6 md:p-8 shadow-md">
-      <div class="flex items-center justify-between flex-wrap gap-4">
-        <div class="flex items-center gap-4">
-          <div class="w-20 h-20 hero-gradient rounded-full flex items-center justify-center">
-            <mat-icon class="w-10! h-10! text-[40px]! text-white">person</mat-icon>
-          </div>
-
-          <div>
-            <div class="flex justify-between">
-              <h1 class="text-2xl md:text-3xl font-bold text-gray-800 m-0">
-                {{ user?.name }}
-              </h1>
-              <mat-icon class="text-(--grey-primary)">settings</mat-icon>
+    <div class="flex justify-center">
+      <header class="bg-white rounded-2xl p-6 md:p-8 shadow-md">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-20 h-20 hero-gradient rounded-full flex items-center justify-center">
+              <mat-icon class="w-10! h-10! text-[40px]! text-white">person</mat-icon>
             </div>
-            <p class="text-gray-600 text-sm md:text-base mt-1">
-              Personal trainer {{ user?.trainer_id }}
-            </p>
+
+            <div>
+              <div class="flex justify-between">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800 m-0">
+                  {{ user?.name }}
+                </h1>
+                <mat-icon class="text-(--grey-primary)">settings</mat-icon>
+              </div>
+              <p class="text-gray-600 text-sm md:text-base mt-1">
+                Personal trainer {{ user?.trainer_id }}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
 
     <section>
       <mat-card class="rounded-2xl! shadow-md!">
