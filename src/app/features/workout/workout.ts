@@ -4,7 +4,7 @@ import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
 import { ExerciseCard } from '@features/routines/components/exercise-card/exercise-card';
-import { ExerciseInRoutine } from '@features/routines/models/routine.interface';
+import { ExerciseInRoutine, Routine } from '@features/routines/models/routine.interface';
 import { RoutinesService } from '@features/routines/services/routines.service';
 import { ConfirmationModal } from '@shared/confirmation-modal/confirmation-modal';
 import { CreateWorkoutDTO } from './models/workout.interface';
@@ -26,7 +26,7 @@ export class Workout implements OnDestroy {
   private _startTime = Date.now();
   private _timerInterval?: number;
 
-  workoutRoutine = this._workoutService.workoutRoutine;
+  workoutRoutine = signal<Routine | null>(null);
   durationTime = signal<string>('00:00');
   showConfirmationModal = signal(false);
   user = this._authService.getUser();
