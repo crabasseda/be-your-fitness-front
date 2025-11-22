@@ -45,7 +45,7 @@
       }
       @case (ModalStep.AddSetsStep) {
         @for (exercise of selectedExercises(); track exercise.exerciseId) {
-          <exercise-card
+          <routine-exercise-card
             mode="routine"
             [exercise]="exercise"
             (exerciseUpdated)="updateExerciseInRoutine($event)"

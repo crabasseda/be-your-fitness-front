@@ -10,7 +10,7 @@ import { ExerciseInRoutine, SetInRoutine } from '@features/routines/models/routi
 type CardMode = 'routine' | 'workout';
 
 @Component({
-  selector: 'exercise-card',
+  selector: 'routine-exercise-card',
   imports: [CommonModule, FormsModule, MatIconModule, MatButtonModule, MatCheckboxModule],
   templateUrl: './routine-exercise-card.html',
   styleUrl: './routine-exercise-card.css',
