@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { WorkoutService } from '@features/workout/services/workout.service';
 import { Chip } from '@shared/chip/chip';
 import { ChipType } from '@shared/chip/models/chip.enum';
-import { AuthService } from '../../core/auth/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-home',

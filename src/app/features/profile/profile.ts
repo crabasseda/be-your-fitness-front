@@ -4,16 +4,15 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
 import { WorkoutCalendar } from '@features/workout/components/workout-calendar/workout-calendar';
 import { WorkoutStats } from '@features/workout/components/workout-stats/workout-stats';
 import { WorkoutService } from '@features/workout/services/workout.service';
-import { Chip } from '@shared/chip/chip';
 
 @Component({
   selector: 'profile',
-  imports: [MatIcon, MatButton, WorkoutCalendar, WorkoutStats, MatCard, MatCardContent, Chip],
+  imports: [MatIcon, MatButton, WorkoutCalendar, WorkoutStats, MatCard, MatCardContent],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
   providers: [provideNativeDateAdapter()],

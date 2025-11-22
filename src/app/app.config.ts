@@ -10,7 +10,7 @@ import { routes } from './app.routes';
 
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
-import { authInterceptor } from '@core/auth/auth.interceptor';
+import { authInterceptor } from '@core/interceptors/auth.interceptor';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {

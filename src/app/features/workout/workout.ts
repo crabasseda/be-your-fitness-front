@@ -2,7 +2,7 @@ import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from '@core/services/auth.service';
 import { ExerciseCard } from '@features/routines/components/exercise-card/exercise-card';
 import { ExerciseInRoutine, Routine } from '@features/routines/models/routine.interface';
 import { RoutinesService } from '@features/routines/services/routines.service';

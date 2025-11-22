@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from '@core/services/auth.service';
 import { ChipType } from '@shared/chip/models/chip.enum';
 import { ModalCreateRoutine } from './components/modal-create-routine/modal-create-routine';
 
