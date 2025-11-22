@@ -1,6 +1,6 @@
 import { Component, effect, inject, input, output, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { ExerciseCard } from '@features/routines/components/exercise-card/exercise-card';
+import { RoutineExerciseCard } from '@features/routines/components/routine-exercise-card/routine-exercise-card';
 import { ExerciseInRoutine, Routine } from '@features/routines/models/routine.interface';
 import { RoutinesService } from '@features/routines/services/routines.service';
 import { ConfirmationModal } from '@shared/confirmation-modal/confirmation-modal';
@@ -8,7 +8,7 @@ import { Modal } from '@shared/modal/modal';
 
 @Component({
   selector: 'modal-edit-routine',
-  imports: [Modal, ExerciseCard, MatIcon, ConfirmationModal],
+  imports: [Modal, RoutineExerciseCard, MatIcon, ConfirmationModal],
   templateUrl: './modal-edit-routine.html',
   styleUrl: './modal-edit-routine.css',
 })

@@ -5,7 +5,7 @@ import { UrlKey } from './models/url';
 export const routes: Routes = [
   {
     path: UrlKey.Login,
-    loadComponent: () => import('@auth/login/login').then((m) => m.Login),
+    loadComponent: () => import('@features/login/login').then((m) => m.Login),
   },
   {
     path: '',

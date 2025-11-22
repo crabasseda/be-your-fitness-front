@@ -1,4 +1,3 @@
-// exercise-card.component.ts
 import { CommonModule } from '@angular/common';
 import { Component, effect, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,24 +12,20 @@ type CardMode = 'routine' | 'workout';
 @Component({
   selector: 'exercise-card',
   imports: [CommonModule, FormsModule, MatIconModule, MatButtonModule, MatCheckboxModule],
-  templateUrl: './exercise-card.html',
-  styleUrl: './exercise-card.css',
+  templateUrl: './routine-exercise-card.html',
+  styleUrl: './routine-exercise-card.css',
 })
-export class ExerciseCard {
-  // Inputs
-  mode = input<CardMode>('routine'); // 'routine' para edición, 'workout' para ejecución
+export class RoutineExerciseCard {
+  mode = input<CardMode>('routine');
   exercise = input.required<Exercise | ExerciseInRoutine>();
   initialSets = input<SetInRoutine[]>();
 
-  // Signals
   sets = signal<SetInRoutine[]>([{ set_number: 1, weight: 0, repetitions: 0, completed: false }]);
 
-  // Outputs
   exerciseUpdated = output<ExerciseInRoutine>();
   removeExercise = output<string>();
 
   constructor() {
-    // Inicializar sets
     effect(
       () => {
         const initial = this.initialSets();
@@ -46,7 +41,6 @@ export class ExerciseCard {
       { allowSignalWrites: true },
     );
 
-    // Emitir cambios
     effect(() => {
       const ex = this.exercise();
       const exerciseInRoutine: ExerciseInRoutine = {
@@ -61,7 +55,6 @@ export class ExerciseCard {
     });
   }
 
-  // Getters para manejar ambos tipos de exercise
   get exerciseName(): string {
     return this._getExerciseName(this.exercise());
   }
@@ -83,7 +76,6 @@ export class ExerciseCard {
     return this.mode() === 'routine';
   }
 
-  // Métodos públicos
   addSet(): void {
     const currentSets = this.sets();
     const newSetNumber = currentSets.length + 1;
@@ -135,7 +127,6 @@ export class ExerciseCard {
     this.removeExercise.emit(this._getExerciseId(this.exercise()));
   }
 
-  // Métodos privados
   private _updateSets(newSets: SetInRoutine[]): void {
     this.sets.set(newSets);
   }

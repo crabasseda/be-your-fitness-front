@@ -3,7 +3,7 @@ import { MatIcon } from '@angular/material/icon';
 import { NotificationService } from '@core/services/notification.service';
 import { ExerciseList } from '@features/exercises/components/exercise-list/exercise-list';
 import { Exercise } from '@features/exercises/models/exercises.interface';
-import { ExerciseCard } from '@features/routines/components/exercise-card/exercise-card';
+import { RoutineExerciseCard } from '@features/routines/components/routine-exercise-card/routine-exercise-card';
 import { CreateRoutineDTO, ExerciseInRoutine } from '@features/routines/models/routine.interface';
 import { RoutinesService } from '@features/routines/services/routines.service';
 import { Modal } from '@shared/modal/modal';
@@ -13,7 +13,7 @@ import { CreateRoutineService } from './services/modal-create-routine.service';
 
 @Component({
   selector: 'modal-create-routine',
-  imports: [Modal, MatIcon, ExerciseCard, StepRoutineDetails, ExerciseList],
+  imports: [Modal, MatIcon, RoutineExerciseCard, StepRoutineDetails, ExerciseList],
   templateUrl: './modal-create-routine.html',
   styleUrl: './modal-create-routine.css',
 })

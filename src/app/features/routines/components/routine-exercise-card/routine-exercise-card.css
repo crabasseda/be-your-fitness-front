@@ -22,7 +22,6 @@
   }
 }
 
-/* Estilos para sets completados */
 .completed-set {
   background-color: rgba(43, 159, 96, 0.05);
 }
@@ -37,7 +36,6 @@
   opacity: 0.8;
 }
 
-/* Estilos del checkbox */
 .custom-checkbox {
   transform: scale(1.1);
 }

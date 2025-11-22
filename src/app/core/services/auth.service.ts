@@ -3,19 +3,21 @@ import { inject, Injectable } from '@angular/core';
 import { Permission, rolePermissions } from '@models/permissions.constant';
 import { Role, User } from '@models/user.interface';
 import { catchError, firstValueFrom, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly TOKEN_KEY = 'token';
   private readonly USER_KEY = 'user';
   private _http = inject(HttpClient);
+  private _apiUrl = environment.apiUrl;
 
   private _currentUser: User | null = null;
 
   async login(username: string, password: string): Promise<void> {
     try {
       const res: any = await firstValueFrom(
-        this._http.post('http://localhost:3000/api/auth/login', { username, password }).pipe(
+        this._http.post(`${this._apiUrl}/auth/login`, { username, password }).pipe(
           catchError(() => {
             return throwError(() => new Error('Credenciales incorrectas'));
           }),

@@ -3,7 +3,7 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
-import { ExerciseCard } from '@features/routines/components/exercise-card/exercise-card';
+import { RoutineExerciseCard } from '@features/routines/components/routine-exercise-card/routine-exercise-card';
 import { ExerciseInRoutine, Routine } from '@features/routines/models/routine.interface';
 import { RoutinesService } from '@features/routines/services/routines.service';
 import { ConfirmationModal } from '@shared/confirmation-modal/confirmation-modal';
@@ -12,7 +12,7 @@ import { WorkoutService } from './services/workout.service';
 
 @Component({
   selector: 'workout',
-  imports: [MatIcon, MatButton, ExerciseCard, ConfirmationModal],
+  imports: [MatIcon, MatButton, RoutineExerciseCard, ConfirmationModal],
   templateUrl: './workout.html',
   styleUrl: './workout.css',
 })
