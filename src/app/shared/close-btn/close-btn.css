@@ -20,7 +20,7 @@
   transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
+@media (width<= 768px) {
   .close-btn {
     top: 0.75rem;
     right: 0.75rem;
@@ -34,7 +34,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .modal-close-btn {
     top: 0.5rem;
     right: 0.5rem;

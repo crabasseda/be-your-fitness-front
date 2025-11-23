@@ -21,7 +21,7 @@ export class NotificationService {
     });
   }
 
-  error(message: string, duration = 5000) {
+  error(message: string, duration = 3000) {
     this.snackBar.open(`✕ ${message}`, 'Cerrar', {
       ...this.defaultConfig,
       duration,
@@ -37,7 +37,7 @@ export class NotificationService {
     });
   }
 
-  warning(message: string, duration = 4000) {
+  warning(message: string, duration = 3000) {
     this.snackBar.open(message, 'Cerrar', {
       ...this.defaultConfig,
       duration,

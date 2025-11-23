@@ -7,7 +7,7 @@ import { UrlKey } from '@models/url';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
-  selector: 'byf-login',
+  selector: 'login',
   imports: [ReactiveFormsModule, MatInputModule, RouterLink, MatButtonModule],
   templateUrl: './login.html',
   styleUrl: './login.css',

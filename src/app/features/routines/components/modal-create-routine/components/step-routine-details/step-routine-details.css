@@ -73,8 +73,8 @@
 }
 
 .custom-input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: var(--color-blue-primary);
+  box-shadow: 0 0 0 3px var(--color-blue-secondary);
   transform: scale(1.01);
 }
 
@@ -106,15 +106,15 @@
 }
 
 .routine-type-card:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  border-color: var(--color-blue-primary);
+  box-shadow: 0 4px 12px var(--color-blue-secondary);
   transform: translateY(-2px);
 }
 
 .routine-type-card.selected {
-  border-color: #3b82f6;
+  border-color: var(--color-blue-primary);
   background-color: #eff6ff;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 12px var(--color-blue-secondary);
 }
 
 .card-icon {
@@ -153,7 +153,7 @@
 .check-icon {
   width: 20px;
   height: 20px;
-  color: #3b82f6;
+  color: var(--color-blue-primary);
   animation: checkIn 0.3s ease-out;
 }
 

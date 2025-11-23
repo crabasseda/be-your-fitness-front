@@ -11,7 +11,7 @@ import { ChipType } from '@shared/chip/models/chip.enum';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   imports: [MatSlideToggleModule, MatButtonModule, MatIconModule, MatCardModule, Chip, DatePipe],
   templateUrl: './home.html',
   styleUrl: './home.css',

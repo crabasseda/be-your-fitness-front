@@ -19,14 +19,14 @@
 }
 
 .schedule-type-button:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+  border-color: var(--color-blue-primary);
+  box-shadow: 0 2px 8px var(--color-blue-secondary);
 }
 
 .schedule-type-button.selected {
-  border-color: #3b82f6;
+  border-color: var(--color-blue-primary);
   background-color: #eff6ff;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 2px 8px var(--color-blue-secondary);
 }
 
 .button-icon {
@@ -42,7 +42,7 @@
 }
 
 .schedule-type-button.selected .button-label {
-  color: #3b82f6;
+  color: var(--color-blue-primary);
 }
 
 .schedule-details {
@@ -94,13 +94,13 @@
 }
 
 .day-button:hover {
-  border-color: #3b82f6;
+  border-color: var(--color-blue-primary);
   background-color: #eff6ff;
 }
 
 .day-button.selected {
-  border-color: #3b82f6;
-  background-color: #3b82f6;
+  border-color: var(--color-blue-primary);
+  background-color: var(--color-blue-primary);
   color: #ffffff;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .field-hint.error {
-  color: #ef4444;
+  color: var(--color-danger);
 }
 
 .date-range-section {
@@ -146,14 +146,14 @@
         .mdc-notched-outline__leading,
         .mdc-notched-outline__notch,
         .mdc-notched-outline__trailing {
-          border-color: #3b82f6 !important;
+          border-color: var(--color-blue-primary) !important;
         }
       }
     }
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .schedule-type-selector {
     grid-template-columns: 1fr;
   }
@@ -177,7 +177,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (width <= 640px) {
   .button-icon {
     font-size: 1.5rem;
   }

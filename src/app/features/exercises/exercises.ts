@@ -5,7 +5,7 @@ import { Exercise } from './models/exercises.interface';
 import { ExercisesService } from './services/exercises.service';
 
 @Component({
-  selector: 'app-exercises',
+  selector: 'exercises',
   imports: [ExerciseList, ExerciseDetailModal],
   templateUrl: './exercises.html',
   styleUrl: './exercises.css',

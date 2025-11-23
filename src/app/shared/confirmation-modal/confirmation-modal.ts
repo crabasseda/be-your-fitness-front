@@ -5,7 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'confirmation-modal',
+  selector: 'byf-confirmation-modal',
   imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule],
   templateUrl: './confirmation-modal.html',
   styleUrl: './confirmation-modal.css',

@@ -30,7 +30,7 @@
   height: 20px;
 }
 
-@media (width < 768px) {
+@media (width <= 768px) {
   .metric-button {
     width: 100%;
     justify-content: center;

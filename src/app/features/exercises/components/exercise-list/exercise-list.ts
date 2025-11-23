@@ -1,5 +1,3 @@
-// shared/exercise-list/exercise-list.component.ts
-
 import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatIcon } from '@angular/material/icon';

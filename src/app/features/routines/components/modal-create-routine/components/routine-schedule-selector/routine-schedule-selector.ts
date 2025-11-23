@@ -70,7 +70,6 @@ export class RoutineScheduleSelector {
       this.selectedDaysOfWeek();
 
       this.validChange.emit(this.isValid());
-      console.log(this.isValid());
     });
   }
 

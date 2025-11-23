@@ -1,5 +1,3 @@
-// core/interceptors/error.interceptor.ts
-
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';

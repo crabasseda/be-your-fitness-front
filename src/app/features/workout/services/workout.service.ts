@@ -24,12 +24,8 @@ export class WorkoutService {
 
     if (startDate) {
       params = params.set('start_date', startDate);
-      if (endDate) {
-        params = params.set('end_date', endDate);
-      }
-    } else {
-      params = params.set('limit', limit.toString());
-    }
+      if (endDate) params = params.set('end_date', endDate);
+    } else params = params.set('limit', limit.toString());
 
     return this._http.get<Workout[]>(`${this._apiUrl}/recent`, { params });
   }

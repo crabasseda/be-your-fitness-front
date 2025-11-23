@@ -35,9 +35,6 @@ export interface CalendarDayData {
 
 export interface CalendarData {
   [day: number]: CalendarDayData;
-  // Ejemplo:
-  // 15: { count: 2, total_duration: 7200, workouts: [...] }
-  // 20: { count: 1, total_duration: 3600, workouts: [...] }
 }
 
 export interface WorkoutStats {
