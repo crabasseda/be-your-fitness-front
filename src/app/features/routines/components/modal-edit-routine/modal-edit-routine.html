@@ -45,7 +45,7 @@
       <span class="label-text">Ejercicios</span>
     </label>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 animate-fade-in">
       @for (exercise of routineToEdit()?.exercises; track exercise.exercise_id) {
         <div class="transform transition-all duration-300 hover:scale-[1.02]">
           <routine-exercise-card

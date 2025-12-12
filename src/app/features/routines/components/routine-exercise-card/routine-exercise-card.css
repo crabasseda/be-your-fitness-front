@@ -1,9 +1,11 @@
 .exercise-routine-card {
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 100%;
 }
 
 .exercise-routine-card:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .exercise-header {
@@ -12,13 +14,15 @@
 
 .sets-grid-header,
 .sets-grid-row {
-  grid-template-columns: 40px 1fr 1fr 50px;
+  grid-template-columns: 36px 1fr 1fr 36px;
+  gap: 0.5rem;
 }
 
-@media (width > 640px) {
+@media (width >= 640px) {
   .sets-grid-header,
   .sets-grid-row {
-    grid-template-columns: 80px 1fr 1fr 60px;
+    grid-template-columns: 40px 1fr 1fr 40px;
+    gap: 0.75rem;
   }
 }
 
@@ -37,13 +41,13 @@
 }
 
 .custom-checkbox {
-  transform: scale(1.1);
+  transform: scale(1);
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-5px);
   }
   to {
     opacity: 1;
@@ -52,11 +56,18 @@
 }
 
 .sets-grid-body > div {
-  animation: slideIn 0.3s ease-out;
+  animation: slideIn 0.2s ease-out;
 }
 
 .sets-grid-row > div:last-child {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
