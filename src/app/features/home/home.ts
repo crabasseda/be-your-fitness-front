@@ -40,7 +40,7 @@ export class Home implements OnInit {
 
   motivationalMessage = '';
 
-  weeklyStats = computed(() => this.stats().length);
+  weeklyStats = computed(() => this.stats()?.length);
 
   ngOnInit() {
     this._pickRandomMotivationalMessage();
@@ -65,7 +65,6 @@ export class Home implements OnInit {
 
   private _loadStats() {
     this._workoutService.getWorkoutsInRange(this._firstDayWeek(), undefined).subscribe((stats) => {
-      console.log(stats);
       this.stats.set(stats);
     });
   }

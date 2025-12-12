@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Permission, rolePermissions } from '@models/permissions.constant';
-import { Role, User } from '@models/user.interface';
+import { User } from '@models/user.interface';
 import { catchError, firstValueFrom, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -48,14 +47,17 @@ export class AuthService {
     const storageUser = localStorage.getItem(this.USER_KEY);
     return JSON.parse(storageUser!);
   }
-
-  hasRole(role: Role): boolean {
-    return this._currentUser?.role === role;
+  getUserRole(): string | null {
+    const user = this.getUser();
+    return user?.role || null;
   }
 
-  hasPermission(permission: Permission): boolean {
-    if (!this._currentUser) return false;
-    return rolePermissions[this._currentUser.role].includes(permission);
+  isAthlete(): boolean {
+    return this.getUserRole() === 'athlete';
+  }
+
+  isTrainer(): boolean {
+    return this.getUserRole() === 'trainer';
   }
 
   private _isBrowser(): boolean {

@@ -27,10 +27,18 @@
           <span class="material-icons">play_circle</span>
           <span>Rutinas</span>
         </a>
-        <a routerLink="/profile" routerLinkActive="active" class="sidebar-nav-item">
-          <span class="material-icons">person</span>
-          <span>Perfil</span>
-        </a>
+        @if (isTrainer) {
+          <a routerLink="/athletes" routerLinkActive="active" class="sidebar-nav-item">
+            <span class="material-icons">group</span>
+            <span>Atletas</span>
+          </a>
+        }
+        @if (isAthlete) {
+          <a routerLink="/profile" routerLinkActive="active" class="sidebar-nav-item">
+            <span class="material-icons">person</span>
+            <span>Perfil</span>
+          </a>
+        }
       }
     </nav>
 

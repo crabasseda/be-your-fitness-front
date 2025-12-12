@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { RoleGuard } from '@core/guards/role.guard';
 import { AuthGuard } from './core/guards/auth.guard';
 import { UrlKey } from './models/url';
 
@@ -40,6 +41,12 @@ export const routes: Routes = [
         path: UrlKey.Profile,
         loadComponent: () => import('@features/profile/profile').then((m) => m.Profile),
         canActivate: [AuthGuard],
+      },
+      {
+        path: UrlKey.Athletes,
+        loadComponent: () => import('@features/athletes/athletes').then((m) => m.Athletes),
+        canActivate: [AuthGuard, RoleGuard],
+        data: { roles: ['trainer'] },
       },
     ],
   },
