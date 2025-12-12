@@ -2,14 +2,12 @@
   <h2>📅 Calendario de Entrenamientos</h2>
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 lg:items-start">
     <div class="bg-white rounded-lg sm:rounded-xl shadow-sm sm:shadow-md overflow-hidden">
-      @if (calendarKey(); as key) {
-        <mat-calendar
-          [selected]="selectedDate()"
-          (selectedChange)="onDateSelected($event)"
-          [dateClass]="dateClass"
-        >
-        </mat-calendar>
-      }
+      <mat-calendar
+        [selected]="selectedDate()"
+        (selectedChange)="onDateSelected($event)"
+        [dateClass]="dateClass"
+      >
+      </mat-calendar>
     </div>
 
     <div class="hidden lg:block">

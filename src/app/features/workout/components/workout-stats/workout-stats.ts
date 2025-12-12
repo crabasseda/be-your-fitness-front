@@ -119,7 +119,7 @@ export class WorkoutStats {
 
     const dailyData: DailyWorkoutData[] = [];
     const startDate = new Date();
-    startDate.setDate(startDate.getDate() - days);
+    startDate.setDate(startDate.getDate() - (days - 1));
 
     for (let i = 0; i < days; i++) {
       const currentDate = new Date(startDate);

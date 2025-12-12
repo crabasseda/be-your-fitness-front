@@ -1,9 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, input, output, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCalendar, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { CalendarData, CalendarDayData } from '@features/workout/models/workout.interface';
 import { Chip } from '@shared/chip/chip';
@@ -26,7 +37,10 @@ import { CloseBtn } from '@shared/close-btn/close-btn';
   templateUrl: './workout-calendar.html',
   styleUrls: ['./workout-calendar.css'],
 })
-export class WorkoutCalendar {
+export class WorkoutCalendar implements AfterViewInit {
+  @ViewChild(MatCalendar) calendar!: MatCalendar<Date>;
+  private _cdr = inject(ChangeDetectorRef);
+
   calendarData = input<CalendarData>({});
   monthChanged = output<{ year: number; month: number }>();
 
@@ -93,8 +107,8 @@ export class WorkoutCalendar {
   constructor() {
     effect(() => {
       if (this.calendarData()) {
-        this.calendarKey.update((k) => k + 1);
-        this.onDateSelected(new Date());
+        this.onDateSelected(this.selectedDate());
+        this.calendar.updateTodaysDate();
       }
     });
   }
@@ -108,6 +122,29 @@ export class WorkoutCalendar {
     const dayData = this.calendarData()[day] || null;
     this.selectedDayData.set(dayData);
     this.showDetails.set(!!dayData);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      if (this.calendar) {
+        this.calendar.stateChanges.subscribe(() => {
+          const activeDate = this.calendar.activeDate;
+          const year = activeDate.getFullYear();
+          const month = activeDate.getMonth() + 1;
+
+          if (year !== this.currentYear() || month !== this.currentMonth()) {
+            this.currentYear.set(year);
+            this.currentMonth.set(month);
+            this.monthChanged.emit({ year, month });
+
+            this.showDetails.set(false);
+            this.selectedDayData.set(null);
+
+            this._cdr.detectChanges();
+          }
+        });
+      }
+    }, 0);
   }
 
   closeDetails() {
