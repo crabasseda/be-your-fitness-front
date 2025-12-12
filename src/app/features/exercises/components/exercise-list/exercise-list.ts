@@ -1,7 +1,11 @@
 import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatIcon } from '@angular/material/icon';
-import { Exercise } from '@features/exercises/models/exercises.interface';
+import {
+  Exercise,
+  ExerciseListMode,
+  FiltersDataResponse,
+} from '@features/exercises/models/exercises.interface';
 import { ExercisesService } from '@features/exercises/services/exercises.service';
 import { Chip } from '@shared/chip/chip';
 import { ChipType } from '@shared/chip/models/chip.enum';
@@ -10,11 +14,8 @@ import { FilterOption } from '@shared/filter-dropdown/models/filter-dropdown.int
 import { Searchbar } from '@shared/searchbar/searchbar';
 import { SimpleCard } from '@shared/simple-card/simple-card';
 
-type ExerciseListMode = 'selection' | 'view';
-
 @Component({
   selector: 'exercise-list',
-  standalone: true,
   imports: [MatIcon, MatCheckbox, FilterDropdown, Searchbar, SimpleCard, Chip],
   templateUrl: './exercise-list.html',
   styleUrls: ['./exercise-list.css'],
@@ -30,11 +31,11 @@ export class ExerciseList {
   exerciseClicked = output<Exercise>();
   exercisesSelected = output<Exercise[]>();
 
-  exercisesList = this._exercisesService.exerciseList;
-  equipmentList = this._exercisesService.equipmentList;
-  bodyPartsList = this._exercisesService.bodyPartsList;
-  selectedEquipment = this._exercisesService.selectedEquipment;
-  selectedBodyPart = this._exercisesService.selectedBodyPart;
+  exercisesList = signal<Exercise[] | null>(null);
+  equipmentList = signal<FiltersDataResponse[]>([]);
+  bodyPartsList = signal<FiltersDataResponse[]>([]);
+  selectedEquipment = signal<string | null>(null);
+  selectedBodyPart = signal<string | null>(null);
 
   filteredExercises = signal<Exercise[] | null>(null);
   selectedExercisesIds = signal<Set<string>>(new Set());
@@ -74,9 +75,10 @@ export class ExerciseList {
 
   constructor() {
     effect(() => {
-      if (this.exercisesList()) {
-        this.filteredExercises.set(this.exercisesList());
-      }
+      const equipment = this.selectedEquipment();
+      const bodyPart = this.selectedBodyPart();
+
+      this._loadExercises();
     });
 
     effect(() => {
@@ -87,9 +89,9 @@ export class ExerciseList {
   }
 
   ngOnInit() {
-    this._exercisesService.getExercises();
-    this._exercisesService.getEquipments();
-    this._exercisesService.getBodyParts();
+    this._loadExercises();
+    this._loadEquipments();
+    this._loadBodyParts();
   }
 
   onSearch(searchValue: string) {
@@ -102,6 +104,7 @@ export class ExerciseList {
   }
 
   onEquipmentChange(value: string | null) {
+    console.log(value);
     this.selectedEquipment.set(value);
   }
 
@@ -131,5 +134,29 @@ export class ExerciseList {
     } else {
       this.exerciseClicked.emit(exercise);
     }
+  }
+
+  private _loadExercises() {
+    this._exercisesService
+      .getExercises({
+        equipment: this.selectedEquipment() ?? undefined,
+        bodyPart: this.selectedBodyPart() ?? undefined,
+      })
+      .subscribe((exercises) => {
+        this.exercisesList.set(exercises);
+        this.filteredExercises.set(exercises);
+      });
+  }
+
+  private _loadEquipments() {
+    this._exercisesService.getEquipments().subscribe((equipments) => {
+      this.equipmentList.set(equipments);
+    });
+  }
+
+  private _loadBodyParts() {
+    this._exercisesService.getBodyParts().subscribe((bodyParts) => {
+      this.bodyPartsList.set(bodyParts);
+    });
   }
 }

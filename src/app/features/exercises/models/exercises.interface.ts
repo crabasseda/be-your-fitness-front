@@ -47,3 +47,10 @@ export interface FiltersResponse {
   success: boolean;
   data: FiltersDataResponse[];
 }
+
+export interface ExerciseFilters {
+  equipment?: string;
+  bodyPart?: string;
+}
+
+export type ExerciseListMode = 'selection' | 'view';
