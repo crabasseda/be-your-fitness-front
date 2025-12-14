@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { NotificationService } from '@core/services/notification.service';
 import { ConfirmationModal } from '@shared/confirmation-modal/confirmation-modal';
 import { finalize } from 'rxjs';
+import { ModalAssignRoutine } from './components/modal-assign-routine/modal-assign-routine';
 import { ModalEditRoutine } from './components/modal-edit-routine/modal-edit-routine';
 import { RoutineCard } from './components/routine-card/routine-card';
 import { Routine } from './models/routine.interface';
@@ -25,6 +26,7 @@ import { RoutinesService } from './services/routines.service';
     ModalCreateRoutine,
     ConfirmationModal,
     ModalEditRoutine,
+    ModalAssignRoutine,
   ],
   templateUrl: './routines.html',
   styleUrl: './routines.css',
@@ -44,19 +46,20 @@ export class Routines {
   showConfirmationModal = signal(false);
   showCreateRoutineModal = signal<boolean>(false);
   showEditRoutineModal = signal<boolean>(false);
+  showAssignRoutineModal = signal<boolean>(false);
 
   user = this._authService.getUser();
   myRoutines = signal<Routine[]>([]);
-  //myRoutines = this._routinesService.routinesList;
-  //assignedRoutines = this._routinesService.assignedRoutinesList;
+  assignedRoutines = signal<Routine[]>([]);
 
   selectedTabIndex!: number;
   routineIdToDelete = signal<string>('');
   routineIdToEdit = signal<string>('');
+  routineToAssign = signal<Routine | null>(null);
 
   ngOnInit() {
     this._loadRoutines();
-    //this._routinesService.getAssignedRoutines(this.user!.id);
+    this._loadAssignedRoutines();
   }
 
   handleStartTraining(routineId: string): void {
@@ -66,6 +69,11 @@ export class Routines {
   handleEdit(routineId: string): void {
     this.onOpenEditRoutineModal();
     this.routineIdToEdit.set(routineId);
+  }
+
+  handleAssign(routine: Routine): void {
+    this.onOpenAssignRoutineModal();
+    this.routineToAssign.set(routine);
   }
 
   handleConfirmationDelete(routineId: string) {
@@ -94,6 +102,16 @@ export class Routines {
     });
   }
 
+  onAssignAthletes(athleteIds: string[]) {
+    this._routinesService.assignRoutine(this.routineToAssign()!._id, athleteIds).subscribe({
+      next: () => {
+        this._notificationService.success('Rutina asignada exitosamente');
+        this.onCloseAssignRoutineModal();
+        this._loadRoutines();
+      },
+    });
+  }
+
   onTabChange(index: number): void {
     this.selectedTabIndex = index;
   }
@@ -113,9 +131,19 @@ export class Routines {
     this.showEditRoutineModal.set(true);
   }
 
+  onOpenAssignRoutineModal(): void {
+    this.showAssignRoutineModal.set(true);
+  }
+
   onCloseEditRoutineModal() {
     this.showEditRoutineModal.set(false);
     this.routineIdToEdit.set('');
+  }
+
+  onCloseAssignRoutineModal() {
+    console.log('onClose');
+    this.showAssignRoutineModal.set(false);
+    this.routineToAssign.set(null);
   }
 
   private _loadRoutines() {
@@ -125,6 +153,17 @@ export class Routines {
       .subscribe({
         next: (routines) => {
           this.myRoutines.set(routines);
+        },
+      });
+  }
+
+  private _loadAssignedRoutines() {
+    this._routinesService
+      .getAssignedRoutines()
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: (routines) => {
+          this.assignedRoutines.set(routines);
         },
       });
   }

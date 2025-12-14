@@ -7,6 +7,7 @@ export interface Routine {
   created_by: string;
   exercises: ExerciseInRoutine[];
   schedule?: RoutineSchedule;
+  assigned_athletes: string[];
 }
 
 export interface RoutineSchedule {

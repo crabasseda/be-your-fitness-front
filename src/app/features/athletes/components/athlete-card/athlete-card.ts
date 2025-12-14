@@ -47,9 +47,4 @@ export class AthleteCard {
       selected: newState,
     });
   }
-
-  onCheckboxClick(event: Event): void {
-    event.stopPropagation();
-    this.toggleSelection();
-  }
 }

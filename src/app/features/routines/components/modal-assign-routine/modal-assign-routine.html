@@ -1,0 +1,50 @@
+<byf-modal (closeModal)="onClose()">
+  <ng-template #header>
+    <div class="modal-header">
+      <div class="header-content">
+        <div class="title-section">
+          <h2 class="modal-title">Asignar rutina</h2>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #body>
+    @if (athletes().length > 0) {
+      <div class="flex justify-end mb-4">
+        <button
+          mat-flat-button
+          type="button"
+          (click)="onSave()"
+          class="bg-orange-primary! hover:bg-orange-secondary! text-white! font-semibold! cursor-pointer py-2.5! px-5! rounded-lg! shadow-md! hover:shadow-lg! border-0!"
+        >
+          <div class="flex items-center justify-center gap-2">
+            <mat-icon class="w-5! h-5! text-base!">save</mat-icon>
+            <span class="text-sm sm:text-base whitespace-nowrap">Guardar rutina</span>
+          </div>
+        </button>
+      </div>
+
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6 w-full mt-6"
+      >
+        @for (athlete of athletes(); track athlete.id) {
+          <athlete-card
+            [isSelected]="isAthleteSelected(athlete.id)"
+            [athlete]="athlete"
+            [mode]="'selection'"
+            (selectionChanged)="onSelectionChanged($event)"
+          />
+        }
+      </div>
+    } @else {
+      <div class="bg-white rounded-xl shadow-md p-12 text-center">
+        <mat-icon class="w-20! h-20! text-[80px]! text-gray-300 mb-4">group</mat-icon>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-2">No tienes atletas</h3>
+        <p class="text-gray-600 mb-6">Aún no tienes ningún atleta asignado</p>
+      </div>
+    }
+  </ng-template>
+
+  <ng-template #footer> </ng-template>
+</byf-modal>

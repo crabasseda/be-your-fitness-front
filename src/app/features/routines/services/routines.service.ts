@@ -15,6 +15,10 @@ export class RoutinesService {
     return this._http.get<Routine[]>(this._apiUrl);
   }
 
+  getAssignedRoutines(): Observable<Routine[]> {
+    return this._http.get<Routine[]>(`${this._apiUrl}/assigned`);
+  }
+
   getRoutineById(id: string): Observable<Routine> {
     return this._http.get<Routine>(`${this._apiUrl}/${id}`);
   }
@@ -29,5 +33,11 @@ export class RoutinesService {
 
   deleteRoutine(id: string): Observable<{ message: string }> {
     return this._http.delete<{ message: string }>(`${this._apiUrl}/${id}`);
+  }
+
+  assignRoutine(routineId: string, athleteIds: string[]) {
+    return this._http.put<Routine>(`${this._apiUrl}/${routineId}/assign`, {
+      athlete_ids: athleteIds,
+    });
   }
 }

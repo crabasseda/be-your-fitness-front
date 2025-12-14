@@ -37,6 +37,7 @@
                 (startTraining)="handleStartTraining(routine._id)"
                 (edit)="handleEdit(routine._id)"
                 (delete)="handleConfirmationDelete(routine._id)"
+                (assign)="handleAssign(routine)"
               />
             }
           </div>
@@ -109,17 +110,31 @@
           <ng-template mat-tab-label>
             <mat-icon class="tab-icon">assignment</mat-icon>
             <span class="tab-label">Rutinas asignadas</span>
+            <span class="tab-badge">{{ assignedRoutines().length }}</span>
           </ng-template>
           <div class="p-8 min-h-[400px]">
-            <div class="flex flex-col items-center justify-center py-16 px-8 text-center">
-              <mat-icon class="text-8xl w-20 h-20 text-(--grey-primary) opacity-30 mb-6">
-                assignment
-              </mat-icon>
-              <h3 class="text-2xl font-semibold text-dark mb-3">No tienes rutinas asignadas</h3>
-              <p class="text-(--grey-primary) max-w-md">
-                Tu entrenador aún no te ha asignado ninguna rutina
-              </p>
-            </div>
+            @if (assignedRoutines().length > 0) {
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+                @for (routine of assignedRoutines(); track routine._id) {
+                  <routine-card
+                    [name]="routine.name"
+                    [items]="routine.exercises"
+                    [areOptionsAvailable]="false"
+                    (startTraining)="handleStartTraining(routine._id)"
+                  />
+                }
+              </div>
+            } @else {
+              <div class="flex flex-col items-center justify-center py-16 px-8 text-center">
+                <mat-icon class="text-8xl w-20 h-20 text-(--grey-primary) opacity-30 mb-6">
+                  fitness_center
+                </mat-icon>
+                <h3 class="text-2xl font-semibold text-dark mb-3">No tienes rutinas asignadas</h3>
+                <p class="text-(--grey-primary) mb-8 max-w-md">
+                  Tu entrenador aún no te ha asignado ninguna rutina
+                </p>
+              </div>
+            }
           </div>
         </mat-tab>
       </mat-tab-group>
@@ -136,6 +151,14 @@
     [routineId]="routineIdToEdit()"
     (updatedRoutine)="handleUpdateRoutine($event)"
     (closeModal)="onCloseEditRoutineModal()"
+  />
+}
+
+@if (showAssignRoutineModal()) {
+  <modal-assign-routine
+    [routine]="routineToAssign()!"
+    (assignedAthletes)="onAssignAthletes($event)"
+    (closeModal)="onCloseAssignRoutineModal()"
   />
 }
 
