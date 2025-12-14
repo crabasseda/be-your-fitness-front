@@ -1,0 +1,81 @@
+<div class="min-h-screen bg-gray-50 p-4 md:p-6">
+  <div class="max-w-7xl mx-auto space-y-6">
+    <div class="bg-white border-b border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="flex items-start gap-6">
+            <div class="flex-1">
+              <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                {{ athlete()?.name }} {{ athlete()?.surname }}
+              </h1>
+
+              <div class="flex flex-wrap gap-4 text-gray-600 mb-3">
+                <div class="flex items-center gap-2">
+                  <mat-icon class="w-5! text-lg!">alternate_email</mat-icon>
+                  <span class="text-sm">{{ athlete()?.username }}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <mat-icon class="w-5! text-lg!">email</mat-icon>
+                  <span class="text-sm">{{ athlete()?.email }}</span>
+                </div>
+              </div>
+
+              <span
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-xs font-medium"
+              >
+                <mat-icon class="w-4! h-4! text-sm!">person</mat-icon>
+                Atleta
+              </span>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-3">
+              <mat-icon class="text-orange-500">comment</mat-icon>
+              <h3 class="text-lg font-semibold text-gray-800 m-0">Notas del Entrenador</h3>
+            </div>
+
+            <textarea
+              [(ngModel)]="feedbackText"
+              placeholder="Escribe comentarios, observaciones o feedback sobre el progreso del atleta..."
+              class="w-[90%] min-h-[120px] p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              maxlength="500"
+            ></textarea>
+
+            <div class="flex items-center justify-between mt-3">
+              <span class="text-xs text-gray-500">{{ feedbackText().length }}/500</span>
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="!feedbackText().trim()"
+                (click)="saveFeedback()"
+              >
+                <mat-icon>save</mat-icon>
+                Guardar nota
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <mat-card class="rounded-2xl! shadow-md!">
+        <mat-card-content class="p-4! md:p-6!">
+          <workout-stats [userId]="athleteId()" />
+        </mat-card-content>
+      </mat-card>
+    </section>
+
+    <section>
+      <mat-card class="rounded-2xl! shadow-md!">
+        <mat-card-content class="p-4! md:p-6!">
+          <workout-calendar
+            [calendarData]="calendarData()"
+            (monthChanged)="onMonthChanged($event)"
+          />
+        </mat-card-content>
+      </mat-card>
+    </section>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { NotificationService } from '@core/services/notification.service';
 import { WorkoutCalendar } from '@features/workout/components/workout-calendar/workout-calendar';
 import { WorkoutStats } from '@features/workout/components/workout-stats/workout-stats';
 import { WorkoutService } from '@features/workout/services/workout.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'profile',
@@ -24,6 +25,7 @@ export class Profile {
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _notificationService = inject(NotificationService);
+  private _userService = inject(UserService);
 
   user = this._authService.getUser();
   workoutStats = signal<any>(null);
@@ -32,8 +34,11 @@ export class Profile {
   showSuccessBanner = signal<boolean>(false);
   lastCompletedWorkout = signal<any>(null);
 
+  trainerName = signal<string>('');
+
   ngOnInit() {
     this._loadData();
+    this._loadTrainerInfo();
 
     this._route.queryParams.subscribe((params) => {
       if (params['workoutSaved'] === 'true') {
@@ -73,6 +78,12 @@ export class Profile {
   private _loadCalendarData(year: number, month: number) {
     this._workoutService.getWorkoutsForCalendar(year, month).subscribe((data) => {
       this.calendarData.set(data);
+    });
+  }
+
+  private _loadTrainerInfo() {
+    this._userService.getUserById(this.user!.trainer_id).subscribe((data) => {
+      this.trainerName.set(data.name + ' ' + data.surname);
     });
   }
 }

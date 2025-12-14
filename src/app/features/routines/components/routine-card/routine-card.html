@@ -22,6 +22,12 @@
         <mat-icon class="text-danger">delete</mat-icon>
         <span>Eliminar</span>
       </button>
+      @if (isTrainer) {
+        <button mat-menu-item (click)="onAssign()">
+          <mat-icon class="text-danger">people</mat-icon>
+          <span>Asignar</span>
+        </button>
+      }
     </mat-menu>
   </div>
 
@@ -30,11 +36,13 @@
       {{ formattedItems()!.join(', ') }}
     </p>
   </div>
-  <button
-    mat-raised-button
-    class="w-full bg-orange-primary! text-white! hover:bg-orange-secondary! transition-colors mt-auto"
-    (click)="onStartTraining()"
-  >
-    Empezar entreno
-  </button>
+  @if (!isTrainer) {
+    <button
+      mat-raised-button
+      class="w-full bg-orange-primary! text-white! hover:bg-orange-secondary! transition-colors mt-auto"
+      (click)="onStartTraining()"
+    >
+      Empezar entreno
+    </button>
+  }
 </div>

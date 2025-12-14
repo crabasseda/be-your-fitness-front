@@ -19,6 +19,7 @@ export class WorkoutService {
     limit: number = 10,
     startDate?: string,
     endDate?: string,
+    userId?: string,
   ): Observable<Workout[]> {
     let params = new HttpParams();
 
@@ -27,26 +28,39 @@ export class WorkoutService {
       if (endDate) params = params.set('end_date', endDate);
     } else params = params.set('limit', limit.toString());
 
+    if (userId) {
+      params = params.set('user_id', userId);
+    }
+
     return this._http.get<Workout[]>(`${this._apiUrl}/recent`, { params });
   }
 
-  getLastNWorkouts(limit: number = 10): Observable<Workout[]> {
-    return this.getRecentWorkouts(limit);
+  getLastNWorkouts(limit: number = 10, userId?: string): Observable<Workout[]> {
+    return this.getRecentWorkouts(limit, undefined, undefined, userId);
   }
 
-  getWorkoutsLastNDays(days: number): Observable<Workout[]> {
+  getWorkoutsLastNDays(days: number, userId?: string): Observable<Workout[]> {
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - days);
-    return this.getRecentWorkouts(undefined, startDate.toISOString().split('T')[0]);
+    return this.getRecentWorkouts(
+      undefined,
+      startDate.toISOString().split('T')[0],
+      undefined,
+      userId,
+    );
   }
 
   getWorkoutsInRange(startDate: string, endDate?: string): Observable<Workout[]> {
     return this.getRecentWorkouts(undefined, startDate, endDate);
   }
 
-  getWorkoutsForCalendar(year: number, month: number): Observable<CalendarData> {
-    return this._http.get<CalendarData>(
-      `${this._apiUrl}/calendar/month?year=${year}&month=${month}`,
-    );
+  getWorkoutsForCalendar(year: number, month: number, userId?: string): Observable<CalendarData> {
+    let params = new HttpParams().set('year', year.toString()).set('month', month.toString());
+
+    if (userId) {
+      params = params.set('user_id', userId);
+    }
+
+    return this._http.get<CalendarData>(`${this._apiUrl}/calendar/month`, { params });
   }
 }

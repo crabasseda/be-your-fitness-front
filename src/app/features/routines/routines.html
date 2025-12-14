@@ -2,8 +2,14 @@
   <div class="bg-linear-to-br from-(--blue-primary) to-(--blue-secondary) px-6 py-8 shadow-md">
     <div class="max-w-7xl mx-auto flex justify-between items-center gap-6 flex-wrap">
       <div class="flex-1 min-w-[250px]">
-        <h1 class="font-bold text-3xl text-white mb-2 drop-shadow-sm">Mis Rutinas</h1>
-        <p class="text-white/90">Gestiona y organiza tus entrenamientos</p>
+        <h1 class="font-bold text-3xl text-white mb-2 drop-shadow-sm">
+          @if (isTrainer) {
+            Mis Rutinas de Entrenador
+          } @else {
+            Mis Rutinas
+          }
+        </h1>
+        <p class="text-white/90">Gestiona y organiza tus rutinas</p>
       </div>
       <button
         mat-flat-button
@@ -19,74 +25,92 @@
   </div>
 
   <div class="max-w-7xl mx-auto px-6 -mt-4">
-    <mat-tab-group
-      class="custom-tabs"
-      mat-stretch-tabs="false"
-      mat-align-tabs="start"
-      (selectedIndexChange)="onTabChange($event)"
-    >
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <mat-icon class="tab-icon">sports_gymnastics</mat-icon>
-          <span class="tab-label">Mis rutinas</span>
-          <span class="tab-badge">{{ myRoutines().length }}</span>
-        </ng-template>
-        <div class="p-8 min-h-[400px]">
-          @if (myRoutines().length > 0) {
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-              @for (routine of myRoutines(); track routine._id) {
-                <routine-card
-                  [name]="routine.name"
-                  [items]="routine.exercises"
-                  [areOptionsAvailable]="true"
-                  (startTraining)="handleStartTraining(routine._id)"
-                  (edit)="handleEdit(routine._id)"
-                  (delete)="handleConfirmationDelete(routine._id)"
-                />
-              }
-            </div>
-          } @else {
-            <div class="flex flex-col items-center justify-center py-16 px-8 text-center">
-              <mat-icon class="text-8xl w-20 h-20 text-(--grey-primary) opacity-30 mb-6">
-                fitness_center
-              </mat-icon>
-              <h3 class="text-2xl font-semibold text-dark mb-3">No tienes rutinas creadas</h3>
-              <p class="text-(--grey-primary) mb-8 max-w-md">
-                Comienza creando tu primera rutina de entrenamiento
-              </p>
-              <button
-                mat-raised-button
-                class="btn-empty-action"
-                (click)="onOpenCreateRoutineModal()"
-              >
-                <mat-icon>add</mat-icon>
-                Crear mi primera rutina
-              </button>
-            </div>
-          }
-        </div>
-      </mat-tab>
+    @if (isTrainer) {
+      <div class="bg-white rounded-lg shadow-md p-8 mt-6 min-h-[400px]">
+        @if (myRoutines().length > 0) {
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+            @for (routine of myRoutines(); track routine._id) {
+              <routine-card
+                [name]="routine.name"
+                [items]="routine.exercises"
+                [areOptionsAvailable]="true"
+                (startTraining)="handleStartTraining(routine._id)"
+                (edit)="handleEdit(routine._id)"
+                (delete)="handleConfirmationDelete(routine._id)"
+              />
+            }
+          </div>
+        } @else {
+          <div class="flex flex-col items-center justify-center py-16 px-8 text-center">
+            <mat-icon class="text-8xl w-20 h-20 text-(--grey-primary) opacity-30 mb-6">
+              fitness_center
+            </mat-icon>
+            <h3 class="text-2xl font-semibold text-dark mb-3">No tienes rutinas creadas</h3>
+            <p class="text-(--grey-primary) mb-8 max-w-md">
+              Comienza creando tu primera rutina de entrenamiento
+            </p>
+            <button mat-raised-button class="btn-empty-action" (click)="onOpenCreateRoutineModal()">
+              <mat-icon>add</mat-icon>
+              Crear mi primera rutina
+            </button>
+          </div>
+        }
+      </div>
+    } @else {
+      <mat-tab-group
+        class="custom-tabs"
+        mat-stretch-tabs="false"
+        mat-align-tabs="start"
+        (selectedIndexChange)="onTabChange($event)"
+      >
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">sports_gymnastics</mat-icon>
+            <span class="tab-label">Mis rutinas</span>
+            <span class="tab-badge">{{ myRoutines().length }}</span>
+          </ng-template>
+          <div class="p-8 min-h-[400px]">
+            @if (myRoutines().length > 0) {
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+                @for (routine of myRoutines(); track routine._id) {
+                  <routine-card
+                    [name]="routine.name"
+                    [items]="routine.exercises"
+                    [areOptionsAvailable]="true"
+                    (startTraining)="handleStartTraining(routine._id)"
+                    (edit)="handleEdit(routine._id)"
+                    (delete)="handleConfirmationDelete(routine._id)"
+                  />
+                }
+              </div>
+            } @else {
+              <div class="flex flex-col items-center justify-center py-16 px-8 text-center">
+                <mat-icon class="text-8xl w-20 h-20 text-(--grey-primary) opacity-30 mb-6">
+                  fitness_center
+                </mat-icon>
+                <h3 class="text-2xl font-semibold text-dark mb-3">No tienes rutinas creadas</h3>
+                <p class="text-(--grey-primary) mb-8 max-w-md">
+                  Comienza creando tu primera rutina de entrenamiento
+                </p>
+                <button
+                  mat-raised-button
+                  class="btn-empty-action"
+                  (click)="onOpenCreateRoutineModal()"
+                >
+                  <mat-icon>add</mat-icon>
+                  Crear mi primera rutina
+                </button>
+              </div>
+            }
+          </div>
+        </mat-tab>
 
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <mat-icon class="tab-icon">assignment</mat-icon>
-          <span class="tab-label">Rutinas asignadas</span>
-          <!-- <span class="tab-badge">{{ assignedRoutines().length }}</span> -->
-        </ng-template>
-        <div class="p-8 min-h-[400px]">
-          <!-- @if (assignedRoutines().length > 0) {
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-              @for (routine of assignedRoutines(); track routine._id) {
-                <routine-card
-                  [name]="routine.name"
-                  [items]="routine.exercises"
-                  [areOptionsAvailable]="false"
-                  (startTraining)="handleStartTraining(routine._id)"
-                  (delete)="handleDelete(routine._id)"
-                />
-              }
-            </div>
-          } @else {
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">assignment</mat-icon>
+            <span class="tab-label">Rutinas asignadas</span>
+          </ng-template>
+          <div class="p-8 min-h-[400px]">
             <div class="flex flex-col items-center justify-center py-16 px-8 text-center">
               <mat-icon class="text-8xl w-20 h-20 text-(--grey-primary) opacity-30 mb-6">
                 assignment
@@ -96,16 +120,17 @@
                 Tu entrenador aún no te ha asignado ninguna rutina
               </p>
             </div>
-          } -->
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    }
   </div>
 </div>
 
 @if (showCreateRoutineModal()) {
   <modal-create-routine (closeModal)="onCloseCreateRoutineModal($event)" />
 }
+
 @if (showEditRoutineModal()) {
   <modal-edit-routine
     [routineId]="routineIdToEdit()"

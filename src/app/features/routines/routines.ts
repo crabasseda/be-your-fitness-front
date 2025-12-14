@@ -35,6 +35,9 @@ export class Routines {
   private _authService = inject(AuthService);
   private _notificationService = inject(NotificationService);
 
+  isAthlete = this._authService.isAthlete();
+  isTrainer = this._authService.isTrainer();
+
   isLoading = signal(true);
 
   ChipType = ChipType;

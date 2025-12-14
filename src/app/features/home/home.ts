@@ -4,15 +4,25 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { WorkoutService } from '@features/workout/services/workout.service';
+import { Feedback } from '@models/feedback.interface';
 import { Chip } from '@shared/chip/chip';
 import { ChipType } from '@shared/chip/models/chip.enum';
+import { FeedbackService } from 'src/app/services/feedback.service';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'home',
-  imports: [MatSlideToggleModule, MatButtonModule, MatIconModule, MatCardModule, Chip, DatePipe],
+  imports: [
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    Chip,
+    DatePipe,
+    RouterLink,
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -20,8 +30,13 @@ export class Home implements OnInit {
   private _authService = inject(AuthService);
   private _router = inject(Router);
   private _workoutService = inject(WorkoutService);
+  private _feedbackService = inject(FeedbackService);
+
+  isTrainer = this._authService.isTrainer();
 
   public user = this._authService.getUser();
+
+  lastFeedback = signal<Feedback | null>(null);
 
   stats = signal<any>(null);
   recentWorkouts = signal<any[]>([]);
@@ -46,6 +61,7 @@ export class Home implements OnInit {
     this._pickRandomMotivationalMessage();
     this._loadStats();
     this._loadRecentWorkouts();
+    this._loadLastFeedback();
   }
 
   getWeeklyProgress(): number {
@@ -94,5 +110,13 @@ export class Home implements OnInit {
     const day = String(monday.getDate()).padStart(2, '0');
 
     return `${year}-${month}-${day}`;
+  }
+
+  private _loadLastFeedback() {
+    this._feedbackService.getLastFeedback().subscribe({
+      next: (feedback) => {
+        this.lastFeedback.set(feedback);
+      },
+    });
   }
 }

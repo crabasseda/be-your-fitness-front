@@ -1,0 +1,62 @@
+<div
+  class="athlete-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 cursor-pointer"
+  [class.selected]="mode() === 'selection' && isSelected()"
+  [class.hover-effect]="mode() === 'view'"
+  (click)="onCardClick()"
+>
+  @if (mode() === 'selection') {
+    <div class="absolute top-4 right-4 z-10">
+      <mat-checkbox
+        [checked]="isSelected()"
+        (click)="onCheckboxClick($event)"
+        (change)="toggleSelection()"
+        color="primary"
+        class="custom-checkbox"
+      ></mat-checkbox>
+    </div>
+  }
+
+  <div class="p-6">
+    <div class="flex items-start gap-4 mb-4">
+      <div class="shrink-0">
+        <div
+          class="w-14 h-14 bg-linear-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center"
+        >
+          <span class="text-white text-lg font-bold">{{ initials }}</span>
+        </div>
+      </div>
+
+      <div class="flex-1 min-w-0">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2 wrap-break-word">
+          {{ fullName }}
+        </h3>
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <mat-icon class="w-4! text-base! shrink-0">alternate_email</mat-icon>
+            <span class="truncate">{{ athlete().username }}</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <mat-icon class="w-4! text-base! shrink-0">email</mat-icon>
+            <span class="truncate">{{ athlete().email }}</span>
+          </div>
+        </div>
+      </div>
+
+      @if (mode() === 'view') {
+        <div class="shrink-0 ml-2">
+          <mat-icon class="text-gray-400">chevron_right</mat-icon>
+        </div>
+      }
+    </div>
+
+    <div class="pt-4 border-t border-gray-100">
+      <div class="flex items-center justify-between">
+        <byf-chip [text]="'Atleta'" [chipType]="ChipType.Blue"></byf-chip>
+
+        @if (mode() === 'view') {
+          <span class="text-xs text-gray-500 hidden sm:inline">Ver detalles</span>
+        }
+      </div>
+    </div>
+  </div>
+</div>

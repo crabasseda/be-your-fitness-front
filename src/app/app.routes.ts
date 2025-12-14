@@ -48,6 +48,15 @@ export const routes: Routes = [
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['trainer'] },
       },
+      {
+        path: `${UrlKey.Athletes}/:id`,
+        loadComponent: () =>
+          import('@features/athletes/components/athlete-details/athlete-details').then(
+            (m) => m.AthleteDetails,
+          ),
+        canActivate: [AuthGuard, RoleGuard],
+        data: { roles: ['trainer'] },
+      },
     ],
   },
 

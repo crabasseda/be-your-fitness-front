@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'routine-card',
@@ -11,6 +12,10 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrl: './routine-card.css',
 })
 export class RoutineCard {
+  private _authService = inject(AuthService);
+
+  isTrainer = this._authService.isTrainer();
+
   name = input<string>();
   items = input.required<any>();
   areOptionsAvailable = input<boolean>();
@@ -18,6 +23,7 @@ export class RoutineCard {
   startTraining = output<void>();
   edit = output<void>();
   delete = output<void>();
+  assign = output<void>();
 
   formattedItems = computed(() => {
     return this.items().map((exercise: any) => exercise.exercise_name);
@@ -33,5 +39,9 @@ export class RoutineCard {
 
   onDelete(): void {
     this.delete.emit();
+  }
+
+  onAssign(): void {
+    this.assign.emit();
   }
 }

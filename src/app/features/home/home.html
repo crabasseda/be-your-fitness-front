@@ -2,105 +2,217 @@
   <div class="max-w-4xl mx-auto space-y-6">
     <header class="hero-gradient rounded-2xl p-8 md:p-12 shadow-lg text-center">
       <h1 class="text-3xl md:text-4xl font-bold text-white m-0 mb-2">Hola, {{ user?.name }} 👋</h1>
-      <p class="text-white/90 text-base md:text-lg mb-6">
-        {{ motivationalMessage }}
-      </p>
+      @if (!isTrainer) {
+        <p class="text-white/90 text-base md:text-lg mb-6">
+          {{ motivationalMessage }}
+        </p>
 
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="goToWorkout()"
-        class="h-14! text-lg! px-8! rounded-xl! font-semibold!"
-      >
-        <mat-icon class="w-6! h-6! text-2xl! mr-2!">play_arrow</mat-icon>
-        <span>Empezar Workout</span>
-      </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="goToWorkout()"
+          class="h-14! text-lg! px-8! rounded-xl! font-semibold!"
+        >
+          <mat-icon class="w-6! h-6! text-2xl! mr-2!">play_arrow</mat-icon>
+          <span>Empezar Workout</span>
+        </button>
+      } @else {
+        <p class="text-white/90 text-base md:text-lg mb-6">Panel de gestión de entrenador</p>
+      }
     </header>
 
-    <section>
-      <mat-card class="rounded-2xl! shadow-md!">
-        <mat-card-content class="p-6!">
-          <div class="flex items-center gap-3 mb-4">
-            <mat-icon class="text-orange-500 w-8! h-8! text-[32px]!">calendar_today</mat-icon>
-            <h2 class="text-xl md:text-2xl font-semibold text-gray-800 m-0">Esta Semana</h2>
-          </div>
+    @if (isTrainer) {
+      <section>
+        <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-4">Acciones Rápidas</h2>
 
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div class="text-center p-4 bg-gray-50 rounded-xl">
-              <div class="text-3xl font-bold mb-1 text-orange-500">
-                {{ weeklyStats() || 0 }}
-              </div>
-              <div class="text-sm text-gray-600">Entrenamientos</div>
-            </div>
-          </div>
-
-          <div class="mt-6">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-sm text-gray-600">Objetivo semanal</span>
-              <span class="text-sm font-semibold text-gray-800">
-                {{ weeklyStats() || 0 }}/{{ weeklyGoal() }}
-              </span>
-            </div>
-            <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-              <div
-                class="h-full progress-fill transition-all duration-500 ease-out"
-                [style.width.%]="getWeeklyProgress()"
-              ></div>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </section>
-
-    <section>
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl md:text-2xl font-semibold text-gray-800 m-0">Actividad Reciente</h2>
-      </div>
-
-      <div class="space-y-3">
-        @for (workout of recentWorkouts(); track workout._id) {
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <mat-card
-            class="rounded-2xl! shadow-md! cursor-pointer hover:shadow-lg! transition-shadow"
+            class="rounded-2xl! shadow-md! cursor-pointer hover:shadow-lg! transition-all"
+            routerLink="/routines"
           >
-            <mat-card-content class="p-4!">
-              <div class="flex items-center gap-3">
+            <mat-card-content class="p-6!">
+              <div class="flex items-center gap-4">
                 <div
-                  class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0"
+                  class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center shrink-0"
                 >
-                  <mat-icon class="text-orange-500">fitness_center</mat-icon>
+                  <mat-icon class="text-blue-500 w-8! h-8! text-[32px]!">play_circle</mat-icon>
                 </div>
-                <div class="flex-1 min-w-0">
-                  <h4 class="font-semibold text-gray-800 text-sm md:text-base truncate m-0">
-                    {{ workout.routine_name }}
-                  </h4>
-                  <p class="text-xs md:text-sm text-gray-600 m-0">
-                    {{ workout.createdAt | date: 'EEEE, d MMM' }}
-                  </p>
+                <div class="flex-1">
+                  <h3 class="font-semibold text-gray-800 text-base m-0 mb-1">Mis Rutinas</h3>
+                  <p class="text-sm text-gray-600 m-0">Crea y gestiona rutinas de entrenamiento</p>
                 </div>
-
-                <byf-chip
-                  [text]="formatDuration(workout.duration_seconds)"
-                  [chipType]="ChipType.Orange"
-                  [icon]="'schedule'"
-                />
+                <mat-icon class="text-gray-400">chevron_right</mat-icon>
               </div>
             </mat-card-content>
           </mat-card>
-        } @empty {
-          <div class="bg-white rounded-2xl shadow-sm p-8 text-center">
-            <mat-icon class="w-16! h-16! text-[64px]! text-gray-300 mb-3">
-              fitness_center
-            </mat-icon>
-            <h3 class="text-lg font-semibold text-gray-800 mb-2">
-              ¡Empieza tu primer entrenamiento!
-            </h3>
-            <p class="text-gray-600 text-sm mb-4">
-              Selecciona una rutina y comienza a registrar tu progreso
-            </p>
-            <button mat-raised-button color="primary" routerLink="/routines">Ver Rutinas</button>
-          </div>
-        }
-      </div>
-    </section>
+
+          <mat-card
+            class="rounded-2xl! shadow-md! cursor-pointer hover:shadow-lg! transition-all"
+            routerLink="/exercises"
+          >
+            <mat-card-content class="p-6!">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center shrink-0"
+                >
+                  <mat-icon class="text-green-500 w-8! h-8! text-[32px]!">fitness_center</mat-icon>
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-semibold text-gray-800 text-base m-0 mb-1">Ejercicios</h3>
+                  <p class="text-sm text-gray-600 m-0">Explora la biblioteca de ejercicios</p>
+                </div>
+                <mat-icon class="text-gray-400">chevron_right</mat-icon>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card
+            class="rounded-2xl! shadow-md! cursor-pointer hover:shadow-lg! transition-all"
+            routerLink="/athletes"
+          >
+            <mat-card-content class="p-6!">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center shrink-0"
+                >
+                  <mat-icon class="text-orange-500 w-8! h-8! text-[32px]!">group</mat-icon>
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-semibold text-gray-800 text-base m-0 mb-1">Mis Atletas</h3>
+                  <p class="text-sm text-gray-600 m-0">Gestiona y asigna rutinas a tus atletas</p>
+                </div>
+                <mat-icon class="text-gray-400">chevron_right</mat-icon>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </section>
+    } @else {
+      @if (lastFeedback()) {
+        <section>
+          <mat-card class="rounded-2xl! shadow-md!">
+            <mat-card-content class="p-6!">
+              <div class="flex items-center gap-3 mb-4">
+                <mat-icon class="text-orange-500 w-8! h-8! text-[32px]!">comment</mat-icon>
+                <h2 class="text-xl md:text-2xl font-semibold text-gray-800 m-0">
+                  Mensaje de tu Entrenador
+                </h2>
+              </div>
+              <div
+                class="bg-linear-to-br from-orange-50 to-orange-100 rounded-xl p-5 mb-4 border-l-4 border-orange-500"
+              >
+                <p class="text-gray-800 text-base leading-relaxed m-0">
+                  "{{ lastFeedback()!.message }}"
+                </p>
+              </div>
+              <div class="flex items-center justify-between text-sm text-gray-600">
+                <div class="flex items-center gap-2">
+                  <div
+                    class="w-8 h-8 bg-linear-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center"
+                  >
+                    <span class="text-white text-xs font-bold">
+                      {{ lastFeedback()!.trainer_id.name.charAt(0)
+                      }}{{ lastFeedback()!.trainer_id.surname.charAt(0) }}
+                    </span>
+                  </div>
+                  <span class="font-medium text-gray-700">
+                    {{ lastFeedback()!.trainer_id.name }} {{ lastFeedback()!.trainer_id.surname }}
+                  </span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <mat-icon class="w-4! text-base!">schedule</mat-icon>
+                  <span>{{ lastFeedback()!.createdAt | date: 'short' }}</span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </section>
+      }
+      <section>
+        <mat-card class="rounded-2xl! shadow-md!">
+          <mat-card-content class="p-6!">
+            <div class="flex items-center gap-3 mb-4">
+              <mat-icon class="text-orange-500 w-8! h-8! text-[32px]!">calendar_today</mat-icon>
+              <h2 class="text-xl md:text-2xl font-semibold text-gray-800 m-0">Esta Semana</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div class="text-center p-4 bg-gray-50 rounded-xl">
+                <div class="text-3xl font-bold mb-1 text-orange-500">
+                  {{ weeklyStats() || 0 }}
+                </div>
+                <div class="text-sm text-gray-600">Entrenamientos</div>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-gray-600">Objetivo semanal</span>
+                <span class="text-sm font-semibold text-gray-800">
+                  {{ weeklyStats() || 0 }}/{{ weeklyGoal() }}
+                </span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  class="h-full progress-fill transition-all duration-500 ease-out"
+                  [style.width.%]="getWeeklyProgress()"
+                ></div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </section>
+
+      <section>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl md:text-2xl font-semibold text-gray-800 m-0">Actividad Reciente</h2>
+        </div>
+
+        <div class="space-y-3">
+          @for (workout of recentWorkouts(); track workout._id) {
+            <mat-card
+              class="rounded-2xl! shadow-md! cursor-pointer hover:shadow-lg! transition-shadow"
+            >
+              <mat-card-content class="p-4!">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0"
+                  >
+                    <mat-icon class="text-orange-500">fitness_center</mat-icon>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-semibold text-gray-800 text-sm md:text-base truncate m-0">
+                      {{ workout.routine_name }}
+                    </h4>
+                    <p class="text-xs md:text-sm text-gray-600 m-0">
+                      {{ workout.createdAt | date: 'EEEE, d MMM' }}
+                    </p>
+                  </div>
+
+                  <byf-chip
+                    [text]="formatDuration(workout.duration_seconds)"
+                    [chipType]="ChipType.Orange"
+                    [icon]="'schedule'"
+                  />
+                </div>
+              </mat-card-content>
+            </mat-card>
+          } @empty {
+            <div class="bg-white rounded-2xl shadow-sm p-8 text-center">
+              <mat-icon class="w-16! h-16! text-[64px]! text-gray-300 mb-3">
+                fitness_center
+              </mat-icon>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                ¡Empieza tu primer entrenamiento!
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                Selecciona una rutina y comienza a registrar tu progreso
+              </p>
+              <button mat-raised-button color="primary" routerLink="/routines">Ver Rutinas</button>
+            </div>
+          }
+        </div>
+      </section>
+    }
   </div>
 </div>

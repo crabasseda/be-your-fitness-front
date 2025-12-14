@@ -108,7 +108,7 @@ export class WorkoutCalendar implements AfterViewInit {
     effect(() => {
       if (this.calendarData()) {
         this.onDateSelected(this.selectedDate());
-        this.calendar.updateTodaysDate();
+        if (this.calendar) this.calendar.updateTodaysDate();
       }
     });
   }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,6 +26,8 @@ import { DailyWorkoutData } from './models/workout-stats.interface';
 })
 export class WorkoutStats {
   private _workoutService = inject(WorkoutService);
+
+  userId = input<string | undefined>();
 
   selectedPeriod = signal<number>(7);
   selectedMetric = signal<ChartMetric>(ChartMetric.Duration);
@@ -86,7 +88,8 @@ export class WorkoutStats {
 
   loadData() {
     this.isLoading.set(true);
-    this._workoutService.getWorkoutsLastNDays(this.selectedPeriod()).subscribe({
+    const targetUserId = this.userId();
+    this._workoutService.getWorkoutsLastNDays(this.selectedPeriod(), targetUserId).subscribe({
       next: (workouts) => {
         this.rawWorkouts.set(workouts);
         this.isLoading.set(false);

@@ -32,8 +32,7 @@
             <span class="material-icons">group</span>
             <span>Atletas</span>
           </a>
-        }
-        @if (isAthlete) {
+        } @else {
           <a routerLink="/profile" routerLinkActive="active" class="sidebar-nav-item">
             <span class="material-icons">person</span>
             <span>Perfil</span>
@@ -97,10 +96,17 @@
           <span class="material-icons text-[22px] mb-0.5">play_circle</span>
           <span class="text-xs">Rutinas</span>
         </a>
-        <a routerLink="/profile" routerLinkActive="active" class="footer-link">
-          <span class="material-icons text-[22px] mb-0.5">person</span>
-          <span class="text-xs">Perfil</span>
-        </a>
+        @if (isTrainer) {
+          <a routerLink="/athletes" routerLinkActive="active" class="footer-link">
+            <span class="material-icons text-[22px] mb-0.5">group</span>
+            <span class="text-xs">Atletas</span>
+          </a>
+        } @else {
+          <a routerLink="/profile" routerLinkActive="active" class="footer-link">
+            <span class="material-icons text-[22px] mb-0.5">person</span>
+            <span class="text-xs">Perfil</span>
+          </a>
+        }
       }
     </nav>
   </footer>
