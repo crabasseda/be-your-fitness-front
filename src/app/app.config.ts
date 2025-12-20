@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
+  isDevMode,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -10,6 +11,7 @@ import { routes } from './app.routes';
 
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
+import { provideServiceWorker } from '@angular/service-worker';
 import { authInterceptor } from '@core/interceptors/auth.interceptor';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
@@ -21,5 +23,17 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(MatNativeDateModule),
     provideCharts(withDefaultRegisterables()),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
 };
