@@ -1,9 +1,13 @@
 {
-  "name": "be-your-fitness-front",
-  "short_name": "be-your-fitness-front",
+  "name": "BeYourFitness - Personal Training ",
+  "short_name": "BeYourFitness",
+  "theme_color": "#ec6c1e",
+  "background_color": "#31a1dd",
   "display": "standalone",
+  "orientation": "portrait",
   "scope": "./",
   "start_url": "./",
+  "description": "Tu aplicación de fitness personalizado",
   "icons": [
     {
       "src": "icons/icon-72x72.png",

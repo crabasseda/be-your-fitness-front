@@ -21,9 +21,27 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
-        "files": [
-          "/**/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
-        ]
+        "files": ["/**/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "exercises-cache",
+      "urls": ["https://v2.exercisedb.dev/api/v1/exercises/**"],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 50,
+        "maxAge": "7d"
+      }
+    },
+    {
+      "name": "routines-data",
+      "urls": ["https://be-your-fitness-api.onrender.com/api/routines/**"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "timeout": "3s",
+        "maxAge": "30m"
       }
     }
   ]
