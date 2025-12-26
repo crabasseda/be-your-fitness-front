@@ -57,7 +57,7 @@
 
     @if (frequency() === 'weekly') {
       <div class="days-of-week-section">
-        <label class="subsection-label">Días de la semana</label>
+        <p class="subsection-label">Días de la semana</p>
         <div class="days-buttons-grid">
           @for (day of daysOfWeek; track day.value) {
             <button
@@ -88,7 +88,7 @@
     }
 
     <div class="date-range-section">
-      <label class="subsection-label">Período (opcional)</label>
+      <p class="subsection-label">Período (opcional)</p>
       <div class="date-range-grid">
         <mat-form-field appearance="outline">
           <mat-label>Desde</mat-label>

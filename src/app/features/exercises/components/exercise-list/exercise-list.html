@@ -34,7 +34,8 @@
   class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6 w-full mt-6"
 >
   @for (exercise of filteredExercises(); track exercise.exerciseId) {
-    <div
+    <button
+      type="button"
       class="relative cursor-pointer transition-all duration-300 rounded-lg hover:-translate-y-1 exercise-card-wrapper"
       [class.selected]="isSelectionMode() && isExerciseSelected(exercise)"
       (click)="onExerciseClick(exercise)"
@@ -66,7 +67,7 @@
           </div>
         }
       }
-    </div>
+    </button>
   } @empty {
     <div class="col-span-full text-center py-16 px-8">
       <mat-icon class="text-[5rem]! w-20! h-20! text-gray-600 opacity-30 mb-6">search_off</mat-icon>

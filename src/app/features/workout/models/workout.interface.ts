@@ -33,9 +33,7 @@ export interface CalendarDayData {
   workouts: WorkoutSummary[];
 }
 
-export interface CalendarData {
-  [day: number]: CalendarDayData;
-}
+export type CalendarData = Record<number, CalendarDayData>;
 
 export interface WorkoutStats {
   total_workouts: number;

@@ -9,9 +9,9 @@ import { CloseBtn } from '@shared/close-btn/close-btn';
   styleUrl: './modal.css',
 })
 export class Modal {
-  @ContentChild('header') headerTemplate?: TemplateRef<any>;
-  @ContentChild('body') bodyTemplate?: TemplateRef<any>;
-  @ContentChild('footer') footerTemplate?: TemplateRef<any>;
+  @ContentChild('header') headerTemplate?: TemplateRef<void>;
+  @ContentChild('body') bodyTemplate?: TemplateRef<void>;
+  @ContentChild('footer') footerTemplate?: TemplateRef<void>;
 
   closeModal = output<void>();
 

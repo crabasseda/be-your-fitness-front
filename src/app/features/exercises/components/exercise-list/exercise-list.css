@@ -1,3 +1,23 @@
+.exercise-card-wrapper {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+  display: block;
+}
+
+.exercise-card-wrapper:focus-visible {
+  outline: none;
+}
+
+.exercise-card-wrapper:focus-visible byf-card,
+.exercise-card-wrapper:focus-visible .card {
+  outline: 4px solid var(--blue-primary);
+  outline-offset: 2px;
+}
+
 .exercise-card-wrapper.selected {
   outline: 4px solid var(--blue-primary);
   outline-offset: 2px;

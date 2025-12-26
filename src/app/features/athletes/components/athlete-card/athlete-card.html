@@ -1,5 +1,5 @@
-<div
-  class="athlete-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 cursor-pointer"
+<button
+  class="athlete-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 cursor-pointer border-none align-left"
   [class.selected]="mode() === 'selection' && isSelected()"
   [class.hover-effect]="mode() === 'view'"
   (click)="onCardClick()"
@@ -58,4 +58,4 @@
       </div>
     </div>
   </div>
-</div>
+</button>

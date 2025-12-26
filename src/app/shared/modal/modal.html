@@ -1,6 +1,6 @@
-<div class="modal-overlay" (click)="onClose()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <byf-close-btn bgColor="var(--color-light)" svgColor="var(--color-dark)" (close)="onClose()" />
+<button class="modal-overlay" (click)="onClose()">
+  <button class="modal-content" (click)="$event.stopPropagation()">
+    <byf-close-btn bgColor="var(--color-light)" svgColor="var(--color-dark)" (closed)="onClose()" />
     @if (headerTemplate) {
       <div class="modal-header">
         <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
@@ -18,5 +18,5 @@
         <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
       </div>
     }
-  </div>
-</div>
+  </button>
+</button>

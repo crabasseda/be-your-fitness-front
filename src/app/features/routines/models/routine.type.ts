@@ -15,12 +15,12 @@ export const ROUTINE_TYPES: RoutineType[] = [
   'cardio',
 ];
 
-export const ROUTINE_TYPES_CONFIG: Array<{
+export const ROUTINE_TYPES_CONFIG: {
   value: RoutineType;
   label: string;
   icon: string;
   description: string;
-}> = [
+}[] = [
   {
     value: 'fuerza',
     label: 'Fuerza',

@@ -170,6 +170,6 @@
   [cancelText]="'Cancelar'"
   [icon]="'flag'"
   [type]="'danger'"
-  (confirm)="handleDelete()"
-  (cancel)="showConfirmationModal.set(false)"
+  (confirmed)="handleDelete()"
+  (cancelled)="showConfirmationModal.set(false)"
 />

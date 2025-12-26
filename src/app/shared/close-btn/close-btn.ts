@@ -9,9 +9,9 @@ import { Component, input, output } from '@angular/core';
 export class CloseBtn {
   bgColor = input<string>();
   svgColor = input<string>();
-  close = output<void>();
+  closed = output<void>();
 
-  onClose() {
-    this.close.emit();
+  triggerOnClose() {
+    this.closed.emit();
   }
 }

@@ -59,6 +59,6 @@
   [cancelText]="'Cancelar'"
   [icon]="'flag'"
   [type]="'success'"
-  (confirm)="finishWorkout()"
-  (cancel)="showConfirmationModal.set(false)"
+  (confirmed)="finishWorkout()"
+  (cancelled)="showConfirmationModal.set(false)"
 />

@@ -19,20 +19,20 @@ export class ConfirmationModal {
   icon = input<string>('help_outline');
   type = input<'success' | 'danger' | 'warning' | 'info'>('info');
 
-  confirm = output<void>();
-  cancel = output<void>();
+  confirmed = output<void>();
+  cancelled = output<void>();
 
-  onCancel(): void {
-    this.cancel.emit();
+  triggerOnCancel(): void {
+    this.cancelled.emit();
   }
 
-  onConfirm(): void {
-    this.confirm.emit();
+  triggerOnConfirm(): void {
+    this.confirmed.emit();
   }
 
   onBackdropClick(event: MouseEvent): void {
     if (event.target === event.currentTarget) {
-      this.onCancel();
+      this.triggerOnCancel();
     }
   }
 }

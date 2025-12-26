@@ -16,7 +16,7 @@ export class WorkoutService {
   }
 
   getRecentWorkouts(
-    limit: number = 10,
+    limit = 10,
     startDate?: string,
     endDate?: string,
     userId?: string,
@@ -35,7 +35,7 @@ export class WorkoutService {
     return this._http.get<Workout[]>(`${this._apiUrl}/recent`, { params });
   }
 
-  getLastNWorkouts(limit: number = 10, userId?: string): Observable<Workout[]> {
+  getLastNWorkouts(limit = 10, userId?: string): Observable<Workout[]> {
     return this.getRecentWorkouts(limit, undefined, undefined, userId);
   }
 

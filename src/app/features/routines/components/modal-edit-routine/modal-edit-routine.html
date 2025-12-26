@@ -70,6 +70,6 @@
   [cancelText]="'Cancelar'"
   [icon]="'save'"
   [type]="'warning'"
-  (confirm)="handleUpdateRoutine()"
-  (cancel)="showConfirmationModal.set(false)"
+  (confirmed)="handleUpdateRoutine()"
+  (cancelled)="showConfirmationModal.set(false)"
 />
