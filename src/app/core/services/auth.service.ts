@@ -11,28 +11,20 @@ export class AuthService {
   private _http = inject(HttpClient);
   private _apiUrl = environment.apiUrl;
 
-  private _currentUser: User | null = null;
-
   async login(username: string, password: string): Promise<void> {
-    try {
-      const res: any = await firstValueFrom(
-        this._http.post(`${this._apiUrl}/auth/login`, { username, password }).pipe(
-          catchError(() => {
-            return throwError(() => new Error('Credenciales incorrectas'));
-          }),
-        ),
-      );
+    const res: any = await firstValueFrom(
+      this._http.post(`${this._apiUrl}/auth/login`, { username, password }).pipe(
+        catchError(() => {
+          return throwError(() => new Error('Credenciales incorrectas'));
+        }),
+      ),
+    );
 
-      localStorage.setItem(this.TOKEN_KEY, res.token);
-      localStorage.setItem(this.USER_KEY, JSON.stringify(res.user));
-      this._currentUser = res.user;
-    } catch (err) {
-      throw err;
-    }
+    localStorage.setItem(this.TOKEN_KEY, res.token);
+    localStorage.setItem(this.USER_KEY, JSON.stringify(res.user));
   }
 
   logout() {
-    this._currentUser = null;
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
   }

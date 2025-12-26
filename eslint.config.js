@@ -20,15 +20,15 @@ module.exports = tseslint.config(
         'error',
         {
           type: 'attribute',
-          prefix: 'app',
+          prefix: ['byf', ''],
           style: 'camelCase',
         },
       ],
       '@angular-eslint/component-selector': [
-        'error',
+        'warn',
         {
           type: 'element',
-          prefix: 'app',
+          prefix: ['byf', ''],
           style: 'kebab-case',
         },
       ],

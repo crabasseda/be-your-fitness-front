@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, OnInit, output, signal } from '@angular/core';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatIcon } from '@angular/material/icon';
 import {
@@ -20,7 +20,7 @@ import { SimpleCard } from '@shared/simple-card/simple-card';
   templateUrl: './exercise-list.html',
   styleUrls: ['./exercise-list.css'],
 })
-export class ExerciseList {
+export class ExerciseList implements OnInit {
   private _exercisesService = inject(ExercisesService);
 
   mode = input<ExerciseListMode>('view');
@@ -75,9 +75,6 @@ export class ExerciseList {
 
   constructor() {
     effect(() => {
-      const equipment = this.selectedEquipment();
-      const bodyPart = this.selectedBodyPart();
-
       this._loadExercises();
     });
 

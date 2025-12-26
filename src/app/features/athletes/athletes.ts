@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { User } from '@models/user.interface';
@@ -11,7 +11,7 @@ import { AthleteCard } from './components/athlete-card/athlete-card';
   templateUrl: './athletes.html',
   styleUrl: './athletes.css',
 })
-export class Athletes {
+export class Athletes implements OnInit {
   private _userService = inject(UserService);
   private _router = inject(Router);
 

@@ -1,4 +1,4 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { Component, inject, input, OnInit, output, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { AthleteCard } from '@features/athletes/components/athlete-card/athlete-card';
 import { Routine } from '@features/routines/models/routine.interface';
@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './modal-assign-routine.html',
   styleUrl: './modal-assign-routine.css',
 })
-export class ModalAssignRoutine {
+export class ModalAssignRoutine implements OnInit {
   private _userService = inject(UserService);
   athletes = signal<User[]>([]);
 

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
@@ -14,7 +14,7 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-athlete-details',
+  selector: 'athlete-details',
   imports: [
     MatCard,
     MatIcon,
@@ -28,7 +28,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './athlete-details.html',
   styleUrl: './athlete-details.css',
 })
-export class AthleteDetails {
+export class AthleteDetails implements OnInit {
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _userService = inject(UserService);

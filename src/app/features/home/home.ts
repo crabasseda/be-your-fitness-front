@@ -33,8 +33,7 @@ export class Home implements OnInit {
   private _feedbackService = inject(FeedbackService);
 
   isTrainer = this._authService.isTrainer();
-
-  public user = this._authService.getUser();
+  user = this._authService.getUser();
 
   lastFeedback = signal<Feedback | null>(null);
 

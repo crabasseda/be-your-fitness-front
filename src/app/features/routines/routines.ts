@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -31,7 +31,7 @@ import { RoutinesService } from './services/routines.service';
   templateUrl: './routines.html',
   styleUrl: './routines.css',
 })
-export class Routines {
+export class Routines implements OnInit {
   private _router = inject(Router);
   private _routinesService = inject(RoutinesService);
   private _authService = inject(AuthService);

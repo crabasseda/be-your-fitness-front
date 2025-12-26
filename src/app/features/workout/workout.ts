@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
+import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { WorkoutService } from './services/workout.service';
   templateUrl: './workout.html',
   styleUrl: './workout.css',
 })
-export class Workout implements OnDestroy {
+export class Workout implements OnInit, OnDestroy {
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _workoutService = inject(WorkoutService);

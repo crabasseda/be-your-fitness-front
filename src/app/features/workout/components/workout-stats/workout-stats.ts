@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { CreateWorkoutDTO } from '@features/workout/models/workout.interface';
 import { WorkoutService } from '@features/workout/services/workout.service';
 import { Chip } from '@shared/chip/chip';
 import { ChipType } from '@shared/chip/models/chip.enum';
@@ -24,7 +25,7 @@ import { DailyWorkoutData } from './models/workout-stats.interface';
   templateUrl: './workout-stats.html',
   styleUrls: ['./workout-stats.css'],
 })
-export class WorkoutStats {
+export class WorkoutStats implements OnInit {
   private _workoutService = inject(WorkoutService);
 
   userId = input<string | undefined>();
@@ -143,11 +144,11 @@ export class WorkoutStats {
     return dailyData;
   }
 
-  private _calculateDuration(workouts: any[]): number {
+  private _calculateDuration(workouts: CreateWorkoutDTO[]): number {
     return Math.round(workouts.reduce((sum, w) => sum + w.duration_seconds / 60, 0));
   }
 
-  private _calculateVolume(workouts: any[]): number {
+  private _calculateVolume(workouts: CreateWorkoutDTO[]): number {
     return workouts.reduce((sum, workout) => {
       return (
         sum +
@@ -163,7 +164,7 @@ export class WorkoutStats {
     }, 0);
   }
 
-  private _calculateReps(workouts: any[]): number {
+  private _calculateReps(workouts: CreateWorkoutDTO[]): number {
     return workouts.reduce((sum, workout) => {
       return (
         sum +

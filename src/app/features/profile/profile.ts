@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -19,7 +19,7 @@ import { UserService } from 'src/app/services/user.service';
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Profile {
+export class Profile implements OnInit {
   private _workoutService = inject(WorkoutService);
   private _authService = inject(AuthService);
   private _route = inject(ActivatedRoute);
