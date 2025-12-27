@@ -14,7 +14,6 @@ import { WorkoutService } from './services/workout.service';
   selector: 'workout',
   imports: [MatIcon, MatButton, RoutineExerciseCard, ConfirmationModal],
   templateUrl: './workout.html',
-  styleUrl: './workout.css',
 })
 export class Workout implements OnInit, OnDestroy {
   private _route = inject(ActivatedRoute);

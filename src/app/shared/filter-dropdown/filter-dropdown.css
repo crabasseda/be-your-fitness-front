@@ -24,14 +24,14 @@
 .filter-field ::ng-deep .mdc-notched-outline__leading,
 .filter-field ::ng-deep .mdc-notched-outline__notch,
 .filter-field ::ng-deep .mdc-notched-outline__trailing {
-  border-color: rgba(0, 0, 0, 0.12);
+  border-color: rgb(0 0 0 / 12%);
   transition: border-color 0.3s ease;
 }
 
 .filter-field:hover ::ng-deep .mdc-notched-outline__leading,
 .filter-field:hover ::ng-deep .mdc-notched-outline__notch,
 .filter-field:hover ::ng-deep .mdc-notched-outline__trailing {
-  border-color: rgba(236, 108, 30, 0.4);
+  border-color: rgb(236 108 30 / 40%);
 }
 
 .filter-field.mat-focused ::ng-deep .mdc-notched-outline__leading,
@@ -53,6 +53,7 @@
 .filter-field ::ng-deep .mat-mdc-select-arrow {
   color: var(--orange-primary);
 }
+
 .filter-label-icon {
   font-size: 18px !important;
   width: 18px !important;
@@ -64,7 +65,7 @@
 
 ::ng-deep .mat-mdc-select-panel {
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 15%);
   margin-top: 8px;
 }
 
@@ -75,11 +76,11 @@
 }
 
 ::ng-deep .mat-mdc-select-panel .mat-mdc-option:hover {
-  background-color: rgba(236, 108, 30, 0.08);
+  background-color: rgb(236 108 30 / 8%);
 }
 
 ::ng-deep .mat-mdc-select-panel .mat-mdc-option.mdc-list-item--selected {
-  background-color: rgba(236, 108, 30, 0.12);
+  background-color: rgb(236 108 30 / 12%);
   color: var(--orange-primary);
 }
 

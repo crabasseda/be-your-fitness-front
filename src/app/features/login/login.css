@@ -14,7 +14,7 @@
   width: 100%;
   max-width: 380px;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 20%);
 }
 
 .brand-title {
@@ -66,5 +66,5 @@
 }
 
 .login-btn-accent:hover {
-  background-color: rgba(236, 108, 30, 0.1) !important;
+  background-color: rgb(236 108 30 / 10%) !important;
 }

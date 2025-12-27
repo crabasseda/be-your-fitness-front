@@ -8,7 +8,6 @@ import { ExercisesService } from './services/exercises.service';
   selector: 'exercises',
   imports: [ExerciseList, ExerciseDetailModal],
   templateUrl: './exercises.html',
-  styleUrl: './exercises.css',
 })
 export class Exercises {
   private _exercisesService = inject(ExercisesService);

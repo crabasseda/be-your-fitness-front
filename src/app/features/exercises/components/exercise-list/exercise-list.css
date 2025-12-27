@@ -27,11 +27,8 @@
 .exercise-card-wrapper.selected::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(49, 161, 221, 0.1);
+  inset: 0;
+  background: rgb(49 161 221 / 10%);
   border-radius: var(--border-radius);
   pointer-events: none;
 }
@@ -41,9 +38,11 @@
     transform: scale(0);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;

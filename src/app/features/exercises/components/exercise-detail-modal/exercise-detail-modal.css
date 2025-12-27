@@ -1,6 +1,6 @@
 .modal-header-info {
   padding: 24px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+  background: linear-gradient(to bottom, rgb(0 0 0 / 70%), rgb(0 0 0 / 50%));
   position: absolute;
   bottom: 0;
   left: 0;
@@ -10,7 +10,7 @@
 
 .modal-type-badge {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgb(255 255 255 / 20%);
   backdrop-filter: blur(10px);
   color: var(--color-light);
   padding: 6px 16px;
@@ -26,7 +26,7 @@
   font-size: 18px;
   font-weight: 600;
   color: var(--color-dark);
-  margin: 0 0 18px 0;
+  margin: 0 0 18px;
 }
 
 .modal-section-title svg {

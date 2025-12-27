@@ -9,7 +9,6 @@ import { AthleteCard } from './components/athlete-card/athlete-card';
   selector: 'athletes',
   imports: [AthleteCard, MatIcon],
   templateUrl: './athletes.html',
-  styleUrl: './athletes.css',
 })
 export class Athletes implements OnInit {
   private _userService = inject(UserService);

@@ -10,7 +10,6 @@ import { UserService } from 'src/app/services/user.service';
   selector: 'modal-assign-routine',
   imports: [Modal, AthleteCard, MatIcon],
   templateUrl: './modal-assign-routine.html',
-  styleUrl: './modal-assign-routine.css',
 })
 export class ModalAssignRoutine implements OnInit {
   private _userService = inject(UserService);

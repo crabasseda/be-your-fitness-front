@@ -26,7 +26,6 @@ import { UserService } from 'src/app/services/user.service';
     FormsModule,
   ],
   templateUrl: './athlete-details.html',
-  styleUrl: './athlete-details.css',
 })
 export class AthleteDetails implements OnInit {
   private _route = inject(ActivatedRoute);

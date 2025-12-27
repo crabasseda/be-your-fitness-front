@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, input, output, signal } from '@angular/core';
+import { Component, effect, input, output, signal, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,6 +19,7 @@ import { RoutineSchedule } from '@features/routines/models/routine.interface';
   ],
   templateUrl: './routine-schedule-selector.html',
   styleUrl: './routine-schedule-selector.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class RoutineScheduleSelector {
   initialSchedule = input<RoutineSchedule | undefined>(undefined);

@@ -60,7 +60,7 @@
 }
 
 :host ::ng-deep .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover {
-  background-color: rgba(236, 108, 30, 0.1);
+  background-color: rgb(236 108 30 / 10%);
 }
 
 :host ::ng-deep .mat-calendar-body-today {
@@ -72,6 +72,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

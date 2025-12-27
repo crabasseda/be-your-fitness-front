@@ -4,7 +4,7 @@
   padding: 0.75rem 1.5rem;
   border-radius: var(--border-radius);
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(236, 108, 30, 0.3);
+  box-shadow: 0 4px 12px rgb(236 108 30 / 30%);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -14,7 +14,7 @@
 
 .btn-create-routine:hover {
   background: var(--orange-secondary);
-  box-shadow: 0 6px 20px rgba(236, 108, 30, 0.4);
+  box-shadow: 0 6px 20px rgb(236 108 30 / 40%);
   transform: translateY(-2px);
 }
 
@@ -34,20 +34,20 @@
   background: var(--orange-secondary);
 }
 
-::ng-deep .custom-tabs {
+.custom-tabs {
   background: white;
   border-radius: var(--border-radius);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
   overflow: hidden;
 }
 
-::ng-deep .custom-tabs .mat-mdc-tab-labels {
+.custom-tabs .mat-mdc-tab-labels {
   background: white;
   border-bottom: 2px solid var(--color-light);
   padding: 0 1rem;
 }
 
-::ng-deep .custom-tabs .mat-mdc-tab {
+.custom-tabs .mat-mdc-tab {
   min-width: 180px;
   padding: 0 1.5rem;
   height: 64px;
@@ -83,20 +83,20 @@
   margin-left: 0.25rem;
 }
 
-::ng-deep .custom-tabs .mat-mdc-tab.mdc-tab--active .tab-icon {
+.custom-tabs .mat-mdc-tab.mdc-tab--active .tab-icon {
   color: var(--blue-primary);
 }
 
-::ng-deep .custom-tabs .mat-mdc-tab.mdc-tab--active .tab-label {
+.custom-tabs .mat-mdc-tab.mdc-tab--active .tab-label {
   color: var(--blue-primary);
 }
 
-::ng-deep .custom-tabs .mat-mdc-tab.mdc-tab--active .tab-badge {
+.custom-tabs .mat-mdc-tab.mdc-tab--active .tab-badge {
   background: var(--blue-primary);
   color: white;
 }
 
-::ng-deep .custom-tabs .mdc-tab-indicator__content--underline {
+.custom-tabs .mdc-tab-indicator__content--underline {
   border-color: var(--blue-primary);
   border-top-width: 3px;
 }
@@ -106,6 +106,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

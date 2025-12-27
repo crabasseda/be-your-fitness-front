@@ -15,11 +15,8 @@
 
 .hero-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(49, 161, 221, 0.85) 0%, rgba(17, 43, 118, 0.88) 100%);
+  inset: 0;
+  background: linear-gradient(135deg, rgb(49 161 221 / 85%) 0%, rgb(17 43 118 / 88%) 100%);
   z-index: 1;
 }
 
@@ -40,16 +37,15 @@
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 800;
   line-height: 1.1;
-  margin: 0 0 24px 0;
-  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+  margin: 0 0 24px;
+  text-shadow: 2px 4px 8px rgb(0 0 0 / 30%);
 }
 
 .hero-title-highlight {
   display: block;
   background: linear-gradient(90deg, #ffd89b 0%, var(--orange-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero-subtitle {
@@ -79,7 +75,7 @@
   font-size: 1.1rem !important;
   font-weight: 600 !important;
   border-radius: 50px !important;
-  box-shadow: 0 8px 20px rgba(236, 108, 30, 0.4) !important;
+  box-shadow: 0 8px 20px rgb(236 108 30 / 40%) !important;
   transition: all 0.3s ease !important;
   display: flex;
   align-items: center;
@@ -88,17 +84,17 @@
 
 .cta-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(236, 108, 30, 0.5) !important;
+  box-shadow: 0 12px 30px rgb(236 108 30 / 50%) !important;
 }
 
 .cta-secondary {
-  background: rgba(255, 255, 255, 0.15) !important;
+  background: rgb(255 255 255 / 15%) !important;
   color: white !important;
   padding: 16px 40px !important;
   font-size: 1.1rem !important;
   font-weight: 600 !important;
   border-radius: 50px !important;
-  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border: 2px solid rgb(255 255 255 / 30%) !important;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease !important;
   display: flex;
@@ -107,8 +103,8 @@
 }
 
 .cta-secondary:hover {
-  background: rgba(255, 255, 255, 0.25) !important;
-  border-color: rgba(255, 255, 255, 0.5) !important;
+  background: rgb(255 255 255 / 25%) !important;
+  border-color: rgb(255 255 255 / 50%) !important;
   transform: translateY(-2px);
 }
 
@@ -158,13 +154,13 @@
   padding: 40px 30px;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
   transition: all 0.3s ease;
 }
 
 .feature-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 24px rgb(0 0 0 / 12%);
 }
 
 .feature-icon {
@@ -188,7 +184,7 @@
 .feature-title {
   font-size: 1.4rem;
   font-weight: 600;
-  margin: 0 0 16px 0;
+  margin: 0 0 16px;
   color: #2d3748;
 }
 
@@ -236,12 +232,12 @@
 .cta-title {
   font-size: 3rem;
   font-weight: 700;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
 }
 
 .cta-subtitle {
   font-size: 1.3rem;
-  margin: 0 0 40px 0;
+  margin: 0 0 40px;
   opacity: 0.95;
 }
 
@@ -259,7 +255,7 @@
   font-size: 1.2rem !important;
   font-weight: 600 !important;
   border-radius: 50px !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 20%) !important;
   transition: all 0.3s ease !important;
   display: flex;
   align-items: center;
@@ -268,7 +264,7 @@
 
 .cta-primary-large:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 30%) !important;
 }
 
 .cta-login-text {
@@ -293,6 +289,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -307,15 +304,17 @@
   100% {
     transform: translateX(-50%) translateY(0);
   }
+
   40% {
     transform: translateX(-50%) translateY(-10px);
   }
+
   60% {
     transform: translateX(-50%) translateY(-5px);
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .hero-section {
     height: 80vh;
     min-height: 500px;

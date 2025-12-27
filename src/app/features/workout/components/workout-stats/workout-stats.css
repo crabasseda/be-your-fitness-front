@@ -15,7 +15,7 @@
 
 .metric-button:hover {
   border-color: var(--color-orange-primary);
-  background: rgba(236, 108, 30, 0.05);
+  background: rgb(236, 108, 30 / 5%);
 }
 
 .metric-button.active {
