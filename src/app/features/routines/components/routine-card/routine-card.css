@@ -6,12 +6,12 @@
   text-overflow: ellipsis;
 }
 
-::ng-deep .mat-mdc-raised-button {
+.mat-mdc-raised-button {
   border-radius: var(--border-radius) !important;
   font-weight: 500;
   padding: 12px 24px;
 }
 
-::ng-deep .mat-mdc-icon-button:hover {
+.mat-mdc-icon-button:hover {
   background-color: rgb(0 0 0 / 4%);
 }

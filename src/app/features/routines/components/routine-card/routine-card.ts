@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, input, output } from '@angular/core';
+import { Component, computed, inject, input, output, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -10,6 +10,7 @@ import { AuthService } from '@core/services/auth.service';
   imports: [CommonModule, MatMenuModule, MatIconModule, MatButtonModule],
   templateUrl: './routine-card.html',
   styleUrl: './routine-card.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class RoutineCard {
   private _authService = inject(AuthService);
