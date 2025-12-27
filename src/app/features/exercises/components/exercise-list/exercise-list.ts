@@ -1,6 +1,7 @@
 import { Component, computed, effect, inject, input, OnInit, output, signal } from '@angular/core';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatIcon } from '@angular/material/icon';
+import { NotificationService } from '@core/services/notification.service';
 import {
   Exercise,
   ExerciseListMode,
@@ -22,6 +23,7 @@ import { SimpleCard } from '@shared/simple-card/simple-card';
 })
 export class ExerciseList implements OnInit {
   private _exercisesService = inject(ExercisesService);
+  private _notificationService = inject(NotificationService);
 
   mode = input<ExerciseListMode>('view');
   showFilters = input(true);
@@ -101,7 +103,6 @@ export class ExerciseList implements OnInit {
   }
 
   onEquipmentChange(value: string | null) {
-    console.log(value);
     this.selectedEquipment.set(value);
   }
 
@@ -139,21 +140,40 @@ export class ExerciseList implements OnInit {
         equipment: this.selectedEquipment() ?? undefined,
         bodyPart: this.selectedBodyPart() ?? undefined,
       })
-      .subscribe((exercises) => {
-        this.exercisesList.set(exercises);
-        this.filteredExercises.set(exercises);
+
+      .subscribe({
+        next: (exercises) => {
+          this.exercisesList.set(exercises);
+          this.filteredExercises.set(exercises);
+        },
+        error: (error) => {
+          console.log(error);
+          this._notificationService.error('Error al cargar ejercicios');
+        },
       });
   }
 
   private _loadEquipments() {
-    this._exercisesService.getEquipments().subscribe((equipments) => {
-      this.equipmentList.set(equipments);
+    this._exercisesService.getEquipments().subscribe({
+      next: (equipments) => {
+        this.equipmentList.set(equipments);
+      },
+      error: (error) => {
+        console.log(error);
+        this._notificationService.error('Error al cargar el filtro de equipamientos');
+      },
     });
   }
 
   private _loadBodyParts() {
-    this._exercisesService.getBodyParts().subscribe((bodyParts) => {
-      this.bodyPartsList.set(bodyParts);
+    this._exercisesService.getBodyParts().subscribe({
+      next: (bodyParts) => {
+        this.bodyPartsList.set(bodyParts);
+      },
+      error: (error) => {
+        console.log(error);
+        this._notificationService.error('Error al cargar el filtro de partes del cuerpo');
+      },
     });
   }
 }
