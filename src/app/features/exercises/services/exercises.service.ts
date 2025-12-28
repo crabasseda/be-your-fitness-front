@@ -17,7 +17,7 @@ import {
 })
 export class ExercisesService {
   private _http = inject(HttpClient);
-  private _apiUrl = environment.exercisesApiUrl;
+  private _apiUrl = environment.apiUrl;
 
   getExercises(filters: ExerciseFilters = {}): Observable<Exercise[]> {
     let params = new HttpParams().set('offset', '0').set('limit', '25');
